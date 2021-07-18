@@ -28,6 +28,18 @@
 			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
 		}
 	},
+	"dependencies": {
+		"@reduxjs/toolkit": "^1.6.0",
+		"classnames": "^2.3.1",
+		"framer-motion": "^4.1.17",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-redux": "^7.2.4",
+		"react-router-config": "^5.1.1",
+		"react-router-dom": "^5.2.0",
+		"react-transition-group": "^4.4.2",
+		"tailwindcss": "^2.1.4"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.14.3",
 		"@babel/plugin-transform-runtime": "^7.14.3",
@@ -86,19 +98,5 @@
 		"webpack-cli": "^4.7.0",
 		"webpack-dev-server": "^3.11.2",
 		"webpack-merge": "^5.7.3"
-	},
-	"dependencies": {
-		"classnames": "^2.3.1",
-		"framer-motion": "^4.1.17",
-		"hookrouter": "^1.2.5",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"react-redux": "^7.2.4",
-		"react-router-config": "^5.1.1",
-		"react-router-dom": "^5.2.0",
-		"react-transition-group": "^4.4.2",
-		"redux": "^4.1.0",
-		"redux-thunk": "^2.3.0",
-		"tailwindcss": "^2.1.4"
 	}
 }

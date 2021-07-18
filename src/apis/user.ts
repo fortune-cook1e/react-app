@@ -1,4 +1,4 @@
-export const getUserInfo = (): Promise<any> => {
+export const fetchUserInfo = (): Promise<any> => {
 	return new Promise(resolve => {
 		setTimeout(() => {
 			resolve({
