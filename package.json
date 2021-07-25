@@ -17,9 +17,6 @@
 			"prettier --write",
 			"yarn lint",
 			"git add ."
-		],
-		"src/**/*.{less,css}": [
-			"yarn stylelint"
 		]
 	},
 	"husky": {
@@ -32,6 +29,8 @@
 		"@reduxjs/toolkit": "^1.6.0",
 		"classnames": "^2.3.1",
 		"framer-motion": "^4.1.17",
+		"html-to-image": "^1.7.0",
+		"html2canvas": "^1.1.4",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-redux": "^7.2.4",

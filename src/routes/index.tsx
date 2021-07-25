@@ -22,6 +22,11 @@ export const routes: any = [
 				path: '/timeout',
 				exact: true,
 				component: lazy(() => import('@/pages/timeout'))
+			},
+			{
+				path: '/canvas',
+				exact: true,
+				component: lazy(() => import('@/pages/canvas'))
 			}
 		]
 	}
