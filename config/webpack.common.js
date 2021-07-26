@@ -2,6 +2,8 @@ const paths = require('./paths')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// const DemoPlugin = require('./plugins/demo')
+const ErrorPlugin = require('./plugins/error')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -137,7 +139,8 @@ const config = {
 		new MiniCssExtractPlugin({
 			filename: '[name].[contenthash].css',
 			chunkFilename: '[id].[contenthash].css'
-		})
+		}),
+		new ErrorPlugin()
 	]
 }
 
