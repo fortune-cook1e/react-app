@@ -27,6 +27,16 @@ export const routes: any = [
 				path: '/canvas',
 				exact: true,
 				component: lazy(() => import('@/pages/canvas'))
+			},
+			{
+				path: '/antd-form',
+				exact: true,
+				component: lazy(() => import('@/pages/antd-form'))
+			},
+			{
+				path: '/rollup',
+				exact: true,
+				component: lazy(() => import('@/pages/rollup'))
 			}
 		]
 	}

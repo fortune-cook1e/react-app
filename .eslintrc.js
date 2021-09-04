@@ -39,7 +39,7 @@ module.exports = {
 		'react/jsx-boolean-value': [2, 'never'],
 		'react/jsx-closing-bracket-location': 2,
 		'react/jsx-closing-tag-location': 2,
-		'react/jsx-curly-newline': 2,
+		'react/jsx-curly-newline': 0,
 		'react/jsx-equals-spacing': [2, 'never'],
 		'react/jsx-no-duplicate-props': 2,
 		'react/jsx-one-expression-per-line': 0,

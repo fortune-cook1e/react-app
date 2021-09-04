@@ -3,6 +3,5 @@ node_modules
 .eslintcache
 .stylelintcache
 yarn-error.log
-yarn.lock
 /report/
 /dist/
