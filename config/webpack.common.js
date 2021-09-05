@@ -3,9 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const DemoPlugin = require('./plugins/demo')
+const { ModuleFederationPlugin } = require('webpack').container
+
 const ErrorPlugin = require('./plugins/error')
 
 const isDev = process.env.NODE_ENV === 'development'
+const deps = require('../package.json').dependencies
 
 const jstsRegex = /\.(js|jsx|ts|tsx)$/
 const cssRegex = /\.css$/
@@ -40,7 +43,7 @@ const config = {
 	// FIXBUG: 解决webpack-dev-server 热更新未开启bug
 	target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
 	entry: {
-		app: paths.src + '/main.tsx'
+		app: paths.src + '/index.tsx'
 	},
 	output: {
 		path: paths.build,
@@ -56,6 +59,13 @@ const config = {
 	},
 	module: {
 		rules: [
+			// {
+			// 	test: /bootstrap\.tsx$/,
+			// 	loader: 'bundle-loader',
+			// 	options: {
+			// 		lazy: true
+			// 	}
+			// },
 			{
 				test: jstsRegex,
 				exclude: '/node_modules/',
@@ -140,7 +150,29 @@ const config = {
 			filename: '[name].[contenthash].css',
 			chunkFilename: '[id].[contenthash].css'
 		}),
-		new ErrorPlugin()
+		// 	new ErrorPlugin(),
+		new ModuleFederationPlugin({
+			// name: 'rapp',
+			// filename: 'rapp.js',
+			remotes: {
+				reactComponent:
+					'reactComponent@http://localhost:8080/react-component.js'
+			},
+
+			shared: {
+				// ...deps,
+				react: {
+					singleton: true,
+					eager: true,
+					requiredVersion: deps.react
+				},
+				'react-dom': {
+					singleton: true,
+					eager: true,
+					requiredVersion: deps['react-dom']
+				}
+			}
+		})
 	]
 }
 

@@ -10,28 +10,28 @@ module.exports = merge(commonConfig, {
 	devtool: 'source-map',
 	devServer: {
 		historyApiFallback: true,
-		contentBase: paths.build,
+		static: paths.build,
 		compress: true,
 		hot: true,
-		port: 8080
-	},
+		port: 8081
+	}
 
-	module: {
-		rules: [
-			{
-				test: jstsRegex,
-				exclude: /node_modules/,
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							cacheDirectory: true,
-							plugins: [require.resolve('react-refresh/babel')].filter(Boolean)
-						}
-					}
-				]
-			}
-		]
-	},
-	plugins: [new ReactRefreshWebpackPlugin()].filter(Boolean)
+	// module: {
+	// 	rules: [
+	// 		{
+	// 			test: jstsRegex,
+	// 			exclude: /node_modules/,
+	// 			use: [
+	// 				{
+	// 					loader: 'babel-loader',
+	// 					options: {
+	// 						cacheDirectory: true,
+	// 						plugins: [require.resolve('react-refresh/babel')].filter(Boolean)
+	// 					}
+	// 				}
+	// 			]
+	// 		}
+	// 	]
+	// },
+	// plugins: [new ReactRefreshWebpackPlugin()].filter(Boolean)
 })
