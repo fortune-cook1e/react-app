@@ -1,7 +1,0 @@
-node_modules
-/node_modules/
-.eslintcache
-.stylelintcache
-yarn-error.log
-/report/
-/dist/
