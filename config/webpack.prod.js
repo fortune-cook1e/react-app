@@ -25,8 +25,8 @@ module.exports = merge(common, {
 			dry: false,
 			verbose: true,
 			cleanOnceBeforeBuildPatterns: [clearPath, clearPath]
-		}),
-		new BundleAnalyzerPlugin()
+		})
+		// new BundleAnalyzerPlugin()
 	],
 	optimization: {
 		minimize: true,
