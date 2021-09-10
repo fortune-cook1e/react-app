@@ -152,11 +152,12 @@ const config = {
 		}),
 		// 	new ErrorPlugin(),
 		new ModuleFederationPlugin({
-			// name: 'rapp',
-			// filename: 'rapp.js',
+			name: 'reactApp',
 			remotes: {
-				reactComponent:
-					'reactComponent@http://localhost:8080/react-component.js'
+				// cookieComponent:
+				// 	'cookieComponent@http://localhost:8888/cookie-component.js'
+				cookieComponent:
+					'cookieComponent@https://fortune-cook1e.github.io/react-component-rollup/cookie-component.js'
 			},
 
 			shared: {
