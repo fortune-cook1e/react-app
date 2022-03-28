@@ -59,13 +59,6 @@ const config = {
 	},
 	module: {
 		rules: [
-			// {
-			// 	test: /bootstrap\.tsx$/,
-			// 	loader: 'bundle-loader',
-			// 	options: {
-			// 		lazy: true
-			// 	}
-			// },
 			{
 				test: jstsRegex,
 				exclude: '/node_modules/',

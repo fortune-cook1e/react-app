@@ -7,7 +7,7 @@ const jstsRegex = /\.(js|jsx|ts|tsx)$/
 
 module.exports = merge(commonConfig, {
 	mode: 'development',
-	devtool: 'source-map',
+	devtool: 'cheap-source-map',
 	devServer: {
 		historyApiFallback: true,
 		static: paths.build,
