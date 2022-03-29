@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Button: React.FC = () => {
+const TailButton = (): JSX.Element => {
 	return (
 		<div className='p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4'>
 			<div className='flex-shrink-0'>
@@ -14,4 +14,4 @@ const Button: React.FC = () => {
 	)
 }
 
-export default Button
+export default TailButton

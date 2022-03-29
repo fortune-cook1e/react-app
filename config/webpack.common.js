@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const DemoPlugin = require('./plugins/demo')
 const { ModuleFederationPlugin } = require('webpack').container
 
-const ErrorPlugin = require('./plugins/error')
+// const ErrorPlugin = require('./plugins/error')
 
 const isDev = process.env.NODE_ENV === 'development'
 const deps = require('../package.json').dependencies
