@@ -149,8 +149,8 @@ const config = {
 			remotes: {
 				// cookieComponent:
 				// 	'cookieComponent@http://localhost:8888/cookie-component.js'
-				cookieComponent:
-					'cookieComponent@https://fortune-cook1e.github.io/react-component-rollup/cookie-component.js'
+				// cookieComponent:
+				// 	'cookieComponent@https://fortune-cook1e.github.io/react-component-rollup/cookie-component.js'
 			},
 
 			shared: {

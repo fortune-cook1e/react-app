@@ -1,0 +1,16 @@
+@header-height: 64px;
+/* prettier-ignore */
+@middle-height:calc(100vh - 64px);
+
+.layout {
+	min-height: 100vh;
+	&__header {
+		height: @header-height;
+	}
+	&__main {
+		min-height: @middle-height;
+	}
+	&__sider {
+		min-height: 100%;
+	}
+}

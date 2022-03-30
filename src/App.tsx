@@ -1,14 +1,15 @@
 import React from 'react'
-import { HashRouter as Router } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import Error from './components/ErrorBoundary'
 import RouteMap from '@/routes'
 
-const App: React.FC = () => {
+const App = (): JSX.Element => {
 	return (
 		<Error>
-			<Router>
+			{/* 这里由于 git-page 不支持 BrowserRouter 所以改用HashRouter */}
+			<HashRouter>
 				<RouteMap />
-			</Router>
+			</HashRouter>
 		</Error>
 	)
 }

@@ -1,25 +1,24 @@
-interface RouteConfig {
-	path: string
-	element: any
-	children?: RouteConfig[]
-	meta: {
-		requiredLogin?: boolean // 是否需要登录
-	}
-}
+import { RouteConfig } from '@/types'
 
 export const routes: RouteConfig[] = [
 	{
 		path: '/',
-		element: () => import('@/pages/home'),
-		meta: {
-			requiredLogin: false
-		}
-	},
-	{
-		path: '/theme',
-		element: () => import('@/pages/theme'),
-		meta: {
-			requiredLogin: false
-		}
+		element: () => import('@/Layout'),
+		children: [
+			{
+				index: true,
+				element: () => import('@/pages/home'),
+				meta: {
+					requiredLogin: false
+				}
+			},
+			{
+				path: '/theme',
+				element: () => import('@/pages/theme'),
+				meta: {
+					requiredLogin: false
+				}
+			}
+		]
 	}
 ]

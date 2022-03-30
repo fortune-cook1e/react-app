@@ -2,17 +2,8 @@ import React, { lazy, Suspense, ComponentType } from 'react'
 import { useRoutes } from 'react-router-dom'
 import ProtectedRoute from '@/components/ProtectedRoute'
 import NotFound from '@/pages/not-found'
+import { RouteConfig } from '@/types'
 import { routes } from './routes'
-
-// 后续增加layout组件 prop
-interface RouteConfig {
-	path: string
-	element: any
-	children?: RouteConfig[]
-	meta: {
-		requiredLogin?: boolean // 是否需要登录
-	}
-}
 
 interface LazyComponentProps {
 	importFunc: () => Promise<{ default: ComponentType<any> }>
@@ -40,11 +31,9 @@ const setProtectedRoute = (routes: RouteConfig[]): RouteConfig[] => {
 	if (!routes.length) return []
 	// 遍历增加权限HOC
 	routes.forEach((route: RouteConfig) => {
-		const {
-			meta: { requiredLogin = false }
-		} = route
+		// const { meta } = route
 		route.element = (
-			<LazyComponent importFunc={route.element} needProtect={requiredLogin} />
+			<LazyComponent importFunc={route.element} needProtect={false} />
 		)
 		route?.children &&
 			route?.children.length &&
