@@ -22,6 +22,7 @@ const userSlice = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state, action) => {
+			console.log('dsadas')
 			state.user = action.payload
 		},
 		setLoading: (state, action) => {

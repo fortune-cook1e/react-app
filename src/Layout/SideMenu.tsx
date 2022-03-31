@@ -1,47 +1,104 @@
-import React from 'react'
-import { Layout, Menu, Breadcrumb, message } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Layout, Menu } from 'antd'
 import {
-	UserOutlined,
-	LaptopOutlined,
-	NotificationOutlined
+	MenuUnfoldOutlined,
+	MenuFoldOutlined,
+	DesktopOutlined
 } from '@ant-design/icons'
 import { MenuItem, ChildMenuItem } from '@/types'
-import { useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { menu } from '@/routes/menu'
+import styles from './index.module.less'
+import { useSelector } from 'react-redux'
+import { appSelector, setMenuStatus } from '@/store/slices/app'
+import { useAppDispatch } from '@/hooks/redux'
 
 const { SubMenu, Item } = Menu
-const { Header, Content, Sider } = Layout
+const { Sider } = Layout
 
 const SideMenu = (): JSX.Element => {
-	const navigate = useNavigate()
+	const { menuCollapsed } = useSelector(appSelector)
+	const dispatch = useAppDispatch()
+	const location = useLocation()
 
-	const handleJumpPage = (url: string) => {
-		if (!url) return message.error('暂无 url  请补充')
-		navigate(url)
+	const [menuOpenKeys, setMenuOpenKeys] = useState({})
+
+	useEffect(() => {
+		const { pathname } = location
+		setMenuOpenKeys(['/theme'])
+	}, [location])
+
+	const changeMenuStatus = () => {
+		const status = !menuCollapsed
+		dispatch(setMenuStatus(status))
 	}
 
-	const renderMenuWithChildren = (menu: ChildMenuItem) => {}
+	const renderMenuWithChildren = (menu: ChildMenuItem) => {
+		const { title, path, children, name } = menu
+		if (!children || !children.length) {
+			return (
+				<Item key={name} icon={<DesktopOutlined />}>
+					<Link to={path}>{title}</Link>
+				</Item>
+			)
+		}
+		return (
+			<SubMenu key={name} title={title} icon={<DesktopOutlined />}>
+				{children.map(c => {
+					return renderMenuWithChildren(c)
+				})}
+			</SubMenu>
+		)
+	}
 
 	const renderMenuWithoutChildren = (menu: MenuItem) => {
-		return <Item key={menu.path}>{menu.title}</Item>
+		return (
+			<Item key={menu.name} icon={<DesktopOutlined />}>
+				<Link to={menu.path as string}>{menu.title}</Link>
+			</Item>
+		)
 	}
 
 	const renderMenu = (menu: MenuItem[]) => {
 		return menu.map(m => {
-			const { children = [] } = m
+			const { children = [], title, name } = m
 			if (!children || !children.length) return renderMenuWithoutChildren(m)
+			return (
+				<SubMenu key={name} title={title} icon={<DesktopOutlined />}>
+					{children.map(renderMenuWithChildren)}
+				</SubMenu>
+			)
 		})
 	}
 
 	return (
-		<Menu
-			mode='inline'
-			// defaultSelectedKeys={['1']}
-			// defaultOpenKeys={['sub1']}
-			style={{ height: '100%', borderRight: 0 }}
-		>
-			{renderMenu(menu)}
-		</Menu>
+		<div className={styles.layout__sider}>
+			<Sider
+				width={200}
+				className={styles.layout__menu}
+				trigger={null}
+				collapsible
+				collapsed={menuCollapsed}
+			>
+				<Menu
+					mode='inline'
+					theme='light'
+					style={{ height: '100%' }}
+					defaultOpenKeys={['theme']}
+					// openKeys={menuOpenKeys}
+				>
+					{renderMenu(menu)}
+				</Menu>
+			</Sider>
+
+			<div className={styles.menu__button}>
+				{menuCollapsed ? (
+					<MenuUnfoldOutlined onClick={changeMenuStatus} />
+				) : (
+					<MenuFoldOutlined onClick={changeMenuStatus} />
+				)}
+			</div>
+		</div>
 	)
 }
 

@@ -18,6 +18,13 @@ export const routes: RouteConfig[] = [
 				meta: {
 					requiredLogin: false
 				}
+			},
+			{
+				path: '/canvas',
+				element: () => import('@/pages/canvas'),
+				meta: {
+					requiredLogin: false
+				}
 			}
 		]
 	}

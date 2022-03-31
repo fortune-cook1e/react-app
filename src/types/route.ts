@@ -13,11 +13,13 @@ export interface MenuItem {
 	title: string
 	icon: string
 	path?: string
+	name: string
 	children?: ChildMenuItem[]
 }
 
 export interface ChildMenuItem {
 	title: string
 	path: string
+	name: string
 	children?: ChildMenuItem[]
 }

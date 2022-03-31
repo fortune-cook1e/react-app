@@ -11,6 +11,24 @@
 		min-height: @middle-height;
 	}
 	&__sider {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		min-height: 100%;
+		box-shadow: 0 0 6px 0 rgb(0 0 0 / 30%);
+		background-color: #fff;
+		.layout__menu {
+			flex:1;
+			height: 100%;
+			background-color: #fff;
+		}
+		.menu__button {
+			display: flex;
+			align-items: center;
+			height: 40px;
+			padding: 0 16px;
+			border-top: 1px solid #d6dadf;
+			cursor: pointer;
+		}
 	}
 }

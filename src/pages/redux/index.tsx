@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useAppDispatch } from '@/store/index'
 import { useSelector } from 'react-redux'
-import { fetchUser, userSelector } from '@/store/slices/userSlice'
+import { fetchUser, userSelector } from '@/store/slices/user'
 
 const Redux = () => {
 	// const dispatch = useDispatch()
