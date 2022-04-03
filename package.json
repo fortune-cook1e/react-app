@@ -28,7 +28,7 @@
 	"dependencies": {
 		"@ant-design/icons": "^4.7.0",
 		"@reduxjs/toolkit": "^1.6.0",
-		"antd": "^4.16.9",
+		"antd": "^4.19.5",
 		"classnames": "^2.3.1",
 		"cookie-react-component": "^1.0.1-beta",
 		"framer-motion": "^4.1.17",

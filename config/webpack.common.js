@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const DemoPlugin = require('./plugins/demo')
 const { ModuleFederationPlugin } = require('webpack').container
-
+const antdTheme = require('./theme')
 // const ErrorPlugin = require('./plugins/error')
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -29,9 +29,8 @@ const cssModuleOptions = (type, useModules) => {
 }
 
 const lessOptions = () => {
-	const vars = paths.src + '/styles/vars.less'
 	const lessOptions = {
-		modifyVars: { hack: `true; @import "${vars}";` },
+		modifyVars: antdTheme,
 		javascriptEnabled: true
 	}
 	return {
@@ -74,8 +73,8 @@ const config = {
 			},
 			{
 				test: cssRegex,
-				exclude: [cssModuleRegex, '/node_modules/'],
 				include: paths.src,
+				exclude: [cssModuleRegex, '/node_modules/'],
 				use: [
 					isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 					{
@@ -88,8 +87,8 @@ const config = {
 			},
 			{
 				test: cssModuleRegex,
-				exclude: '/node_modules/',
 				include: paths.src,
+				exclude: '/node_modules/',
 				use: [
 					isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 					{
@@ -101,8 +100,8 @@ const config = {
 			},
 			{
 				test: lessRegex,
-				exclude: [lessModuleRegex, '/node_modules/'],
 				include: paths.src,
+				exclude: [lessModuleRegex],
 				use: [
 					isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 					{
@@ -119,7 +118,7 @@ const config = {
 			},
 			{
 				test: lessModuleRegex,
-				exclude: '/node_modules/',
+				include: paths.src,
 				use: [
 					isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 					{ loader: 'css-loader', options: cssModuleOptions(1, true) },
