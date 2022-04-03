@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkreact_app=self.webpackChunkreact_app||[]).push([[554],{554:function(e,t,a){a.r(t);a(985);var s=a(893);t.default=function(){return(0,s.jsx)("div",{children:"this is theme pages"})}}}]);
