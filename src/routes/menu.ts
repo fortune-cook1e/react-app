@@ -21,6 +21,11 @@ export const menu: MenuItem[] = [
 				title: 'canvas',
 				path: '/canvas',
 				name: 'canvas'
+			},
+			{
+				title: '图片懒加载',
+				path: '/lazy-loading',
+				name: 'lazy-loading'
 			}
 		]
 	}

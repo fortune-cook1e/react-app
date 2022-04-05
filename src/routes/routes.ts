@@ -25,6 +25,13 @@ export const routes: RouteConfig[] = [
 				meta: {
 					requiredLogin: false
 				}
+			},
+			{
+				path: '/lazy-loading',
+				element: () => import('@/pages/lazy-load'),
+				meta: {
+					requiredLogin: false
+				}
 			}
 		]
 	}
