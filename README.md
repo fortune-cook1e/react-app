@@ -15,3 +15,4 @@
 - 动画(Motion)
 - transition 封装
 - redux-toolkit
+- 图片懒加载
