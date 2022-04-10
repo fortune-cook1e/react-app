@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Button } from 'antd'
 import { ConfigProvider } from 'antd'
+import useClickOutside from '@/hooks/useClickOutside'
 import styles from './index.module.less'
 
 const COLORS = ['#25b864', '#f65c2d', '#faad14']
 let INDEX = 0
 
 const ThemePage = (): JSX.Element => {
+	const titleRef = useRef<HTMLDivElement | null>(null)
+
 	const handleClick = () => {
 		INDEX = INDEX === COLORS.length - 1 ? 0 : INDEX
 		const color = COLORS[INDEX++]
@@ -22,6 +25,12 @@ const ThemePage = (): JSX.Element => {
 		document.documentElement.style.setProperty('--primary-color', '#f65c2d')
 	}
 
+	const handleClickOutside = () => {
+		console.log('out side ~~')
+	}
+
+	useClickOutside(titleRef, handleClickOutside)
+
 	return (
 		<div>
 			<section>
@@ -33,7 +42,9 @@ const ThemePage = (): JSX.Element => {
 			</section>
 
 			<section>
-				<h3 className={styles.variable__text}>css3 原生颜色主题测试</h3>
+				<h3 className={styles.variable__text} ref={titleRef}>
+					css3 原生颜色主题测试
+				</h3>
 				<Button onClick={handleCss3Click}>click me</Button>
 			</section>
 		</div>
