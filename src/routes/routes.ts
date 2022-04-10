@@ -32,6 +32,13 @@ export const routes: RouteConfig[] = [
 				meta: {
 					requiredLogin: false
 				}
+			},
+			{
+				path: '/apis',
+				element: () => import('@/pages/react-apis'),
+				meta: {
+					requiredLogin: false
+				}
 			}
 		]
 	}

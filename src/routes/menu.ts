@@ -26,6 +26,11 @@ export const menu: MenuItem[] = [
 				title: '图片懒加载',
 				path: '/lazy-loading',
 				name: 'lazy-loading'
+			},
+			{
+				title: 'react-apis 学习',
+				path: '/apis',
+				name: 'apis'
 			}
 		]
 	}
