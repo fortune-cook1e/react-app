@@ -39,6 +39,13 @@ export const routes: RouteConfig[] = [
 				meta: {
 					requiredLogin: false
 				}
+			},
+			{
+				path: '/demo',
+				element: () => import('@/pages/demo'),
+				meta: {
+					requiredLogin: false
+				}
 			}
 		]
 	}

@@ -31,6 +31,11 @@ export const menu: MenuItem[] = [
 				title: 'react-apis 学习',
 				path: '/apis',
 				name: 'apis'
+			},
+			{
+				title: 'demo',
+				path: '/demo',
+				name: 'demo'
 			}
 		]
 	}
