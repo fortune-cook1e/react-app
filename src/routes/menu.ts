@@ -36,6 +36,11 @@ export const menu: MenuItem[] = [
 				title: 'demo',
 				path: '/demo',
 				name: 'demo'
+			},
+			{
+				title: 'key学习使用',
+				path: '/key-page',
+				name: 'key-page'
 			}
 		]
 	}

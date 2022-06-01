@@ -42,7 +42,11 @@ export const routes: RouteConfig[] = [
 			},
 			{
 				path: '/demo',
-				element: () => import('@/pages/demo'),
+				element: () => import('@/pages/demo')
+			},
+			{
+				path: '/key-page',
+				element: () => import('@/pages/key-page'),
 				meta: {
 					requiredLogin: false
 				}
