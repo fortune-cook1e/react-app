@@ -5,6 +5,11 @@ const commonConfig = require('./webpack.common')
 
 const jstsRegex = /\.(js|jsx|ts|tsx)$/
 
+const PORT = 8080
+
+const API_PREFIX = '/api'
+const API_HOST = 'http://localhost:3000'
+
 module.exports = merge(commonConfig, {
 	mode: 'development',
 	devtool: 'cheap-source-map',
@@ -13,7 +18,16 @@ module.exports = merge(commonConfig, {
 		static: paths.build,
 		compress: true,
 		hot: true,
-		port: 8081
+		port: PORT,
+		client: {
+			overlay: false
+		},
+		proxy: {
+			[`${API_PREFIX}`]: {
+				target: API_HOST,
+				pathRewrite: { [`^${API_PREFIX}`]: '' }
+			}
+		}
 	},
 
 	module: {
