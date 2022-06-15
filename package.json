@@ -31,6 +31,7 @@
 		"antd": "^4.19.5",
 		"axios": "^0.27.2",
 		"classnames": "^2.3.1",
+		"cookie-components": "^1.1.0",
 		"cookie-react-component": "^1.0.1-beta",
 		"framer-motion": "^4.1.17",
 		"html-to-image": "^1.7.0",

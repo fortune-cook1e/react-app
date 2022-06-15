@@ -6,14 +6,16 @@ const instance = axios.create({
 	baseURL: '/api'
 })
 
-const request = <T>(requestionOptions: RequestOptions<T>): Promise<HttpResponse<T>> => {
+const request = <T = any, D = any>(
+	requestionOptions: RequestOptions<T>
+): Promise<HttpResponse<D>> => {
 	const defaultOptions = {
 		globalLoading: false, // 全局loading
-		customerError: false // 自定义处理报错(不再弹窗报错)
+		customError: false // 自定义处理报错(不再弹窗报错)
 	}
 
 	const { method, url, data, params, options = defaultOptions } = requestionOptions
-	const { globalLoading, customerError } = options
+	const { globalLoading, customError } = options
 
 	const token = 'adsa'
 
@@ -29,7 +31,7 @@ const request = <T>(requestionOptions: RequestOptions<T>): Promise<HttpResponse<
 
 	return new Promise((resolve, reject) => {
 		instance(_options)
-			.then((response: AxiosResponse<HttpResponse<T>>) => {
+			.then((response: AxiosResponse<HttpResponse<D>>) => {
 				const { headers } = response
 				const responseAuthroizationToken =
 					headers['Set-Authorization'] || headers['set-authorization']
@@ -41,14 +43,14 @@ const request = <T>(requestionOptions: RequestOptions<T>): Promise<HttpResponse<
 				const { code, msg = '服务器异常' } = data
 				// TODO: 待处理 status非200情况
 				if (code !== 0) {
-					!customerError && message.error(msg)
+					!customError && message.error(msg)
 					reject(data)
 				}
 				resolve(data)
 			})
 			.catch((error: AxiosError) => {
 				const { message: axiosErrorMsg } = error
-				!customerError && message.error(axiosErrorMsg || '服务器异常')
+				!customError && message.error(axiosErrorMsg || '服务器异常')
 				reject(error)
 			})
 	})

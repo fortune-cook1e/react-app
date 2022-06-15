@@ -7,7 +7,7 @@ import { routes } from './routes'
 
 interface LazyComponentProps {
 	importFunc: () => Promise<{ default: ComponentType<any> }>
-	needProtect: boolean
+	needProtect?: boolean
 }
 
 // 懒加载、路由拦截
@@ -31,13 +31,9 @@ const setProtectedRoute = (routes: RouteConfig[]): RouteConfig[] => {
 	if (!routes.length) return []
 	// 遍历增加权限HOC
 	routes.forEach((route: RouteConfig) => {
-		// const { meta } = route
-		route.element = (
-			<LazyComponent importFunc={route.element} needProtect={false} />
-		)
-		route?.children &&
-			route?.children.length &&
-			setProtectedRoute(route.children)
+		const { meta } = route
+		route.element = <LazyComponent importFunc={route.element} needProtect={meta?.requiredLogin} />
+		route?.children && route?.children.length && setProtectedRoute(route.children)
 	})
 	return routes
 }

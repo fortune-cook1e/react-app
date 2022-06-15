@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Layout, Menu } from 'antd'
-import {
-	MenuUnfoldOutlined,
-	MenuFoldOutlined,
-	DesktopOutlined
-} from '@ant-design/icons'
+import { MenuUnfoldOutlined, MenuFoldOutlined, DesktopOutlined } from '@ant-design/icons'
 import { MenuItem, ChildMenuItem } from '@/types'
 import { Link, useLocation } from 'react-router-dom'
 import { menu } from '@/routes/menu'
 import styles from './index.module.less'
 import { useSelector } from 'react-redux'
 import { appSelector, setMenuStatus } from '@/store/slices/app'
-import { useAppDispatch } from '@/hooks/redux'
+import { useAppDispatch } from '@/hooks'
 
 const { SubMenu, Item } = Menu
 const { Sider } = Layout

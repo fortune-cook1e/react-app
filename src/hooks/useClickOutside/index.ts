@@ -1,6 +1,6 @@
 import { useEffect, MutableRefObject } from 'react'
 
-const useClickOutside = (
+export const useClickOutside = (
 	eleRef: MutableRefObject<any>,
 	callback: (e: Event) => void
 ): void => {
@@ -17,5 +17,3 @@ const useClickOutside = (
 		}
 	}, [])
 }
-
-export default useClickOutside

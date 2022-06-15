@@ -5,7 +5,7 @@ const commonConfig = require('./webpack.common')
 
 const jstsRegex = /\.(js|jsx|ts|tsx)$/
 
-const PORT = 8080
+const PORT = 8081
 
 const API_PREFIX = '/api'
 const API_HOST = 'http://localhost:3000'
@@ -17,10 +17,14 @@ module.exports = merge(commonConfig, {
 		historyApiFallback: true,
 		static: paths.build,
 		compress: true,
+		open: true,
 		hot: true,
 		port: PORT,
 		client: {
-			overlay: false
+			overlay: {
+				errors: false,
+				warnings: false
+			}
 		},
 		proxy: {
 			[`${API_PREFIX}`]: {
@@ -30,22 +34,5 @@ module.exports = merge(commonConfig, {
 		}
 	},
 
-	module: {
-		rules: [
-			{
-				test: jstsRegex,
-				exclude: /node_modules/,
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							cacheDirectory: true,
-							plugins: [require.resolve('react-refresh/babel')].filter(Boolean)
-						}
-					}
-				]
-			}
-		]
-	},
 	plugins: [new ReactRefreshWebpackPlugin()].filter(Boolean)
 })

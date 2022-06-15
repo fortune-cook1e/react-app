@@ -2,8 +2,8 @@ const paths = require('./paths')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-// const DemoPlugin = require('./plugins/demo')
-const { ModuleFederationPlugin } = require('webpack').container
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+
 const antdTheme = require('./theme')
 // const ErrorPlugin = require('./plugins/error')
 
@@ -66,7 +66,8 @@ const config = {
 					{
 						loader: 'babel-loader',
 						options: {
-							cacheDirectory: true
+							cacheDirectory: true,
+							plugins: [isDev && require.resolve('react-refresh/babel')].filter(Boolean)
 						}
 					}
 				]
@@ -96,7 +97,8 @@ const config = {
 						options: cssModuleOptions(1, true)
 					},
 					'postcss-loader'
-				]
+				],
+				sideEffects: true
 			},
 			{
 				test: lessRegex,
@@ -124,9 +126,10 @@ const config = {
 					{ loader: 'css-loader', options: cssModuleOptions(1, true) },
 					'postcss-loader',
 					{ loader: 'less-loader' }
-				]
+				],
+				sideEffects: true
 			}
-		]
+		].filter(Boolean)
 	},
 
 	plugins: [
@@ -139,34 +142,35 @@ const config = {
 			inject: 'body' // script插入body底部
 		}),
 		new MiniCssExtractPlugin({
-			filename: '[name].[contenthash].css',
-			chunkFilename: '[id].[contenthash].css'
+			filename: 'styles/[name].[contenthash].css',
+			chunkFilename: 'styles/[id].[contenthash].css'
 		}),
+		isDev && new ReactRefreshWebpackPlugin({ overlay: false })
 		// 	new ErrorPlugin(),
-		new ModuleFederationPlugin({
-			name: 'reactApp',
-			remotes: {
-				// cookieComponent:
-				// 	'cookieComponent@http://localhost:8888/cookie-component.js'
-				// cookieComponent:
-				// 	'cookieComponent@https://fortune-cook1e.github.io/react-component-rollup/cookie-component.js'
-			},
+		// new ModuleFederationPlugin({
+		// 	name: 'reactApp',
+		// 	remotes: {
+		// 		// cookieComponent:
+		// 		// 	'cookieComponent@http://localhost:8888/cookie-component.js'
+		// 		// cookieComponent:
+		// 		// 	'cookieComponent@https://fortune-cook1e.github.io/react-component-rollup/cookie-component.js'
+		// 	},
 
-			shared: {
-				// ...deps,
-				react: {
-					singleton: true,
-					eager: true,
-					requiredVersion: deps.react
-				},
-				'react-dom': {
-					singleton: true,
-					eager: true,
-					requiredVersion: deps['react-dom']
-				}
-			}
-		})
-	]
+		// 	shared: {
+		// 		// ...deps,
+		// 		react: {
+		// 			singleton: true,
+		// 			eager: true,
+		// 			requiredVersion: deps.react
+		// 		},
+		// 		'react-dom': {
+		// 			singleton: true,
+		// 			eager: true,
+		// 			requiredVersion: deps['react-dom']
+		// 		}
+		// 	}
+		// })
+	].filter(Boolean)
 }
 
 module.exports = config

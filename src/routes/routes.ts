@@ -2,6 +2,10 @@ import { RouteConfig } from '@/types'
 
 export const routes: RouteConfig[] = [
 	{
+		path: '/login',
+		element: () => import('@/pages/login')
+	},
+	{
 		path: '/',
 		element: () => import('@/Layout'),
 		children: [
@@ -9,7 +13,7 @@ export const routes: RouteConfig[] = [
 				index: true,
 				element: () => import('@/pages/home'),
 				meta: {
-					requiredLogin: false
+					requiredLogin: true
 				}
 			},
 			{

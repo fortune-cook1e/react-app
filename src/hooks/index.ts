@@ -1,3 +1,3 @@
-export * from './redux'
+export * from './useRedux'
 export * from './useIntersectionObserver'
-export { default } from './useClickOutside'
+export * from './useClickOutside'

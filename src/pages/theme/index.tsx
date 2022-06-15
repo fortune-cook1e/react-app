@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Button } from 'antd'
 import { ConfigProvider } from 'antd'
-import useClickOutside from '@/hooks/useClickOutside'
+import { useClickOutside } from '@/hooks'
 import styles from './index.module.less'
 
 const COLORS = ['#25b864', '#f65c2d', '#faad14']
@@ -29,7 +29,7 @@ const ThemePage = (): JSX.Element => {
 		console.log('out side ~~')
 	}
 
-	useClickOutside(titleRef, handleClickOutside)
+	// useClickOutside(titleRef, handleClickOutside)
 
 	return (
 		<div>

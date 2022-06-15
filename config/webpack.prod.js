@@ -5,8 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const BundleAnalyzerPlugin =
-	require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const clearPath = path.resolve(__dirname, '../dist')
 
@@ -17,10 +16,6 @@ module.exports = merge(common, {
 	mode: 'production',
 	devtool: false,
 	plugins: [
-		new MiniCssExtractPlugin({
-			filename: 'styles/[name].[contenthash].css',
-			chunkFilename: '[id].css'
-		}),
 		new CleanWebpackPlugin({
 			dry: false,
 			verbose: true,
