@@ -1,13 +1,9 @@
 import { Method } from 'axios'
 
 export interface HttpResponse<T> {
-	status: number
-	statusText: string
-	data: {
-		code: number
-		msg: string
-		data: T
-	}
+	code: number
+	msg: string
+	data: T
 }
 
 export interface RequestOptions<T> {
@@ -17,5 +13,6 @@ export interface RequestOptions<T> {
 	params?: T
 	options?: {
 		globalLoading?: boolean // 是否开启全局loading
+		customerError?: boolean // 是否自定义处理错误
 	}
 }
