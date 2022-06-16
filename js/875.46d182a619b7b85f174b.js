@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkreact_app=self.webpackChunkreact_app||[]).push([[875],{6875:function(e,t,n){n.r(t);n(6985);var a=n(6974),c=n(5893);t.default=function(){var e=(0,a.s0)();return(0,c.jsxs)("div",{children:["this is home page ",(0,c.jsx)("button",{onClick:function(){e("/theme")},children:"go theme page"})]})}}}]);
