@@ -32,7 +32,7 @@ const setProtectedRoute = (routes: RouteConfig[]): RouteConfig[] => {
 	// 遍历增加权限HOC
 	routes.forEach((route: RouteConfig) => {
 		const { meta } = route
-		route.element = <LazyComponent importFunc={route.element} needProtect={meta?.requiredLogin} />
+		route.element = <LazyComponent importFunc={route.element} needProtect={meta?.auth} />
 		route?.children && route?.children.length && setProtectedRoute(route.children)
 	})
 	return routes

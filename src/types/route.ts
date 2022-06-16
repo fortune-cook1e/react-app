@@ -5,7 +5,7 @@ export interface RouteConfig extends RouteObject {
 	children?: RouteConfig[]
 	meta?: {
 		title?: string // 标题
-		requiredLogin?: boolean // 是否需要登录
+		auth?: boolean // 是否需要登录
 	}
 }
 

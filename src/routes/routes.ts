@@ -13,35 +13,35 @@ export const routes: RouteConfig[] = [
 				index: true,
 				element: () => import('@/pages/home'),
 				meta: {
-					requiredLogin: true
+					auth: true
 				}
 			},
 			{
 				path: '/theme',
 				element: () => import('@/pages/theme'),
 				meta: {
-					requiredLogin: false
+					auth: false
 				}
 			},
 			{
 				path: '/canvas',
 				element: () => import('@/pages/canvas'),
 				meta: {
-					requiredLogin: false
+					auth: false
 				}
 			},
 			{
 				path: '/lazy-loading',
 				element: () => import('@/pages/lazy-load'),
 				meta: {
-					requiredLogin: false
+					auth: false
 				}
 			},
 			{
 				path: '/apis',
 				element: () => import('@/pages/react-apis'),
 				meta: {
-					requiredLogin: false
+					auth: false
 				}
 			},
 			{
@@ -52,7 +52,7 @@ export const routes: RouteConfig[] = [
 				path: '/key-page',
 				element: () => import('@/pages/key-page'),
 				meta: {
-					requiredLogin: false
+					auth: false
 				}
 			}
 		]

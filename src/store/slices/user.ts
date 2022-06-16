@@ -3,13 +3,20 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { login, logout, register } from '@/apis/user'
 import { RootState } from '@/store'
 import { IUser } from '@/types/user'
+import { LOCAL_STORAGE_USER_KEY } from '@/constants'
+import { setStorage, getStorage } from '@/utils'
+
+const initUser = () => {
+	const user = getStorage('local', LOCAL_STORAGE_USER_KEY)
+	return user ? JSON.parse(user) : null
+}
 
 export interface UserState {
 	user: IUser | null
 }
 
 const initialState: UserState = {
-	user: null
+	user: initUser()
 }
 
 export const doLogin = createAsyncThunk('users/login', async (params: LoginRequest) => {
@@ -42,6 +49,7 @@ const userSlice = createSlice({
 			})
 			.addCase(doLogin.fulfilled, (state, action) => {
 				state.user = action.payload
+				setStorage('local', LOCAL_STORAGE_USER_KEY, JSON.stringify(action.payload))
 			})
 			.addCase(doLogin.rejected, () => {
 				throw new Error('login rejected')
@@ -60,6 +68,7 @@ const userSlice = createSlice({
 			})
 			.addCase(doRegister.fulfilled, (state, action) => {
 				state.user = action.payload
+				setStorage('local', LOCAL_STORAGE_USER_KEY, JSON.stringify(action.payload))
 			})
 			.addCase(doRegister.rejected, () => {
 				throw new Error('register rejected')

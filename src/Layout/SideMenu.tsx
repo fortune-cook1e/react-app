@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Layout, Menu } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined, DesktopOutlined } from '@ant-design/icons'
 import { MenuItem, ChildMenuItem } from '@/types'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { menu } from '@/routes/menu'
 import styles from './index.module.less'
 import { useSelector } from 'react-redux'
 import { appSelector, setMenuStatus } from '@/store/slices/app'
-import { useAppDispatch } from '@/hooks'
+import { useAppDispatch, useRouter } from '@/hooks'
+import { getItemInChildrenMap } from '@/utils'
 
 const { SubMenu, Item } = Menu
 const { Sider } = Layout
@@ -17,33 +18,24 @@ interface MenuKeys {
 	open: string[]
 }
 
-// const findCurrentMenuItem = (pathname: string, menu: MenuItem[]) => {
-// 	if (!menu.length) return
-// 	let currentFatherMenu = null
-// 	const currentChildMenu = null
-// 	menu.forEach(m => {
-// 		const { path, name, children = [] } = m
-// 		if (path === pathname) {
-// 			currentFatherMenu = m
-// 		}
-// 	})
-// }
-
 const SideMenu = (): JSX.Element => {
 	const { menuCollapsed } = useSelector(appSelector)
 	const dispatch = useAppDispatch()
-	const location = useLocation()
+	const { location } = useRouter()
 
-	const [menuKeys, setMenuKeys] = useState<MenuKeys>(() => {
+	const [menuKeys] = useState<MenuKeys>(() => {
 		const { pathname } = location
 
+		const [parentItem, childItem] = getItemInChildrenMap<MenuItem | ChildMenuItem>(
+			menu,
+			item => item?.path === pathname
+		).reverse()
+
 		return {
-			selected: ['theme'],
-			open: ['study']
+			selected: [childItem.name],
+			open: [parentItem.name]
 		}
 	})
-
-	console.log(menuKeys)
 
 	const changeMenuStatus = () => {
 		const status = !menuCollapsed

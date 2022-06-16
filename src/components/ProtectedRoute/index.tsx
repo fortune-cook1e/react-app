@@ -6,7 +6,7 @@ interface Props {
 	children: React.ReactNode
 }
 
-const ProtectedRoute = ({ children }: Props): JSX.Element | void => {
+const ProtectedRoute = ({ children }: Props): JSX.Element => {
 	const { isUserLogin } = useAuth()
 	const navigate = useNavigate()
 
