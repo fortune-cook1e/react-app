@@ -32,7 +32,7 @@ const SideMenu = (): JSX.Element => {
 		).reverse()
 
 		return {
-			selected: [childItem.name],
+			selected: childItem?.name ? [childItem.name] : [parentItem.name],
 			open: [parentItem.name]
 		}
 	})
