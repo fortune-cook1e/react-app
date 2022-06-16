@@ -8,6 +8,7 @@ export interface IUser {
 	username: string
 	age: number
 	gender: Gender
+	accessToken: string
 }
 
 export interface LoginRequest {

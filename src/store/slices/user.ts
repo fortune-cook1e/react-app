@@ -1,24 +1,29 @@
 import { LoginRequest } from './../../types/user'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { login } from '@/apis/user'
+import { login, logout, register } from '@/apis/user'
 import { RootState } from '@/store'
-import { Gender, IUser } from '@/types/user'
+import { IUser } from '@/types/user'
 
 export interface UserState {
-	user: IUser
+	user: IUser | null
 }
 
 const initialState: UserState = {
-	user: {
-		id: '',
-		username: '',
-		age: 0,
-		gender: Gender.Female
-	}
+	user: null
 }
 
-const doLogin = createAsyncThunk('users/login', async (params: LoginRequest) => {
+export const doLogin = createAsyncThunk('users/login', async (params: LoginRequest) => {
 	const { data } = await login(params)
+	return data
+})
+
+export const doLogout = createAsyncThunk('users/logout', async () => {
+	await logout()
+	return
+})
+
+export const doRegister = createAsyncThunk('users/register', async (params: LoginRequest) => {
+	const { data } = await register(params)
 	return data
 })
 
@@ -33,10 +38,31 @@ const userSlice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(doLogin.pending, () => {
-				console.log('pending...')
+				console.log('login pending...')
 			})
 			.addCase(doLogin.fulfilled, (state, action) => {
 				state.user = action.payload
+			})
+			.addCase(doLogin.rejected, () => {
+				throw new Error('login rejected')
+			})
+			.addCase(doLogout.pending, () => {
+				console.log('logout pending...')
+			})
+			.addCase(doLogout.fulfilled, state => {
+				state.user = null
+			})
+			.addCase(doLogout.rejected, () => {
+				throw new Error('logout rejected')
+			})
+			.addCase(doRegister.pending, () => {
+				console.log('register pending...')
+			})
+			.addCase(doRegister.fulfilled, (state, action) => {
+				state.user = action.payload
+			})
+			.addCase(doRegister.rejected, () => {
+				throw new Error('register rejected')
 			})
 	}
 })

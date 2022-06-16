@@ -9,3 +9,18 @@ export const login = (data: LoginRequest): Promise<HttpResponse<IUser>> => {
 		data
 	})
 }
+
+export const logout = (): Promise<HttpResponse> => {
+	return request({
+		url: '/users/logout',
+		method: 'post'
+	})
+}
+
+export const register = (data: LoginRequest): Promise<HttpResponse> => {
+	return request({
+		url: '/users/register',
+		method: 'post',
+		data
+	})
+}

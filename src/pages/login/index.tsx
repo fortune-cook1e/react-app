@@ -1,16 +1,39 @@
-import React from 'react'
-import { Form, Input, Button, Space } from 'antd'
+import React, { useState } from 'react'
+import { Form, Input, Button, Space, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { useAuth } from '@/hooks/useAuth'
+import { LoginRequest } from '@/types'
+import { useNavigate } from 'react-router-dom'
 
 const { Item } = Form
 const { Password } = Input
 
 const Login = (): JSX.Element => {
-	const [form] = Form.useForm()
+	const navigate = useNavigate()
+	const { login: doLogin, register: doRegister } = useAuth()
+	const [form] = Form.useForm<LoginRequest>()
+	const [loadings, setLoadings] = useState({
+		login: false,
+		register: false
+	})
 
-	const login = async () => {
-		const values = await form.validateFields()
-		console.log(values)
+	const submit = async (type: 'login' | 'register') => {
+		try {
+			setLoadings({
+				...loadings,
+				[type]: true
+			})
+			const values = await form.validateFields()
+			const submitFunc = type === 'login' ? doLogin : doRegister
+			await submitFunc(values)
+			message.success(`${type === 'login' ? '登录' : '注册'}成功`)
+			navigate('/')
+		} finally {
+			setLoadings({
+				login: false,
+				register: false
+			})
+		}
 	}
 
 	return (
@@ -33,10 +56,12 @@ const Login = (): JSX.Element => {
 					</Item>
 					<Item wrapperCol={{ offset: 5 }}>
 						<Space>
-							<Button type='primary' onClick={login}>
+							<Button type='primary' onClick={() => submit('login')} loading={loadings.login}>
 								登录
 							</Button>
-							<Button>注册</Button>
+							<Button type='primary' onClick={() => submit('register')} loading={loadings.register}>
+								注册
+							</Button>
 						</Space>
 					</Item>
 				</Form>

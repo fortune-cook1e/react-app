@@ -1,6 +1,6 @@
 import { Method } from 'axios'
 
-export interface HttpResponse<T> {
+export interface HttpResponse<T = any> {
 	code: number
 	msg: string
 	data: T
