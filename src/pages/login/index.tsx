@@ -56,7 +56,12 @@ const Login = (): JSX.Element => {
 					</Item>
 					<Item wrapperCol={{ offset: 5 }}>
 						<Space>
-							<Button type='primary' onClick={() => submit('login')} loading={loadings.login}>
+							<Button
+								htmlType='submit'
+								type='primary'
+								onClick={() => submit('login')}
+								loading={loadings.login}
+							>
 								登录
 							</Button>
 							<Button type='primary' onClick={() => submit('register')} loading={loadings.register}>

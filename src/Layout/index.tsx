@@ -1,31 +1,19 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Layout, Menu } from 'antd'
-import {
-	UserOutlined,
-	LaptopOutlined,
-	NotificationOutlined
-} from '@ant-design/icons'
+import { Layout } from 'antd'
 import styles from './index.module.less'
 import SideMenu from './SideMenu'
-import { useSelector } from 'react-redux'
-import { appSelector, setMenuStatus } from '@/store/slices/app'
+import Logo from './Logo'
+import Tools from './Tools'
 
-const { SubMenu } = Menu
-const { Header, Content, Sider } = Layout
+const { Header, Content } = Layout
 
 const BaseLayout = (): JSX.Element => {
-	const { menuCollapsed } = useSelector(appSelector)
-
-	const changeMenuStatus = () => {
-		const status = !menuCollapsed
-		setMenuStatus(status)
-	}
-
 	return (
 		<div className={styles.layout}>
 			<Header className={styles.layout__header}>
-				<div className='logo' />
+				<Logo />
+				<Tools />
 			</Header>
 
 			<Layout className={styles.layout__main}>

@@ -1,11 +1,39 @@
-@header-height: 64px;
+@header-height: 48px;
 /* prettier-ignore */
-@middle-height:calc(100vh - 64px);
+@middle-height:calc(100vh - @header-height);
 
 .layout {
 	min-height: 100vh;
 	&__header {
+		display: flex;
+		align-items: center;
 		height: @header-height;
+		.logo {
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background-color: #fff;
+			text-align: center;
+			line-height: 20px;
+		}
+		.tools {
+			display: flex;
+			align-items: center;
+			height: 100%;
+			margin-left: auto;
+			&__menu {
+				display: flex;
+				align-items: center;
+				padding: 0 5px;
+				cursor: pointer;
+				.username {
+					color: #fff;
+				}
+				&:hover {
+					background-color: #252a3d;
+				}
+			}
+		}
 	}
 	&__main {
 		min-height: @middle-height;

@@ -28,7 +28,7 @@
 	"dependencies": {
 		"@ant-design/icons": "^4.7.0",
 		"@reduxjs/toolkit": "^1.6.0",
-		"antd": "^4.19.5",
+		"antd": "^4.21.3",
 		"axios": "^0.27.2",
 		"classnames": "^2.3.1",
 		"framer-motion": "^4.1.17",
