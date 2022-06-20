@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_app=self.webpackChunkreact_app||[]).push([[231],{4231:function(e,a,n){n.r(a);n(7294);var t=n(5893);a.default=function(){return(0,t.jsx)("div",{children:"this is user management page"})}}}]);
