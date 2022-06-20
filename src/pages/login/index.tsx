@@ -27,8 +27,8 @@ const Login = (): JSX.Element => {
 			const submitFunc = type === 'login' ? doLogin : doRegister
 			await submitFunc(values)
 			message.success(`${type === 'login' ? '登录' : '注册'}成功`)
-			navigate('/')
-		} finally {
+			navigate('/dashboard')
+		} catch {
 			setLoadings({
 				login: false,
 				register: false

@@ -24,3 +24,9 @@ export const register = (data: LoginRequest): Promise<HttpResponse> => {
 		data
 	})
 }
+
+export const getUsers = (): Promise<HttpResponse> =>
+	request({
+		url: '/users',
+		method: 'get'
+	})

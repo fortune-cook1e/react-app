@@ -48,5 +48,12 @@ export const routes: IRoute[] = [
 			...studyRoutes,
 			...apisRoutes
 		]
+	},
+	{
+		path: '/login',
+		element: () => import('@/pages/login'),
+		title: '登录',
+		key: 'login',
+		icon: ''
 	}
 ]

@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import { HttpResponse, RequestOptions } from '@/types'
 import { message } from 'antd'
+import store from '@/store'
+import { setUser } from '@/store/slices/user'
 
 const instance = axios.create({
 	baseURL: '/api'
@@ -43,6 +45,16 @@ const request = <T = any, D = any>(
 				const { code, msg = '服务器异常' } = data
 				// TODO: 待处理 status非200情况
 				if (code !== 0) {
+					// TIP: 10000code代表token失效 需要重新登录
+					if (code === 10000) {
+						message.info('登录失效，请重新登录，1s后进行跳转')
+						setTimeout(() => {
+							store.dispatch(setUser(null))
+							window.location.hash = '#/login'
+						}, 1000)
+
+						return
+					}
 					!customError && message.error(msg)
 					reject(data)
 				}
