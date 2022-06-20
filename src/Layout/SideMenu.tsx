@@ -32,8 +32,8 @@ const SideMenu = (): JSX.Element => {
 		).reverse()
 
 		return {
-			selected: childItem?.name ? [childItem.name] : [parentItem.name],
-			open: [parentItem.name]
+			selected: childItem?.key ? [childItem.key] : [parentItem.key],
+			open: [parentItem.key]
 		}
 	})
 
@@ -43,16 +43,16 @@ const SideMenu = (): JSX.Element => {
 	}
 
 	const renderMenuWithChildren = (menu: ChildMenuItem) => {
-		const { title, path, children, name } = menu
+		const { title, path, children, key } = menu
 		if (!children || !children.length) {
 			return (
-				<Item key={name}>
+				<Item key={key}>
 					<Link to={path}>{title}</Link>
 				</Item>
 			)
 		}
 		return (
-			<SubMenu key={name} title={title} icon={<DesktopOutlined />}>
+			<SubMenu key={key} title={title} icon={<DesktopOutlined />}>
 				{children.map(c => {
 					return renderMenuWithChildren(c)
 				})}
@@ -62,7 +62,7 @@ const SideMenu = (): JSX.Element => {
 
 	const renderMenuWithoutChildren = (menu: MenuItem) => {
 		return (
-			<Item key={menu.name} icon={<DesktopOutlined />}>
+			<Item key={menu.key} icon={<DesktopOutlined />}>
 				<Link to={menu.path as string}>{menu.title}</Link>
 			</Item>
 		)
@@ -70,10 +70,10 @@ const SideMenu = (): JSX.Element => {
 
 	const renderMenu = (menu: MenuItem[]) => {
 		return menu.map(m => {
-			const { children = [], title, name } = m
+			const { children = [], title, key } = m
 			if (!children || !children.length) return renderMenuWithoutChildren(m)
 			return (
-				<SubMenu key={name} title={title} icon={<DesktopOutlined />}>
+				<SubMenu key={key} title={title} icon={<DesktopOutlined />}>
 					{children.map(renderMenuWithChildren)}
 				</SubMenu>
 			)

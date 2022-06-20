@@ -1,60 +1,52 @@
-import { RouteConfig } from '@/types'
+import { IRoute, IChildRoute } from '@/types'
 
-export const routes: RouteConfig[] = [
+export const studyRoutes: IChildRoute[] = [
 	{
-		path: '/login',
-		element: () => import('@/pages/login')
+		path: '/theme',
+		element: () => import('@/pages/theme'),
+		title: '主题色',
+		key: 'theme'
 	},
+	{
+		path: '/canvas',
+		element: () => import('@/pages/canvas'),
+		title: 'Canvas',
+		key: 'canvas'
+	},
+	{
+		path: '/lazy-load',
+		element: () => import('@/pages/lazy-load'),
+		title: '图片懒加载',
+		key: 'lazyLoad'
+	}
+]
+
+// 调koa-app APi相关路由
+export const apisRoutes: IChildRoute[] = [
+	{
+		path: '/user-management',
+		element: () => import('@/pages/user-management'),
+		title: '用户管理',
+		key: 'userManagement'
+	}
+]
+
+export const routes: IRoute[] = [
 	{
 		path: '/',
 		element: () => import('@/Layout'),
+		title: 'home',
+		key: 'home',
+		icon: '',
 		children: [
 			{
-				index: true,
-				element: () => import('@/pages/home'),
-				meta: {
-					auth: true
-				}
+				path: '/dashboard',
+				element: () => import('@/pages/dashboard'),
+				title: '首页',
+				key: 'dashboard'
 			},
-			{
-				path: '/theme',
-				element: () => import('@/pages/theme'),
-				meta: {
-					auth: false
-				}
-			},
-			{
-				path: '/canvas',
-				element: () => import('@/pages/canvas'),
-				meta: {
-					auth: false
-				}
-			},
-			{
-				path: '/lazy-loading',
-				element: () => import('@/pages/lazy-load'),
-				meta: {
-					auth: false
-				}
-			},
-			{
-				path: '/apis',
-				element: () => import('@/pages/react-apis'),
-				meta: {
-					auth: false
-				}
-			},
-			{
-				path: '/demo',
-				element: () => import('@/pages/demo')
-			},
-			{
-				path: '/key-page',
-				element: () => import('@/pages/key-page'),
-				meta: {
-					auth: false
-				}
-			}
+			...studyRoutes,
+			...apisRoutes
 		]
 	}
 ]

@@ -26,6 +26,7 @@ const BaseLayout = (): JSX.Element => {
 							minHeight: 280
 						}}
 					>
+						{/* 子路由组件渲染地方 */}
 						<Outlet />
 					</Content>
 				</Layout>

@@ -1,25 +1,31 @@
 import type { RouteObject } from 'react-router-dom'
-export interface RouteConfig extends RouteObject {
-	path?: string
+
+export interface IRoute extends RouteObject {
+	path: string
 	element: any
-	children?: RouteConfig[]
+	title: string
+	key: string
+	children?: IChildRoute[]
+	icon: string
 	meta?: {
-		title?: string // 标题
-		auth?: boolean // 是否需要登录
+		menu: boolean
+		auth: boolean
 	}
 }
+
+export type IChildRoute = Omit<IRoute, 'children' | 'icon'>
 
 export interface MenuItem {
 	title: string
 	icon: string
 	path?: string
-	name: string
+	key: string
 	children?: ChildMenuItem[]
 }
 
 export interface ChildMenuItem {
 	title: string
 	path: string
-	name: string
+	key: string
 	children?: ChildMenuItem[]
 }

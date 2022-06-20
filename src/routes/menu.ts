@@ -1,47 +1,23 @@
 import { MenuItem } from './../types/route'
+import { apisRoutes, studyRoutes } from './routes'
 
 export const menu: MenuItem[] = [
 	{
 		title: '首页',
 		icon: '',
-		path: '/',
-		name: 'home'
+		path: '/dashboard',
+		key: 'dashboard'
 	},
 	{
-		title: '学习页',
-		name: 'study',
+		title: '学习',
 		icon: '',
-		children: [
-			{
-				title: '主题色',
-				path: '/theme',
-				name: 'theme'
-			},
-			{
-				title: 'canvas',
-				path: '/canvas',
-				name: 'canvas'
-			},
-			{
-				title: '图片懒加载',
-				path: '/lazy-loading',
-				name: 'lazy-loading'
-			},
-			{
-				title: 'react-apis 学习',
-				path: '/apis',
-				name: 'apis'
-			},
-			{
-				title: 'demo',
-				path: '/demo',
-				name: 'demo'
-			},
-			{
-				title: 'key学习使用',
-				path: '/key-page',
-				name: 'key-page'
-			}
-		]
+		key: 'study',
+		children: studyRoutes
+	},
+	{
+		title: '接口调用',
+		icon: '',
+		key: 'apis',
+		children: apisRoutes
 	}
 ]
