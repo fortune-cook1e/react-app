@@ -20,7 +20,7 @@ const initialState: UserState = {
 }
 
 export const doLogin = createAsyncThunk('users/login', async (params: LoginRequest) => {
-	const { data } = await login(params)
+	const data = await login(params)
 	return data
 })
 
@@ -30,7 +30,7 @@ export const doLogout = createAsyncThunk('users/logout', async () => {
 })
 
 export const doRegister = createAsyncThunk('users/register', async (params: LoginRequest) => {
-	const { data } = await register(params)
+	const data = await register(params)
 	return data
 })
 
