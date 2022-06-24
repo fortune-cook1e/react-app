@@ -41,8 +41,7 @@
 		"react-query": "^3.39.1",
 		"react-redux": "^7.2.4",
 		"react-router-dom": "^6.2.2",
-		"react-transition-group": "^4.4.2",
-		"tailwindcss": "^2.1.4"
+		"react-transition-group": "^4.4.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.14.3",

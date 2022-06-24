@@ -1,9 +1,9 @@
-import { getUsers } from '@/apis'
 import React, { useEffect } from 'react'
 import { useQuery } from 'react-query'
 import { ColumnsType } from 'antd/es/table'
 import { Table } from 'antd'
 import { Gender, IUser } from '@/types'
+import { getUsers } from '@/apis'
 
 const UserManagement = (): JSX.Element => {
 	const { isLoading, data } = useQuery('users', getUsers)

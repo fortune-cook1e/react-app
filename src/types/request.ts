@@ -16,3 +16,12 @@ export interface RequestOptions<T> {
 		customError?: boolean // 是否自定义处理错误
 	}
 }
+
+export interface PageRequest {
+	page: number
+	page_size: number
+}
+
+export interface PageResponse extends PageRequest {
+	total: number
+}

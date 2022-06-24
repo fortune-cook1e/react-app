@@ -28,6 +28,12 @@ export const apisRoutes: IChildRoute[] = [
 		element: () => import('@/pages/user-management'),
 		title: '用户管理',
 		key: 'userManagement'
+	},
+	{
+		path: '/staff',
+		element: () => import('@/pages/staff'),
+		title: '员工管理',
+		key: 'staff'
 	}
 ]
 

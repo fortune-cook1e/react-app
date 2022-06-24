@@ -4,6 +4,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useAuth } from '@/hooks/useAuth'
 import { LoginRequest } from '@/types'
 import { useNavigate } from 'react-router-dom'
+import styles from './index.module.less'
 
 const { Item } = Form
 const { Password } = Input
@@ -37,8 +38,8 @@ const Login = (): JSX.Element => {
 	}
 
 	return (
-		<section className='relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12'>
-			<div className='relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10'>
+		<section className={styles.container}>
+			<div className={styles.content}>
 				<Form form={form} labelCol={{ span: 5 }}>
 					<Item
 						label='账号'
