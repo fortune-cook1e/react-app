@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_app=self.webpackChunkreact_app||[]).push([[728],{9728:function(c,n,a){a.r(n);var e=a(5026),i=a(9346),s=(a(7294),a(5893));n.default=function(){return(0,s.jsxs)("div",{children:["this is Dashboard",(0,s.jsx)(i.Z,{onClick:function(){e.ZP.info("dasda",0)},children:"click me"})]})}}}]);
