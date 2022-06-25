@@ -1,7 +1,7 @@
-import { IStaffListRequest, IStaff } from './../types/staff'
+import { IStaffListRequest, IStaff, IStaffListResponse } from './../types/staff'
 import request from '@/utils/request'
 
-export const fetchStaffList = (params: IStaffListRequest): Promise<IStaff[]> => {
+export const fetchStaffList = (params: IStaffListRequest): Promise<IStaffListResponse> => {
 	return request({
 		url: '/staff/list',
 		method: 'get',
@@ -9,7 +9,7 @@ export const fetchStaffList = (params: IStaffListRequest): Promise<IStaff[]> => 
 	})
 }
 
-export const addStaff = (data: Omit<IStaff, 'id'>): Promise<void> => {
+export const createStaff = (data: Omit<IStaff, 'id'>): Promise<void> => {
 	return request({
 		url: '/staff/add',
 		method: 'post',

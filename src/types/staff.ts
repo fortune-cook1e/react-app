@@ -1,4 +1,4 @@
-import { PageRequest } from './request'
+import { PageRequest, PageResponse } from './request'
 import { Gender } from './user'
 
 export interface IStaff {
@@ -6,10 +6,16 @@ export interface IStaff {
 	name: string
 	gender: Gender
 	occupation: string
-	entryTime: number
-	resignationTime: number
+	entryTime: string
+	resignationTime: string
+	company: string
 }
 
 export interface IStaffListRequest extends PageRequest {
 	keyword?: string
+}
+
+export interface IStaffListResponse {
+	list: IStaff[]
+	pager: PageResponse
 }

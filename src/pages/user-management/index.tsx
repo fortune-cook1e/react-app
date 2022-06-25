@@ -6,7 +6,7 @@ import { Gender, IUser } from '@/types'
 import { getUsers } from '@/apis'
 
 const UserManagement = (): JSX.Element => {
-	const { isLoading, data } = useQuery('users', getUsers)
+	const { isFetching, data } = useQuery('users', getUsers)
 
 	const columns: ColumnsType<IUser> = [
 		{
@@ -32,7 +32,7 @@ const UserManagement = (): JSX.Element => {
 		}
 	]
 
-	return <Table<IUser> rowKey='id' loading={isLoading} columns={columns} dataSource={data} />
+	return <Table<IUser> rowKey='id' loading={isFetching} columns={columns} dataSource={data} />
 }
 
 export default UserManagement
