@@ -100,7 +100,7 @@ const SideMenu = (): JSX.Element => {
 				</Menu>
 			</Sider>
 
-			<div className={styles.menu__button}>
+			<div className={styles.menu__button} onClick={changeMenuStatus}>
 				{menuCollapsed ? (
 					<MenuUnfoldOutlined onClick={changeMenuStatus} />
 				) : (

@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { Table, Input, Space, Button } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { IStaff, PageRequest } from '@/types'
-import { useQuery } from 'react-query'
-import { fetchStaffList } from '@/apis/staff'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { fetchStaffList, deleteStaff } from '@/apis/staff'
 import LayoutContainer from '@/components/common/LayoutContainer'
 import styles from './index.module.less'
 import StaffModal from './modules/StaffModal'
-import useMount from '@/hooks/useMount'
+import { QUERY_KEYS } from '@/constants'
 
 type SearchQuerykey = [string, { pager: PageRequest }]
 
 const Page = (): JSX.Element => {
+	const queryClient = useQueryClient()
 	const [pager, setPager] = useState<PageRequest>({
 		page: 1,
 		page_size: 10
@@ -19,9 +20,11 @@ const Page = (): JSX.Element => {
 	const [total, setTotal] = useState<number>(0)
 	const [keyword, setKeyword] = useState<string | undefined>(undefined)
 	const [visible, setVisible] = useState<boolean>(false)
+	const [updatingStaffId, setUpdatingStaffId] = useState<string | undefined>(undefined)
+	const [deletingStaffId, setDeletingStaffId] = useState<string | undefined>(undefined)
 
 	const { isFetching, data, refetch } = useQuery<IStaff[], Error, IStaff[], SearchQuerykey>(
-		['staff-list', { pager }],
+		[QUERY_KEYS.staff.list, { pager }],
 		async params => {
 			const { queryKey } = params
 			const {
@@ -33,8 +36,28 @@ const Page = (): JSX.Element => {
 		}
 	)
 
+	const { mutate: delStaff } = useMutation((id: string) => deleteStaff({ id }), {
+		onMutate(id: string) {
+			setDeletingStaffId(id)
+		},
+		onSuccess() {
+			queryClient.invalidateQueries(QUERY_KEYS.staff.list)
+			setDeletingStaffId(undefined)
+		}
+	})
+
 	const onSearch = () => {
 		refetch()
+	}
+
+	const onUpdate = (id: string) => {
+		setUpdatingStaffId(id)
+		setVisible(true)
+	}
+
+	const onClose = () => {
+		setUpdatingStaffId(undefined)
+		setVisible(false)
 	}
 
 	const columns: ColumnsType<IStaff> = [
@@ -83,8 +106,12 @@ const Page = (): JSX.Element => {
 			render: (id: string) => {
 				return (
 					<Space>
-						<Button size='small'>更新</Button>
-						<Button size='small'>删除</Button>
+						<Button size='small' onClick={() => onUpdate(id)}>
+							更新
+						</Button>
+						<Button size='small' loading={deletingStaffId === id} onClick={() => delStaff(id)}>
+							删除
+						</Button>
 					</Space>
 				)
 			}
@@ -93,7 +120,7 @@ const Page = (): JSX.Element => {
 
 	return (
 		<LayoutContainer className={styles.staff}>
-			<StaffModal visible={visible} onClose={() => setVisible(false)} />
+			<StaffModal staffId={updatingStaffId} visible={visible} onClose={onClose} />
 			<LayoutContainer.Header>
 				<div className={styles.tools}>
 					<Input
@@ -129,7 +156,6 @@ const Page = (): JSX.Element => {
 								page,
 								page_size: pageSize
 							})
-							refetch()
 						}
 					}}
 				/>

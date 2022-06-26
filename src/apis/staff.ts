@@ -32,3 +32,11 @@ export const deleteStaff = (data: { id: string }): Promise<void> => {
 		data
 	})
 }
+
+export const fetchStaffInfo = (id: string): Promise<IStaff> => {
+	return request({
+		url: '/staff/info',
+		method: 'get',
+		params: { id }
+	})
+}
