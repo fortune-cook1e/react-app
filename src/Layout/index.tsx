@@ -5,6 +5,7 @@ import styles from './index.module.less'
 import SideMenu from './SideMenu'
 import Logo from './Logo'
 import Tools from './Tools'
+import Floatings from './Floatings'
 
 const { Header, Content } = Layout
 
@@ -18,6 +19,8 @@ const BaseLayout = (): JSX.Element => {
 
 			<Layout className={styles.layout__main}>
 				<SideMenu />
+
+				<Floatings />
 
 				<Layout style={{ padding: '24px' }}>
 					<Content

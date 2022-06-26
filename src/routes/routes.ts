@@ -2,12 +2,6 @@ import { IRoute, IChildRoute } from '@/types'
 
 export const studyRoutes: IChildRoute[] = [
 	{
-		path: '/theme',
-		element: () => import('@/pages/theme'),
-		title: '主题色',
-		key: 'theme'
-	},
-	{
 		path: '/canvas',
 		element: () => import('@/pages/canvas'),
 		title: 'Canvas',

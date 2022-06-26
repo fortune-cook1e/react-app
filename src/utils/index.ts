@@ -1,10 +1,3 @@
-export const downloadByUrl = (url: string): void => {
-	const a = document.createElement('a')
-	a.setAttribute('download', 'my-image.png')
-	a.setAttribute('href', url)
-	a.click()
-}
-
 /**
  * 获取 storage 缓存数据
  * @param {*} type 类型   local：localStorage   session：sessionStorage
