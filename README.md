@@ -10,7 +10,7 @@
 
 - antd 动态主题
 - 路由拦截
-- tailwind
+- React-Query
 - webpack federation
 - 动画(Motion)
 - transition 封装
