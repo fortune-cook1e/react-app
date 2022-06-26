@@ -1,22 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Input, Button, Space, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useAuth } from '@/hooks/useAuth'
 import { LoginRequest } from '@/types'
 import { useNavigate } from 'react-router-dom'
 import styles from './index.module.less'
+import { useQueryClient } from 'react-query'
 
 const { Item } = Form
 const { Password } = Input
 
 const Login = (): JSX.Element => {
 	const navigate = useNavigate()
+	const queryClient = useQueryClient()
 	const { login: doLogin, register: doRegister } = useAuth()
 	const [form] = Form.useForm<LoginRequest>()
 	const [loadings, setLoadings] = useState({
 		login: false,
 		register: false
 	})
+
+	useEffect(() => {
+		// FIXBUG: 修复每次cookie失效时 跳转到login页 再登录成功后 之前的请求失败依然处于loading状态
+		queryClient.invalidateQueries()
+	}, [])
 
 	const submit = async (type: 'login' | 'register') => {
 		try {

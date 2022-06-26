@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Table, Input, Space, Button } from 'antd'
+import React, { useState } from 'react'
+import { Table, Input, Space, Button, Popconfirm } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { IStaff, PageRequest } from '@/types'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
@@ -23,7 +23,11 @@ const Page = (): JSX.Element => {
 	const [updatingStaffId, setUpdatingStaffId] = useState<string | undefined>(undefined)
 	const [deletingStaffId, setDeletingStaffId] = useState<string | undefined>(undefined)
 
-	const { isFetching, data, refetch } = useQuery<IStaff[], Error, IStaff[], SearchQuerykey>(
+	const {
+		isFetching,
+		data,
+		refetch: getStaffList
+	} = useQuery<IStaff[], Error, IStaff[], SearchQuerykey>(
 		[QUERY_KEYS.staff.list, { pager }],
 		async params => {
 			const { queryKey } = params
@@ -47,7 +51,7 @@ const Page = (): JSX.Element => {
 	})
 
 	const onSearch = () => {
-		refetch()
+		getStaffList()
 	}
 
 	const onUpdate = (id: string) => {
@@ -109,9 +113,11 @@ const Page = (): JSX.Element => {
 						<Button size='small' onClick={() => onUpdate(id)}>
 							更新
 						</Button>
-						<Button size='small' loading={deletingStaffId === id} onClick={() => delStaff(id)}>
-							删除
-						</Button>
+						<Popconfirm title='确定删除？' onConfirm={() => delStaff(id)}>
+							<Button size='small' loading={deletingStaffId === id}>
+								删除
+							</Button>
+						</Popconfirm>
 					</Space>
 				)
 			}
