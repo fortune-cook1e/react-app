@@ -1,0 +1,43 @@
+// 单行文本溢出处理
+.single-line-overflow {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+// 多行文本溢出处理
+.multiple-line-overflow(@line:2) {
+	display: box;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: @line;
+}
+
+.font__common(@size:13px;@weight:400;@color:#222222) {
+	color: @color;
+	font-weight: @weight;
+	font-size: @size;
+}
+
+// font-family:PingFangSC-Regular/PingFangSC-Medium/PingFangSC-Semibold
+// @family: regular / medium / bold
+
+.font(@family:regular;@size;@weight;@color) when (@family = regular) {
+	font-family: PingFangSC-Regular, 'PingFang SC', sans-serif;
+	.font__common(@size; @weight; @color);
+}
+
+.font(@family:medium;@size:13px;@weight:500;@color) when (@family = medium) {
+	font-family: PingFangSC-Medium, 'PingFang SC', sans-serif;
+	.font__common(@size; @weight; @color);
+}
+.font(@family:bold;@size:28px;@weight:600;@color) when (@family = bold) {
+	font-family: PingFangSC-Semibold, 'PingFang SC', sans-serif;
+	.font__common(@size; @weight; @color);
+}
+
+.reset {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}

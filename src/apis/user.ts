@@ -4,7 +4,7 @@ import request from '@/utils/request'
 
 export const login = (data: LoginRequest): Promise<IUser> => {
 	return request({
-		url: '/users/login',
+		url: '/user/login',
 		method: 'post',
 		data
 	})
@@ -12,14 +12,14 @@ export const login = (data: LoginRequest): Promise<IUser> => {
 
 export const logout = (): Promise<void> => {
 	return request({
-		url: '/users/logout',
+		url: '/user/logout',
 		method: 'post'
 	})
 }
 
 export const register = (data: LoginRequest): Promise<IUser> => {
 	return request({
-		url: '/users/register',
+		url: '/user/register',
 		method: 'post',
 		data
 	})
@@ -27,6 +27,6 @@ export const register = (data: LoginRequest): Promise<IUser> => {
 
 export const getUsers = (): Promise<IUser[]> =>
 	request({
-		url: '/users',
+		url: '/user/list',
 		method: 'get'
 	})
