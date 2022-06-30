@@ -1,10 +1,6 @@
 import React, { useMemo } from 'react'
 import { Chart, Interval, Tooltip } from 'bizcharts'
-import { Spin } from 'antd'
 import Layout from '../Layout'
-import { useQuery } from 'react-query'
-import { QUERY_KEYS } from '@/constants'
-import { fetchStaffList } from '@/apis/staff'
 import { IStaff } from '@/types'
 
 interface ChartStaffData {
@@ -19,15 +15,11 @@ const scale = {
 	}
 }
 
-const Resignation = (): JSX.Element => {
-	const { isFetching, data: staffData = [] } = useQuery([QUERY_KEYS.staff.list], async () => {
-		const { list = [] } = await fetchStaffList({
-			page: 1,
-			page_size: 999
-		})
-		return list
-	})
+interface Props {
+	staffData: IStaff[]
+}
 
+const Resignation = ({ staffData = [] }: Props): JSX.Element => {
 	const staffChartData: ChartStaffData[] = useMemo(() => {
 		if (!staffData.length) return []
 		return staffData.reduce((acc: ChartStaffData[], cur: IStaff) => {
@@ -52,12 +44,20 @@ const Resignation = (): JSX.Element => {
 
 	return (
 		<Layout title='离职员工'>
-			<Spin spinning={isFetching}>
-				<Chart height={300} autoFit data={staffChartData} scale={scale}>
-					<Interval position='resignationTime*count' />
-					<Tooltip shared />
-				</Chart>
-			</Spin>
+			<Chart height={300} autoFit data={staffChartData} scale={scale}>
+				<Interval
+					position='resignationTime*count'
+					label={[
+						'count',
+						val => {
+							return {
+								content: val
+							}
+						}
+					]}
+				/>
+				<Tooltip shared />
+			</Chart>
 		</Layout>
 	)
 }

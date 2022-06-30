@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Table, Input, Space, Button, Popconfirm } from 'antd'
 import { ColumnsType } from 'antd/es/table'
-import { IStaff, PageRequest } from '@/types'
+import { Department, Gender, IStaff, Occupation, PageRequest } from '@/types'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { fetchStaffList, deleteStaff } from '@/apis/staff'
 import LayoutContainer from '@/components/common/LayoutContainer'
 import styles from './index.module.less'
 import StaffModal from './modules/StaffModal'
-import { QUERY_KEYS } from '@/constants'
+import { GENDER_OPTIONS, QUERY_KEYS } from '@/constants'
+import { OCCUPATION_OPTIONS, DEPARTMENT_OPTIONS } from '@/constants/staff'
 
 type SearchQuerykey = [string, { pager: PageRequest }]
 
@@ -65,11 +66,11 @@ const Page = (): JSX.Element => {
 	}
 
 	const columns: ColumnsType<IStaff> = [
-		{
-			key: 'id',
-			title: 'Id',
-			dataIndex: 'id'
-		},
+		// {
+		// 	key: 'id',
+		// 	title: 'Id',
+		// 	dataIndex: 'id'
+		// },
 		{
 			key: 'name',
 			title: '名称',
@@ -79,30 +80,48 @@ const Page = (): JSX.Element => {
 			key: 'occupation',
 			title: '职业',
 			dataIndex: 'occupation',
-			ellipsis: true
+			ellipsis: true,
+			render: (val: Occupation) => {
+				const occupationLabel = OCCUPATION_OPTIONS.find(o => o.value == val)?.label || ''
+				return occupationLabel
+			}
+		},
+		{
+			key: 'department',
+			title: '部门',
+			dataIndex: 'department',
+			ellipsis: true,
+			render: (val: Department) => {
+				const departmentLabel = DEPARTMENT_OPTIONS.find(o => o.value == val)?.label || ''
+				return departmentLabel
+			}
 		},
 		{
 			key: 'gender',
 			title: '性别',
-			dataIndex: 'gender'
+			dataIndex: 'gender',
+			render: (val: Gender) => {
+				const genderLabel = GENDER_OPTIONS.find(g => g.value === val)?.label || ''
+				return genderLabel
+			}
 		},
-		{
-			key: 'entryTime',
-			title: '入职时间',
-			dataIndex: 'entryTime',
-			ellipsis: true
-		},
+		// {
+		// 	key: 'entryTime',
+		// 	title: '入职时间',
+		// 	dataIndex: 'entryTime',
+		// 	ellipsis: true
+		// },
 		{
 			key: 'resignationTime',
 			title: '离职时间',
 			dataIndex: 'resignationTime',
 			ellipsis: true
 		},
-		{
-			key: 'leave',
-			title: '状态',
-			dataIndex: 'leave'
-		},
+		// {
+		// 	key: 'leave',
+		// 	title: '状态',
+		// 	dataIndex: 'leave'
+		// },
 		{
 			key: 'id',
 			title: '操作',

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Modal, Form, Input, Select, DatePicker, Spin } from 'antd'
-import { Gender, IStaff } from '@/types'
+import { Department, Gender, IStaff, Occupation } from '@/types'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { updateStaff, createStaff, fetchStaffInfo } from '@/apis/staff'
 import { GENDER_OPTIONS, QUERY_KEYS } from '@/constants'
 import moment, { Moment } from 'moment'
+import { DEPARTMENT_OPTIONS, OCCUPATION_OPTIONS } from '@/constants/staff'
 const { RangePicker } = DatePicker
 
 const { Item } = Form
@@ -21,6 +22,7 @@ interface StaffForm {
 	name: string
 	gender: Gender
 	occupation: string
+	department: string
 	time: Moment[]
 	company: string
 }
@@ -37,12 +39,14 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
 		{
 			enabled: !!staffId,
 			onSuccess: data => {
-				const { company, id, entryTime, resignationTime, occupation, gender, name } = data
+				const { company, id, entryTime, resignationTime, occupation, gender, name, department } =
+					data
 				form.setFieldsValue({
 					id,
 					name,
 					gender,
 					company,
+					department,
 					time: [moment(entryTime), moment(resignationTime)],
 					occupation
 				})
@@ -78,7 +82,8 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
 			gender,
 			occupation,
 			time: [entryTime, resignationTime],
-			company
+			company,
+			department
 		} = values
 
 		const isUpdateMode = !!staffId
@@ -89,6 +94,7 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
 			gender,
 			company,
 			occupation,
+			department,
 			entryTime: entryTime.format(DATE_FORMAT),
 			resignationTime: resignationTime.format(DATE_FORMAT)
 		}
@@ -115,7 +121,16 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
 			confirmLoading={addLoading || updateLoading}
 		>
 			<Spin spinning={staffInfoLoading}>
-				<Form form={form} labelCol={{ span: 4 }} wrapperCol={{ span: 20 }}>
+				<Form
+					form={form}
+					labelCol={{ span: 4 }}
+					wrapperCol={{ span: 20 }}
+					initialValues={{
+						gender: Gender.Male,
+						occupation: Occupation.FrontEnd,
+						department: Department.CDP
+					}}
+				>
 					<Item label='id' name='id' hidden />
 					<Item label='名称' name='name' rules={[{ required: true, message: '请输入名称' }]}>
 						<Input style={{ width: '400px' }} placeholder='请输入名称' />
@@ -124,7 +139,11 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
 						<Select style={{ width: '400px' }} options={GENDER_OPTIONS} placeholder='请选择性别' />
 					</Item>
 					<Item label='职业' name='occupation' rules={[{ required: true, message: '请输入职位' }]}>
-						<Input style={{ width: '400px' }} placeholder='请输入职位' />
+						<Select
+							style={{ width: '400px' }}
+							placeholder='请输入职位'
+							options={OCCUPATION_OPTIONS}
+						/>
 					</Item>
 					<Item
 						label='时间'
@@ -136,6 +155,13 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
 							placeholder={['入职时间', '离职时间']}
 							format={DATE_FORMAT}
 						/>
+					</Item>
+					<Item
+						label='部门'
+						name='department'
+						rules={[{ required: true, message: '请输入公司名称' }]}
+					>
+						<Select style={{ width: 400 }} placeholder='请选择部门' options={DEPARTMENT_OPTIONS} />
 					</Item>
 					<Item label='公司' name='company' rules={[{ required: true, message: '请输入公司名称' }]}>
 						<Input style={{ width: '400px' }} placeholder='请输入公司名' />

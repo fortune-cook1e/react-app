@@ -8,5 +8,9 @@ export const GENDER_OPTIONS = [
 	{
 		label: '女',
 		value: Gender.Female
+	},
+	{
+		label: '未知',
+		value: Gender.Unknown
 	}
 ]
