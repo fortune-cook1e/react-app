@@ -4,10 +4,7 @@ import styles from './index.module.less'
 
 const htmlToImage = require('html-to-image')
 
-import { downloadByUrl } from '@/utils'
-
-const IMG =
-	'https://big-c.oss-cn-hangzhou.aliyuncs.com/cms/img/x2fhevy4hvqyv6nuxsre6qy52e0g6e54封'
+const IMG = 'https://big-c.oss-cn-hangzhou.aliyuncs.com/cms/img/x2fhevy4hvqyv6nuxsre6qy52e0g6e54封'
 
 const ReactCanvas: React.FC = () => {
 	const createCanvas = async () => {
@@ -23,7 +20,6 @@ const ReactCanvas: React.FC = () => {
 		// downloadByUrl(img)
 		const url = await htmlToImage.toPng(element)
 		console.log({ url })
-		downloadByUrl(url)
 	}
 
 	return (
@@ -36,11 +32,7 @@ const ReactCanvas: React.FC = () => {
 				<div className={styles.right}>right</div>
 				<div className={styles.top}>top</div>
 				<div className={styles.bottom}>bottom</div>
-				<img
-					src={IMG + '?' + `time=${Date.now()}`}
-					alt=''
-					crossOrigin='anonymous'
-				/>
+				<img src={IMG + '?' + `time=${Date.now()}`} alt='' crossOrigin='anonymous' />
 			</div>
 		</div>
 	)
