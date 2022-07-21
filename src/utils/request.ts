@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
-import { HttpResponse, RequestOptions, QueryResponse } from '@/types'
+import { HttpResponse, RequestOptions } from '@/types'
 import { message } from 'antd'
 import store from '@/store'
 import { setUser } from '@/store/slices/user'

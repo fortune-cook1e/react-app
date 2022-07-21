@@ -60,3 +60,7 @@ export const getItemInChildrenMap = <T extends { children?: T[] }>(
 	dfs({ children: [...list] } as T)
 	return arr
 }
+
+// 生成范围内随机数
+export const randomNum = (min: number, max: number): number =>
+	Math.floor(Math.random() * (max - min + 1)) + min
