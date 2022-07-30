@@ -28,6 +28,7 @@
 	},
 	"dependencies": {
 		"@ant-design/icons": "^4.7.0",
+		"@fe-cookie/client-request-crypto": "^1.0.1",
 		"@reduxjs/toolkit": "^1.6.0",
 		"antd": "^4.21.3",
 		"axios": "^0.27.2",

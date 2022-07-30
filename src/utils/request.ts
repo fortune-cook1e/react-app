@@ -1,8 +1,10 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import { HttpResponse, RequestOptions } from '@/types'
+import { clientCrypto } from '@fe-cookie/client-request-crypto'
 import { message } from 'antd'
 import store from '@/store'
 import { setUser } from '@/store/slices/user'
+import globalConfig from './config'
 
 const instance = axios.create({
 	baseURL: '/api'
@@ -17,7 +19,10 @@ const request = <T = any, D = any>(requestionOptions: RequestOptions<T>): Promis
 	const { method, url, data, params, options = defaultOptions } = requestionOptions
 	const { globalLoading, customError } = options
 
-	const token = 'adsa'
+	const { sign, params: newParams } = clientCrypto({
+		params: params || data || {},
+		salt: globalConfig.salt
+	})
 
 	const _options: AxiosRequestConfig = {
 		method,
@@ -25,7 +30,7 @@ const request = <T = any, D = any>(requestionOptions: RequestOptions<T>): Promis
 		data,
 		params,
 		headers: {
-			Authorization: `Bearer ${token}`
+			'X-AUTHO-TOKEN': sign || ''
 		}
 	}
 
