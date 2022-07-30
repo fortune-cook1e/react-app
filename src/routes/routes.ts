@@ -2,12 +2,6 @@ import { IRoute, IChildRoute } from '@/types'
 
 export const studyRoutes: IChildRoute[] = [
 	{
-		path: '/canvas',
-		element: () => import('@/pages/canvas'),
-		title: 'Canvas',
-		key: 'canvas'
-	},
-	{
 		path: '/lazy-load',
 		element: () => import('@/pages/lazy-load'),
 		title: '图片懒加载',
