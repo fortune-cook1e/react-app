@@ -34,6 +34,12 @@ export const routes: IRoute[] = [
 		icon: '',
 		children: [
 			{
+				index: true,
+				element: () => import('@/pages/dashboard'),
+				title: 'dashboard',
+				key: 'dashboard2'
+			},
+			{
 				path: '/dashboard',
 				element: () => import('@/pages/dashboard'),
 				title: '首页',

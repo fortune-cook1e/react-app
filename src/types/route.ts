@@ -1,12 +1,12 @@
 import type { RouteObject } from 'react-router-dom'
 
 export interface IRoute extends RouteObject {
-	path: string
+	path?: string
 	element: any
 	title: string
 	key: string
 	children?: IChildRoute[]
-	icon: string
+	icon?: string
 	meta?: {
 		menu: boolean
 		auth: boolean
