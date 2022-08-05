@@ -25,7 +25,7 @@ export interface MenuItem {
 
 export interface ChildMenuItem {
 	title: string
-	path: string
+	path?: string
 	key: string
 	children?: ChildMenuItem[]
 }

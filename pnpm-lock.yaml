@@ -35,6 +35,8 @@ specifiers:
   css-loader: ^5.2.6
   css-minimizer-webpack-plugin: ^3.0.1
   cz-conventional-changelog: ^3.3.0
+  dexie: ^3.2.2
+  dexie-react-hooks: ^1.1.1
   dotenv: ^16.0.1
   eslint: ^7.28.0
   eslint-config-prettier: ^8.3.0
@@ -87,6 +89,8 @@ dependencies:
   axios: 0.27.2
   bizcharts: 4.1.19_afqnugmud6bgjswh26aoju7tfu
   classnames: 2.3.1
+  dexie: 3.2.2
+  dexie-react-hooks: 1.1.1_ljoi6plmr6prgr2kz5ljmso564
   framer-motion: 4.1.17_sfoxds7t5ydpegc3knd667wn6m
   html-to-image: 1.9.0
   html2canvas: 1.4.1
@@ -4368,6 +4372,23 @@ packages:
 
   /detect-node/2.1.0:
     resolution: {integrity: sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==}
+
+  /dexie-react-hooks/1.1.1_ljoi6plmr6prgr2kz5ljmso564:
+    resolution: {integrity: sha512-Cam5JP6PxHN564RvWEoe8cqLhosW0O4CAZ9XEVYeGHJBa6KEJlOpd9CUpV3kmU9dm2MrW97/lk7qkf1xpij7gA==}
+    peerDependencies:
+      '@types/react': '>=16'
+      dexie: '>=3.1.0-alpha.1 <5.0.0'
+      react: '>=16'
+    dependencies:
+      '@types/react': 17.0.46
+      dexie: 3.2.2
+      react: 17.0.2
+    dev: false
+
+  /dexie/3.2.2:
+    resolution: {integrity: sha512-q5dC3HPmir2DERlX+toCBbHQXW5MsyrFqPFcovkH9N2S/UW/H3H5AWAB6iEOExeraAu+j+zRDG+zg/D7YhH0qg==}
+    engines: {node: '>=6.0'}
+    dev: false
 
   /diff/4.0.2:
     resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}

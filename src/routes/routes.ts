@@ -6,6 +6,12 @@ export const studyRoutes: IChildRoute[] = [
 		element: () => import('@/pages/lazy-load'),
 		title: '图片懒加载',
 		key: 'lazyLoad'
+	},
+	{
+		path: '/index-db',
+		element: () => import('@/pages/indexDb'),
+		title: 'IndexDB',
+		key: 'indexDb'
 	}
 ]
 
