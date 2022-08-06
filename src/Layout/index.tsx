@@ -6,6 +6,7 @@ import SideMenu from './SideMenu'
 import Logo from './Logo'
 import Tools from './Tools'
 import Floatings from './Floatings'
+import { AnimatePresence } from 'framer-motion'
 
 const { Header, Content } = Layout
 
@@ -30,7 +31,9 @@ const BaseLayout = (): JSX.Element => {
 						}}
 					>
 						{/* 子路由组件渲染地方 */}
-						<Outlet />
+						<AnimatePresence>
+							<Outlet />
+						</AnimatePresence>
 					</Content>
 				</Layout>
 			</Layout>
