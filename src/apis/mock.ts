@@ -1,9 +1,11 @@
 import { MockDataType } from '@/types'
+import { IMockData } from '@/types/mock'
 import { mockData } from '@/utils'
 
-export const fetchMockData = (): Promise<any> => {
+export const fetchMockData = (): Promise<IMockData[]> => {
 	return new Promise(resolve => {
 		setTimeout(() => {
+			console.log('fetch data...')
 			const data = mockData(
 				{
 					name: MockDataType.String,
@@ -12,7 +14,7 @@ export const fetchMockData = (): Promise<any> => {
 				},
 				1000
 			)
-			resolve(data)
+			resolve(data as IMockData[])
 		}, 1500)
 	})
 }

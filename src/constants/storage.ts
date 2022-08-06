@@ -8,3 +8,9 @@ export const QUERY_KEYS = {
 		info: 'info'
 	}
 }
+
+// indexedDb 数据存储keys
+export const DB_KEYS = {
+	mockData: 'mockData',
+	mockData2: 'mockData2'
+}

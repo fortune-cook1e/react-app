@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
-
 import store from '@/store'
 import App from './App'
 import { QueryClient, QueryClientProvider } from 'react-query'
