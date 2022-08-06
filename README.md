@@ -16,6 +16,9 @@
 - transition 封装
 - redux-toolkit
 - 图片懒加载
+- indexedDb 数据存储功能
+- 路由动画过渡
+- 开发环境支持 vite
 
 ## 记录项
 
