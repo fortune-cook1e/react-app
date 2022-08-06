@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, ComponentType } from 'react'
+import React, { Suspense, ComponentType } from 'react'
 import { useRoutes } from 'react-router-dom'
 import ProtectedRoute from '@/components/ProtectedRoute'
 import NotFound from '@/pages/not-found'
@@ -6,22 +6,22 @@ import { IRoute } from '@/types'
 import { routes } from './routes'
 
 interface LazyComponentProps {
-	importFunc: () => Promise<{ default: ComponentType<any> }>
+	component: ComponentType
 	needProtect?: boolean
 }
 
 // 懒加载、路由拦截
-function LazyComponent(props: LazyComponentProps) {
-	const { importFunc, needProtect = true } = props
-	const LazyComponent = lazy(importFunc)
+function setProtectedComponent(props: LazyComponentProps) {
+	const { component, needProtect = true } = props
+	const Component = component
 	return (
-		<Suspense fallback={<div>路由懒加载...</div>}>
+		<Suspense fallback={<div>加载中...</div>}>
 			{needProtect ? (
 				<ProtectedRoute>
-					<LazyComponent />
+					<Component />
 				</ProtectedRoute>
 			) : (
-				<LazyComponent />
+				<Component />
 			)}
 		</Suspense>
 	)
@@ -31,8 +31,9 @@ const setProtectedRoute = (routes: IRoute[]): IRoute[] => {
 	if (!routes.length) return []
 	// 遍历增加权限HOC
 	routes.forEach((route: IRoute) => {
-		const { meta } = route
-		route.element = <LazyComponent importFunc={route.element} needProtect={meta?.auth} />
+		const { meta, element } = route
+		const Component = element
+		route.element = setProtectedComponent({ component: Component, needProtect: meta?.auth })
 		!!route?.children && setProtectedRoute(route.children)
 	})
 	return routes
@@ -40,10 +41,9 @@ const setProtectedRoute = (routes: IRoute[]): IRoute[] => {
 
 const protectedRoutes = setProtectedRoute(routes)
 
-const RouteElement = (): any => {
+const RouteElement = (): JSX.Element | null => {
 	const element = useRoutes([
 		...protectedRoutes,
-
 		{
 			path: '*',
 			element: <NotFound />

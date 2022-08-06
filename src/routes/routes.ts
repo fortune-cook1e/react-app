@@ -1,15 +1,16 @@
+import { lazy } from 'react'
 import { IRoute, IChildRoute } from '@/types'
 
 export const studyRoutes: IChildRoute[] = [
 	{
 		path: '/lazy-load',
-		element: () => import('@/pages/lazy-load'),
+		element: lazy(() => import('@/pages/lazy-load')),
 		title: '图片懒加载',
 		key: 'lazyLoad'
 	},
 	{
 		path: '/index-db',
-		element: () => import('@/pages/indexDb'),
+		element: lazy(() => import('@/pages/indexDb')),
 		title: 'IndexDB',
 		key: 'indexDb'
 	}
@@ -19,13 +20,13 @@ export const studyRoutes: IChildRoute[] = [
 export const apisRoutes: IChildRoute[] = [
 	{
 		path: '/user-management',
-		element: () => import('@/pages/user-management'),
+		element: lazy(() => import('@/pages/user-management')),
 		title: '用户管理',
 		key: 'userManagement'
 	},
 	{
 		path: '/staff',
-		element: () => import('@/pages/staff'),
+		element: lazy(() => import('@/pages/staff')),
 		title: '员工管理',
 		key: 'staff'
 	}
@@ -34,20 +35,20 @@ export const apisRoutes: IChildRoute[] = [
 export const routes: IRoute[] = [
 	{
 		path: '/',
-		element: () => import('@/Layout'),
+		element: lazy(() => import('@/Layout')),
 		title: 'home',
 		key: 'home',
 		icon: '',
 		children: [
 			{
 				index: true,
-				element: () => import('@/pages/dashboard'),
+				element: lazy(() => import('@/pages/dashboard')),
 				title: 'dashboard',
 				key: 'dashboard2'
 			},
 			{
 				path: '/dashboard',
-				element: () => import('@/pages/dashboard'),
+				element: lazy(() => import('@/pages/dashboard')),
 				title: '首页',
 				key: 'dashboard'
 			},
@@ -57,7 +58,7 @@ export const routes: IRoute[] = [
 	},
 	{
 		path: '/login',
-		element: () => import('@/pages/login'),
+		element: lazy(() => import('@/pages/login')),
 		title: '登录',
 		key: 'login',
 		icon: ''
