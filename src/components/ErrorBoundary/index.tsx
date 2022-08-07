@@ -1,8 +1,8 @@
 import { ErrorBoundary } from 'react-error-boundary'
 import React from 'react'
+import { QueryErrorResetBoundary } from 'react-query'
 
 interface Props {
-	// error: any
 	children: React.ReactNode
 }
 
@@ -23,14 +23,21 @@ function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
 
 const Error: React.FC<Props> = ({ children }) => {
 	return (
-		<ErrorBoundary
-			FallbackComponent={ErrorFallback}
-			onReset={() => {
-				// reset the state of your app so the error doesn't happen again
-			}}
-		>
-			{children}
-		</ErrorBoundary>
+		// <ErrorBoundary
+		// 	FallbackComponent={ErrorFallback}
+		// 	onReset={() => {
+		// 		// reset the state of your app so the error doesn't happen again
+		// 	}}
+		// >
+		// 	{children}
+		// </ErrorBoundary>
+		<QueryErrorResetBoundary>
+			{({ reset }) => (
+				<ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
+					{children}
+				</ErrorBoundary>
+			)}
+		</QueryErrorResetBoundary>
 	)
 }
 

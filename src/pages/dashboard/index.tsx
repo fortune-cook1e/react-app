@@ -9,13 +9,21 @@ import { QUERY_KEYS } from '@/constants'
 import { fetchStaffList } from '@/apis/staff'
 
 const Dashboard = (): JSX.Element => {
-	const { isFetching, data: staffData = [] } = useQuery([QUERY_KEYS.staff.list], async () => {
+	const {
+		isFetching,
+		data: staffData = [],
+		isError
+	} = useQuery([QUERY_KEYS.staff.list], async () => {
 		const { list = [] } = await fetchStaffList({
 			page: 1,
 			page_size: 999
 		})
 		return list
 	})
+
+	if (isError) {
+		return <span>error..</span>
+	}
 
 	return (
 		<div className={styles.dashboard}>
