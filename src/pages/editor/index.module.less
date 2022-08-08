@@ -1,0 +1,28 @@
+@components-width: 300px;
+@options-width: 300px;
+// prettier-ignore
+@canvas-width:calc(100vw - @components-width - @options-width);
+@min-height: 100vh;
+
+.editor {
+	display: flex;
+	.components {
+		width: @components-width;
+		min-height: @min-height;
+		background-color: gray;
+	}
+
+	.canvas {
+		width: @canvas-width;
+		height: 100%;
+		min-height: @min-height;
+		background-color: pink;
+	}
+
+	.options {
+		width: @options-width;
+		height: 100%;
+		min-height: @min-height;
+		background-color: aquamarine;
+	}
+}

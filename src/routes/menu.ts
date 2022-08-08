@@ -12,7 +12,14 @@ export const menu: MenuItem[] = [
 		title: '学习',
 		icon: '',
 		key: 'study',
-		children: studyRoutes
+		children: [
+			...studyRoutes,
+			{
+				title: '编辑器',
+				key: 'editor',
+				path: '/editor'
+			}
+		]
 	},
 	{
 		title: '接口调用',
