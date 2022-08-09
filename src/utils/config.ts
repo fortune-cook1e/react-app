@@ -4,7 +4,8 @@ const globalConfig = {
 	salt: 'react-app',
 	indexedDbBaseName: 'my-react-app-database',
 	indexedDbStoreName: 'reactApp',
-	indexedDbVersion: 1
+	indexedDbVersion: 1,
+	isDev: import.meta.env.VITE_APP_ENV === 'development'
 }
 
 // 初始化indexedDb数据库

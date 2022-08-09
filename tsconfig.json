@@ -1,12 +1,14 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
+		"module": "ESNext",
+		"moduleResolution": "Node",
 		"allowJs": true,
 		"strict": true,
-		"target": "ES2017",
+		"target": "ESNext",
 		"outDir": "./dist",
 		"sourceMap": true,
 		"esModuleInterop": true,
+		"isolatedModules": true,
 		"jsx": "preserve",
 		"lib": ["dom", "esnext"],
 		"baseUrl": "./",
@@ -14,6 +16,6 @@
 			"@/*": ["src/*"]
 		}
 	},
-	"typeRoots": ["node_modules/@types", "src/global.d.ts", "vite.config.ts"],
+	"typeRoots": ["node_modules/@types", "src/global.d.ts", "vite.config.ts", "vite/client"],
 	"exclude": ["node_modules", "dist", "build"]
 }

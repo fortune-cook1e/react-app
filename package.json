@@ -20,12 +20,6 @@
 			"git add ."
 		]
 	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged",
-			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-		}
-	},
 	"dependencies": {
 		"@ant-design/icons": "^4.7.0",
 		"@fe-cookie/client-request-crypto": "^1.0.1",
