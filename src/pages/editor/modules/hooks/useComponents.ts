@@ -1,9 +1,23 @@
-import Button from '../../components/Button'
+import { lazy } from 'react'
+import { ComponentData } from '../../types'
 
-export const useComponents = () => {
+interface UseComponentsResponse {
+	componentData: ComponentData[]
+}
+
+export const useComponents = (): UseComponentsResponse => {
 	return {
-		componentsMap: {
-			Button
-		}
+		componentData: [
+			{
+				id: 'Button',
+				name: 'Button',
+				component: lazy(() => import('../../components/Button'))
+			},
+			{
+				id: 'Picture',
+				name: 'Picture',
+				component: lazy(() => import('../../components/Picture'))
+			}
+		]
 	}
 }
