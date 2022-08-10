@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_app=self.webpackChunkreact_app||[]).push([[745],{42745:function(e,n,t){t.r(n),t.d(n,{default:function(){return r}});t(67294);var u="src-pages-editor-components-Button-index-module_G5Xiv",c=t(85893),r=function(){return(0,c.jsx)("div",{className:u,children:"Button"})}}}]);
