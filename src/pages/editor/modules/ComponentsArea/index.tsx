@@ -1,7 +1,7 @@
 import React from 'react'
 import { Space, Button } from 'antd'
 import styles from '../../index.module.less'
-import { useComponents } from '../hooks/useComponents'
+import { useComponents } from '../../hooks/useComponents'
 import DrapWrapper from './DrapWrapper'
 
 const ComponentsArea = (): JSX.Element => {

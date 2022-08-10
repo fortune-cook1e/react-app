@@ -1,4 +1,5 @@
 import { AnyOptions, MockDataType } from '@/types'
+import { v4 as uuidv4 } from 'uuid'
 
 /**
  * 获取 storage 缓存数据
@@ -114,4 +115,9 @@ export const mockData = (
 		list.push(data)
 	}
 	return list
+}
+
+// 获取随机字符串
+export const getUniqueId = (): string => {
+	return uuidv4()
 }
