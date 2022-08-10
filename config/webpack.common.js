@@ -54,6 +54,12 @@ const config = {
 		extensions: ['.js', '.jsx', '.ts', '.tsx'],
 		alias: {
 			'@': paths.src
+		},
+		// FIXBUG: 解决react-dnd 不兼容 react17问题
+		// see:https://github.com/react-dnd/react-dnd/issues/3423
+		fallback: {
+			'react/jsx-runtime': 'react/jsx-runtime.js',
+			'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js'
 		}
 	},
 	module: {
