@@ -18,6 +18,11 @@ export const menu: MenuItem[] = [
 				title: '编辑器',
 				key: 'editor',
 				path: '/editor'
+			},
+			{
+				title: '可视化',
+				key: 'visual',
+				path: '/visual'
 			}
 		]
 	},

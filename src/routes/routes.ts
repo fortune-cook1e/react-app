@@ -63,6 +63,12 @@ export const routes: IRoute[] = [
 		key: 'editor'
 	},
 	{
+		path: '/visual',
+		element: lazy(() => import('@/pages/visual')),
+		title: '可视化',
+		key: 'visual'
+	},
+	{
 		path: '/login',
 		element: lazy(() => import('@/pages/login')),
 		title: '登录',
