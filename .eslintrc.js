@@ -23,7 +23,8 @@ module.exports = {
 		sourceType: 'module'
 	},
 	globals: {
-		JSX: true
+		JSX: true,
+		IS_DEV: true
 	},
 	rules: {
 		'@typescript-eslint/no-require-imports': 0,
@@ -215,15 +216,7 @@ module.exports = {
 			'always',
 			{
 				// 注释前有空白
-				markers: [
-					'global',
-					'globals',
-					'eslint',
-					'eslint-disable',
-					'*package',
-					'!',
-					','
-				]
+				markers: ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ',']
 			}
 		],
 		'template-curly-spacing': [2, 'never'], // 禁止花括号内出现空格

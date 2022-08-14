@@ -24,6 +24,9 @@ const PATHS = {
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [react()],
+	define: {
+		IS_DEV: false
+	},
 	css: {
 		postcss: {
 			plugins: [postcssImport, postcssPresetEnv]
