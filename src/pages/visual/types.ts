@@ -8,3 +8,7 @@ export interface ComponentData {
 export interface CanvasComponentData extends ComponentData {
 	uniqueId: string // 拖拽时生成
 }
+
+export type DndDropResult = {
+	componentData: ComponentData
+}
