@@ -6,7 +6,7 @@ const globalConfig = {
 	indexedDbStoreName: 'reactApp',
 	indexedDbVersion: 1,
 	// ISDEV 变量在vite文件中定义
-	isDev: IS_DEV && process.env.NODE_ENV === 'development'
+	isDev: !!IS_DEV && process.env.NODE_ENV === 'development'
 }
 
 // 初始化indexedDb数据库
