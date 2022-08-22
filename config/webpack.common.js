@@ -30,7 +30,7 @@ const cssModuleOptions = (type, useModules) => {
 
 const lessOptions = () => {
 	const lessOptions = {
-		modifyVars: antdTheme,
+		// modifyVars: antdTheme,
 		javascriptEnabled: true
 	}
 	return {

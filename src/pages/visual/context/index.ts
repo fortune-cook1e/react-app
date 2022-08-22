@@ -1,4 +1,3 @@
-import { CanvasComponentData } from './../../editor/types'
 import { createContext, useContext } from 'react'
 import { GlobalCanvas } from '../instance/canvas'
 

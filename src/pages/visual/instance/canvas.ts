@@ -9,8 +9,8 @@ export class GlobalCanvas {
 	selectedCom: CanvasComponentData | null // 当前选中的组件
 	canvasChangedHistory: CanvasComponentData[][] // 画布改变历史记录
 
-	constructor() {
-		this.canvasComList = []
+	constructor(canvasCmpList?: CanvasComponentData[]) {
+		this.canvasComList = canvasCmpList || []
 		this.listeners = []
 		this.selectedCom = null
 		this.canvasChangedHistory = []

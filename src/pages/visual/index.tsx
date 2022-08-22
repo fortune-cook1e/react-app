@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import styles from './index.module.less'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import HeaderArea from './modules/HeaderArea'
 import ComponentsArea from './modules/ComponentsArea'
 import CanvasArea from './modules/CanvasArea'
 import OptionsArea from './modules/OptionsArea'
@@ -14,7 +15,7 @@ const Visual = (): JSX.Element => {
 	const forceUpdate = useForceUpdate()
 
 	useEffect(() => {
-		// 订阅数据源头的改变
+		// 订阅数据源的改变
 		const unsubscribe = globalCanvas.subscribe(() => {
 			forceUpdate()
 		})
@@ -28,9 +29,12 @@ const Visual = (): JSX.Element => {
 		<CanvasContext.Provider value={{ globalCanvas }}>
 			<DndProvider backend={HTML5Backend}>
 				<div className={styles.visual}>
-					<ComponentsArea />
-					<CanvasArea />
-					<OptionsArea />
+					<HeaderArea />
+					<div className={styles.visual__content}>
+						<ComponentsArea />
+						<CanvasArea />
+						<OptionsArea />
+					</div>
 				</div>
 			</DndProvider>
 		</CanvasContext.Provider>

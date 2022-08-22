@@ -7,3 +7,8 @@ export enum MockDataType {
 	Number = 'number',
 	Boolean = 'boolean'
 }
+
+export enum Env {
+	Dev = 'development',
+	Prod = 'production'
+}
