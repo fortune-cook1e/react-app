@@ -25,7 +25,6 @@ const RenderEngine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
 			}
 		},
 		drop: ({ componentData }: DndDropResult) => {
-			console.log('dnd drop add..', componentData)
 			addComponent(componentData)
 		}
 	}))
@@ -40,9 +39,7 @@ const RenderEngine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
 
 	const engineRenderData = engineInstance.getEngineData()
 
-	const onDragStart = () => {
-		console.log('drag start')
-	}
+	const onDragStart = () => {}
 
 	const onDragEnd = (result: DropResult) => {
 		const canvasData = engineInstance.getEngineData()

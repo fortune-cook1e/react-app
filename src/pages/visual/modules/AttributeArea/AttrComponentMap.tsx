@@ -14,7 +14,6 @@ const AttrComponentMap = (): JSX.Element => {
 		const selectedCmp = globalEngine.getSelectedCmp()
 		if (!selectedCmp) return
 		const { cmpType } = selectedCmp
-		console.log('redenr ata..', { selectedCmp })
 		const Cmp = ATTR_COMPONENT_MAP[cmpType]
 		return Cmp ? <Cmp {...selectedCmp} /> : null
 	}

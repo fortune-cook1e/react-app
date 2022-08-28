@@ -24,7 +24,6 @@ const EngineComponentMap = ({ canvasCmpData }: Props): JSX.Element => {
 	}, [canvasCmpData])
 
 	const onSelectCmp = () => {
-		console.log('select cmp...')
 		globalEngine.setSelectedCmp(uniqueId)
 	}
 
