@@ -3,13 +3,13 @@ import { Space } from 'antd'
 import styles from '../../index.module.less'
 import { AndroidOutlined } from '@ant-design/icons'
 import DndDragWrapper from './DndDragWrapper'
-import { COMPONENT_LIST } from '../../constants'
+import { MATERIAL_LIST } from '../../constants'
 
 const ComponentsArea = (): JSX.Element => {
 	return (
 		<div className={styles.components}>
 			<Space wrap>
-				{COMPONENT_LIST.map(c => {
+				{MATERIAL_LIST.map(c => {
 					return (
 						<DndDragWrapper key={c.id} componentData={c}>
 							<div className={styles.components__item}>

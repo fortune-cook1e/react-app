@@ -4,8 +4,8 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import HeaderArea from './modules/HeaderArea'
 import ComponentsArea from './modules/ComponentsArea'
-import CanvasArea from './modules/CanvasArea'
-import OptionsArea from './modules/OptionsArea'
+import AttributeArea from './modules/AttributeArea'
+import Engine from './modules/Engine'
 import { CanvasContext } from './context'
 import { useCanvas } from './hooks/useCanvas'
 import { useForceUpdate } from '@/hooks/useForceUpdate'
@@ -30,10 +30,16 @@ const Visual = (): JSX.Element => {
 			<DndProvider backend={HTML5Backend}>
 				<div className={styles.visual}>
 					<HeaderArea />
-					<div className={styles.visual__content}>
-						<ComponentsArea />
-						<CanvasArea />
-						<OptionsArea />
+					<div className={styles.emulator}>
+						<div className={styles.emulator__left}>
+							<ComponentsArea />
+						</div>
+						<div className={styles.emulator__middle}>
+							<Engine engineInstance={globalCanvas} />
+						</div>
+						<div className={styles.emulator__right}>
+							<AttributeArea />
+						</div>
 					</div>
 				</div>
 			</DndProvider>

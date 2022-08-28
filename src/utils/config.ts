@@ -2,7 +2,6 @@ import { Env } from '@/types'
 import localforage from 'localforage'
 
 const getEnv = (): Env => {
-	console.log(location)
 	if (process.env.NODE_ENV === 'development') return Env.Dev
 	if (location.host.includes('localhost')) {
 		return Env.Dev

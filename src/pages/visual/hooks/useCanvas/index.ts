@@ -1,14 +1,12 @@
 import { useRef } from 'react'
 import { GlobalCanvas } from '../../instance/canvas'
-import { CanvasComponentData } from '../../types'
 
-export const useCanvas = (canvasData?: CanvasComponentData[]): GlobalCanvas => {
+export const useCanvas = (canvas?: GlobalCanvas): GlobalCanvas => {
 	const canvasRef = useRef<any | null>(null)
 
 	if (!canvasRef.current) {
-		if (canvasData) {
-			const globalCanvas = new GlobalCanvas(canvasData)
-			canvasRef.current = globalCanvas
+		if (canvas) {
+			canvasRef.current = canvas
 		} else {
 			const globalCanvas = new GlobalCanvas()
 			canvasRef.current = globalCanvas

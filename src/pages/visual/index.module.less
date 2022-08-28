@@ -1,12 +1,12 @@
 @components-area-width: 70px;
 @header-area-height: 70px;
-@options-area-width: 300px;
+@attr-area-width: 300px;
 @canvas-core-width: 375px;
 @canvas-core-min-height: 600px;
 // prettier-ignore
 @content-area-min-height:calc(100vh - @header-area-height);
 // prettier-ignore
-@canvas-area-width:calc(100vw - @components-area-width - @options-area-width);
+@canvas-area-width:calc(100vw - @components-area-width - @attr-area-width);
 
 .visual {
 	min-height: 100vh;
@@ -33,47 +33,61 @@
 			color: #fff;
 		}
 	}
-	&__content {
+	.emulator {
 		display: flex;
 		min-height: @content-area-min-height;
-		.components {
+		&__left {
 			width: @components-area-width;
 			height: 100%;
-			padding: 20px;
-			&__item {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				width: 100%;
-				cursor: pointer;
-				transition: all 0.5s;
-				&:hover {
-					transform: scale(1.1);
-				}
-				&__icon {
-					margin-bottom: 5px;
-				}
-				&__title {
-					font-weight: bold;
-					margin-bottom: 0.5rem;
+			.components {
+				padding: 20px;
+				&__item {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					width: 100%;
+					cursor: pointer;
+					transition: all 0.5s;
+					&:hover {
+						transform: scale(1.1);
+					}
+					&__icon {
+						margin-bottom: 5px;
+					}
+					&__title {
+						font-weight: bold;
+						margin-bottom: 0.5rem;
+					}
 				}
 			}
 		}
-		.canvas {
+		&__middle {
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			width: @canvas-area-width;
 			background-color: gray;
-			&__core {
-				width: @canvas-core-width;
-				min-height: @canvas-core-min-height;
-				background-color: #fff;
-			}
+			// .canvas {
+			// 	&__core {
+			// 		width: @canvas-core-width;
+			// 		min-height: @canvas-core-min-height;
+			// 		background-color: #fff;
+			// 	}
+			// }
 		}
-		.options {
-			width: @options-area-width;
+
+		&__right {
+			width: @attr-area-width;
+			.attribute {
+				height: 100%;
+				.empty {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					height: 100%;
+				}
+			}
 		}
 	}
 }

@@ -1,17 +1,24 @@
-import React, { useState, Suspense, lazy } from 'react'
+import React, { CSSProperties } from 'react'
 import { useDrop } from 'react-dnd'
-import CanvasComponent from './CanvasComponent'
 import { Draggable, Droppable, DragDropContext, DropResult } from 'react-beautiful-dnd'
-import styles from '../../index.module.less'
-import { CanvasComponentData, ComponentData, DndDropResult } from '../../types'
-import { getUniqueId } from '@/utils'
-import { getComponentByType } from '../../utils'
-import { COMPONENT_LIST } from '../../constants'
-import { useCanvasContext } from '../../context'
+import { EngineComponentData, MaterialComponentData, DndDropResult } from '../../types'
+import EngineComponentMap from './EngineComponentMap'
+import { MATERIAL_LIST } from '../../constants'
+import styles from './index.module.less'
+import { GlobalCanvas } from '../../instance/canvas'
+import { getUniqueId } from './utils'
 
-const CanvasCore = (): JSX.Element => {
+interface Props {
+	engineInstance: GlobalCanvas
+	engineData?: EngineComponentData[]
+	engineStyle?: CSSProperties
+}
+
+const ENGINE_DROP_ID = 'engine'
+
+const Engine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
 	const [{ isOver }, dndDropRef] = useDrop(() => ({
-		accept: COMPONENT_LIST.map(c => c.id),
+		accept: MATERIAL_LIST.map(c => c.id),
 		collect: monitor => {
 			return {
 				isOver: !!monitor.isOver()
@@ -22,53 +29,48 @@ const CanvasCore = (): JSX.Element => {
 			addComponent(componentData)
 		}
 	}))
-	const { globalCanvas } = useCanvasContext()
 
-	const addComponent = (item: ComponentData) => {
+	const addComponent = (item: MaterialComponentData) => {
 		const cmp = {
 			...item,
 			uniqueId: getUniqueId()
 		}
-		globalCanvas.addCmp(cmp)
+		engineInstance.addCmp(cmp)
 	}
 
-	const canvasData = globalCanvas.getCanvasData()
+	const engineRenderData = engineInstance.getCanvasData()
 
 	const onDragStart = () => {
 		console.log('drag start')
 	}
 
-	const onDragUpdate = () => {}
-
 	const onDragEnd = (result: DropResult) => {
-		const canvasData = globalCanvas.getCanvasData()
+		const canvasData = engineInstance.getCanvasData()
 		const { draggableId, destination, source } = result
 		const dragItem = canvasData.find(c => c.uniqueId === draggableId)
 		if (!destination || !dragItem || !source) return
 		if (destination.droppableId === source.droppableId && destination.index === source.index) return
 		const { index: destIndex } = destination
 		const { index: sourceIndex } = source
-		const newCmps: CanvasComponentData[] = JSON.parse(JSON.stringify(canvasData))
+		const newCmps: EngineComponentData[] = JSON.parse(JSON.stringify(canvasData))
 		// 先插入后删除旧数据
 		// 插入待加入
 		newCmps.splice(sourceIndex, 1)
 		newCmps.splice(destIndex, 0, dragItem)
-		globalCanvas.updateCmps(newCmps)
+		engineInstance.updateCmps(newCmps)
 	}
 
-	console.log('render...')
-
 	return (
-		<div className={styles.canvas__core} ref={dndDropRef}>
+		<div className={styles.engine} style={engineStyle} ref={dndDropRef}>
 			<DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
-				<Droppable droppableId='canvasCore'>
+				<Droppable droppableId={ENGINE_DROP_ID}>
 					{dropProvided => (
 						<div
 							ref={dropProvided.innerRef}
 							className={styles.canvas__core__content}
 							{...dropProvided.droppableProps}
 						>
-							{canvasData.map((c: CanvasComponentData, cIndex: number) => {
+							{engineRenderData.map((c: EngineComponentData, cIndex: number) => {
 								return (
 									<Draggable key={c.uniqueId} draggableId={c.uniqueId} index={cIndex}>
 										{dragProvided => (
@@ -77,7 +79,7 @@ const CanvasCore = (): JSX.Element => {
 												{...dragProvided.dragHandleProps}
 												ref={dragProvided.innerRef}
 											>
-												<CanvasComponent canvasCmpData={c} />
+												<EngineComponentMap canvasCmpData={c} />
 											</div>
 										)}
 									</Draggable>
@@ -91,4 +93,4 @@ const CanvasCore = (): JSX.Element => {
 	)
 }
 
-export default CanvasCore
+export default Engine

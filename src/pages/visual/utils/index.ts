@@ -1,11 +1,11 @@
-import { ComponentType } from '../types'
+import { EngineComponentType } from '../types/index'
 
 // 根据类型获取组件
-export const getComponentByType = (type: ComponentType): string => {
+export const getComponentByType = (type: EngineComponentType): string => {
 	switch (type) {
-		case ComponentType.Button:
+		case EngineComponentType.Button:
 			return 'Button'
-		case ComponentType.Table:
+		case EngineComponentType.Table:
 			return 'Table'
 		default:
 			return ''
@@ -13,12 +13,12 @@ export const getComponentByType = (type: ComponentType): string => {
 }
 
 // 根据组件获取组件类型
-export const getTypeByComponent = (component: string): ComponentType => {
+export const getTypeByComponent = (component: string): EngineComponentType => {
 	switch (component) {
 		case 'Button':
-			return ComponentType.Button
+			return EngineComponentType.Button
 		case 'Table':
-			return ComponentType.Table
+			return EngineComponentType.Table
 		default:
 			return -1
 	}
