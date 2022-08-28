@@ -1,17 +1,18 @@
-import { AnyOptions } from '@/types'
 import { CSSProperties } from 'react'
+import { EngineButtonProps } from './attr'
 
 export enum EngineComponentType {
 	Button = 0,
 	Table = 1
 }
 
+export type EngineCmpValuesType = EngineButtonProps
 export interface MaterialComponentData {
 	id: string
 	name: string
-	type: EngineComponentType
+	cmpType: EngineComponentType
 	style?: CSSProperties // 样式内容
-	props?: AnyOptions // 其他属性内容
+	values: EngineCmpValuesType
 }
 
 export interface EngineComponentData extends MaterialComponentData {
@@ -21,3 +22,5 @@ export interface EngineComponentData extends MaterialComponentData {
 export type DndDropResult = {
 	componentData: MaterialComponentData
 }
+
+export type EngineCmpProps = EngineComponentData

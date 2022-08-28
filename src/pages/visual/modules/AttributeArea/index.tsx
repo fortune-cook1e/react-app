@@ -1,17 +1,18 @@
 import React from 'react'
 import { Empty } from 'antd'
-import styles from '../../index.module.less'
-import { useCanvasContext } from '../../context'
+import styles from './index.module.less'
+import { useEngineContext } from '../../context'
+import AttrComponentMap from './AttrComponentMap'
 
 const AttributeArea = (): JSX.Element => {
-	const { globalCanvas } = useCanvasContext()
+	const { globalEngine } = useEngineContext()
 
-	const currentSeletedCmp = globalCanvas.getSelectedCmp()
+	const currentSeletedCmp = globalEngine.getSelectedCmp()
 
 	return (
 		<div className={styles.attribute}>
 			{currentSeletedCmp ? (
-				<span>ha</span>
+				<AttrComponentMap />
 			) : (
 				<div className={styles.empty}>
 					<Empty description='请选择组件' />

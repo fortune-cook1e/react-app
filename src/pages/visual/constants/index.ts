@@ -8,16 +8,20 @@ import { MaterialComponentData, EngineComponentType } from '../types'
 export const MATERIAL_LIST: MaterialComponentData[] = [
 	{
 		id: 'button',
-		type: EngineComponentType.Button,
+		cmpType: EngineComponentType.Button,
 		name: '按钮',
 		style: {},
-		props: {}
+		values: {
+			text: '默认文本',
+			type: 'primary',
+			disabled: false
+		}
 	},
 	{
 		id: 'table',
-		type: EngineComponentType.Table,
+		cmpType: EngineComponentType.Table,
 		name: '表格',
 		style: {},
-		props: {}
+		values: {}
 	}
 ]

@@ -6,17 +6,17 @@ import HeaderArea from './modules/HeaderArea'
 import ComponentsArea from './modules/ComponentsArea'
 import AttributeArea from './modules/AttributeArea'
 import Engine from './modules/Engine'
-import { CanvasContext } from './context'
-import { useCanvas } from './hooks/useCanvas'
+import { EngineContext } from './context'
+import { useEngine } from './hooks/useEngine'
 import { useForceUpdate } from '@/hooks/useForceUpdate'
 
 const Visual = (): JSX.Element => {
-	const globalCanvas = useCanvas()
+	const globalEngine = useEngine()
 	const forceUpdate = useForceUpdate()
 
 	useEffect(() => {
 		// 订阅数据源的改变
-		const unsubscribe = globalCanvas.subscribe(() => {
+		const unsubscribe = globalEngine.subscribe(() => {
 			forceUpdate()
 		})
 
@@ -26,7 +26,7 @@ const Visual = (): JSX.Element => {
 	}, [])
 
 	return (
-		<CanvasContext.Provider value={{ globalCanvas }}>
+		<EngineContext.Provider value={{ globalEngine }}>
 			<DndProvider backend={HTML5Backend}>
 				<div className={styles.visual}>
 					<HeaderArea />
@@ -35,7 +35,7 @@ const Visual = (): JSX.Element => {
 							<ComponentsArea />
 						</div>
 						<div className={styles.emulator__middle}>
-							<Engine engineInstance={globalCanvas} />
+							<Engine engineInstance={globalEngine} />
 						</div>
 						<div className={styles.emulator__right}>
 							<AttributeArea />
@@ -43,7 +43,7 @@ const Visual = (): JSX.Element => {
 					</div>
 				</div>
 			</DndProvider>
-		</CanvasContext.Provider>
+		</EngineContext.Provider>
 	)
 }
 

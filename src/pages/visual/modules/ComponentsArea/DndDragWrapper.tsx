@@ -1,9 +1,9 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
-import { EngineComponentData } from '../../types/index'
+import { MaterialComponentData } from '../../types/index'
 
 interface Props {
-	componentData: EngineComponentData
+	componentData: MaterialComponentData
 	children: React.ReactNode
 }
 

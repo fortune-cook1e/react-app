@@ -5,18 +5,18 @@ import { EngineComponentData, MaterialComponentData, DndDropResult } from '../..
 import EngineComponentMap from './EngineComponentMap'
 import { MATERIAL_LIST } from '../../constants'
 import styles from './index.module.less'
-import { GlobalCanvas } from '../../instance/canvas'
+import { Engine } from '../../instance/engine'
 import { getUniqueId } from './utils'
 
 interface Props {
-	engineInstance: GlobalCanvas
+	engineInstance: Engine
 	engineData?: EngineComponentData[]
 	engineStyle?: CSSProperties
 }
 
 const ENGINE_DROP_ID = 'engine'
 
-const Engine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
+const RenderEngine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
 	const [{ isOver }, dndDropRef] = useDrop(() => ({
 		accept: MATERIAL_LIST.map(c => c.id),
 		collect: monitor => {
@@ -38,14 +38,14 @@ const Engine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
 		engineInstance.addCmp(cmp)
 	}
 
-	const engineRenderData = engineInstance.getCanvasData()
+	const engineRenderData = engineInstance.getEngineData()
 
 	const onDragStart = () => {
 		console.log('drag start')
 	}
 
 	const onDragEnd = (result: DropResult) => {
-		const canvasData = engineInstance.getCanvasData()
+		const canvasData = engineInstance.getEngineData()
 		const { draggableId, destination, source } = result
 		const dragItem = canvasData.find(c => c.uniqueId === draggableId)
 		if (!destination || !dragItem || !source) return
@@ -93,4 +93,4 @@ const Engine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
 	)
 }
 
-export default Engine
+export default RenderEngine

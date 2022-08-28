@@ -2,17 +2,17 @@ import React, { useRef, useEffect } from 'react'
 import ClipboardJS from 'clipboard'
 import styles from '../../index.module.less'
 import { Button, message, Space } from 'antd'
-import { useCanvasContext } from '../../context'
+import { useEngineContext } from '../../context'
 
 const HeaderArea = (): JSX.Element => {
 	const saveBtnRef = useRef<any>(null)
-	const { globalCanvas } = useCanvasContext()
+	const { globalEngine } = useEngineContext()
 	let clipboard: any = null
 
 	useEffect(() => {
 		if (saveBtnRef.current) {
 			clipboard = new ClipboardJS(saveBtnRef.current, {
-				text: () => JSON.stringify(globalCanvas.getCanvasData())
+				text: () => JSON.stringify(globalEngine.getEngineData())
 			})
 			clipboard.on('success', function (e: any) {
 				message.success('复制元数据成功')

@@ -1,23 +1,23 @@
 import { CSSProperties } from 'react'
-import { EngineComponentData } from '../types'
+import { EngineComponentData, EngineCmpValuesType } from '../types'
 
 type ListenerFunc = (data?: any) => any
 
-export class GlobalCanvas {
-	canvasComList: EngineComponentData[] // 画布展示的数据
+export class Engine {
+	engineDataList: EngineComponentData[] // 引擎展示的数据
 	listeners: ListenerFunc[] // 订阅函数
 	selectedCom: EngineComponentData | null // 当前选中的组件
-	canvasChangedHistory: EngineComponentData[][] // 画布改变历史记录
+	// canvasChangedHistory: EngineComponentData[][] // 画布改变历史记录
 
-	constructor(canvasCmpList?: EngineComponentData[]) {
-		this.canvasComList = canvasCmpList || []
+	constructor(engineDataList?: EngineComponentData[]) {
+		this.engineDataList = engineDataList || []
 		this.listeners = []
 		this.selectedCom = null
-		this.canvasChangedHistory = []
+		// this.canvasChangedHistory = []
 	}
 
-	getCanvasData(): EngineComponentData[] {
-		return this.canvasComList
+	getEngineData(): EngineComponentData[] {
+		return this.engineDataList
 	}
 
 	// 添加组件
@@ -29,7 +29,7 @@ export class GlobalCanvas {
 
 	// 设置选中组件
 	setSelectedCmp(uid: string): void {
-		const _selected = this.canvasComList.find(c => c.uniqueId === uid)
+		const _selected = this.engineDataList.find(c => c.uniqueId === uid)
 		!!_selected && (this.selectedCom = _selected)
 	}
 
@@ -40,7 +40,7 @@ export class GlobalCanvas {
 
 	// 设置渲染组件列表
 	setCmps(cmps: EngineComponentData[]): void {
-		this.canvasComList = cmps
+		this.engineDataList = cmps
 	}
 
 	// 更新画布包括重新绘制
@@ -51,7 +51,7 @@ export class GlobalCanvas {
 
 	// 获取所有组件
 	getCmps(): EngineComponentData[] {
-		return this.canvasComList
+		return this.engineDataList
 	}
 
 	// 更新单个组件
@@ -63,16 +63,23 @@ export class GlobalCanvas {
 				break
 			}
 		}
-		this.setCmps(cmps)
+		this.updateCmps(cmps)
 	}
 
 	// 更新选中组件的props属性
-	updateSelectedCmpValue(value: any): void {
+	updateSelectedCmpValues(values: Partial<EngineCmpValuesType>): void {
 		const _selectedCom = this.getSelectedCmp()
 		if (!_selectedCom) return
+
+		// SHIT: 隐患点 目的是为传递单个参数 不用全部一起传
+		const _values: any = {
+			...this.selectedCom?.values,
+			...values
+		}
+
 		const cmp: EngineComponentData = {
 			..._selectedCom,
-			props: value
+			values: _values
 		}
 		this.selectedCom = cmp
 		this.updateCmp(cmp)
