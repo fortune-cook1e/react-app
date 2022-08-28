@@ -4,9 +4,15 @@ import { EngineCmpProps } from '@/pages/visual/types'
 
 const Button = (props: EngineCmpProps): JSX.Element => {
 	const { values, style } = props
-	const { text = '', type, disabled } = values
+	const { text = '', type, disabled, onClick } = values
+
+	const onBtnClick = (event: MouseEvent) => {
+		event.stopPropagation()
+		onClick?.(event as any)
+	}
+
 	return (
-		<AntdButton style={style} type={type} disabled={disabled}>
+		<AntdButton style={style} type={type} disabled={disabled} onClick={(e: any) => onBtnClick(e)}>
 			{text}
 		</AntdButton>
 	)

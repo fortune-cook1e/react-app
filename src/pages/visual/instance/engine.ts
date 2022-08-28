@@ -31,6 +31,10 @@ export class Engine {
 	setSelectedCmp(uid: string): void {
 		const _selected = this.engineDataList.find(c => c.uniqueId === uid)
 		!!_selected && (this.selectedCom = _selected)
+		if (_selected) {
+			this.selectedCom = _selected
+			this.updateCmp(_selected)
+		}
 	}
 
 	// 获取选中的组件
