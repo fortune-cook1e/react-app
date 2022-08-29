@@ -23,6 +23,11 @@ export const menu: MenuItem[] = [
 				title: '可视化',
 				key: 'visual',
 				path: '/visual'
+			},
+			{
+				title: '可视化列表',
+				key: 'visualManagement',
+				path: '/visual-management'
 			}
 		]
 	},

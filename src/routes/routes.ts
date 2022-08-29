@@ -29,6 +29,12 @@ export const apisRoutes: IChildRoute[] = [
 		element: lazy(() => import('@/pages/staff')),
 		title: '员工管理',
 		key: 'staff'
+	},
+	{
+		title: '可视化列表',
+		key: 'visualManagement',
+		path: '/visual-management',
+		element: lazy(() => import('@/pages/visual-management'))
 	}
 ]
 
