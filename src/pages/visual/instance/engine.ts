@@ -28,12 +28,10 @@ export class Engine {
 	}
 
 	// 设置选中组件
-	setSelectedCmp(uid: string): void {
-		const _selected = this.engineDataList.find(c => c.uniqueId === uid)
-		!!_selected && (this.selectedCom = _selected)
-		if (_selected) {
-			this.selectedCom = _selected
-			this.updateCmp(_selected)
+	setSelectedCmp(cmp: EngineComponentData | null): void {
+		this.selectedCom = cmp
+		if (cmp) {
+			this.updateCmp(cmp)
 		}
 	}
 
@@ -45,6 +43,19 @@ export class Engine {
 	// 设置渲染组件列表
 	setCmps(cmps: EngineComponentData[]): void {
 		this.engineDataList = cmps
+	}
+
+	// 移除组件
+	removeCmp(id: string): void {
+		// TODO: 移除分2种情况： 1. 当前选中组件 2. 当前非选中组件
+		// 设置当前选中情况分2种：1. 当前只有一个 2. 当前数据总量大于1
+		const _cmps = this.engineDataList.filter(d => d.uniqueId !== id)
+		if (id === this.selectedCom?.uniqueId) {
+			this.setSelectedCmp(null)
+			this.updateCmps(_cmps)
+		} else {
+			this.updateCmps(_cmps)
+		}
 	}
 
 	// 更新画布包括重新绘制
@@ -100,6 +111,14 @@ export class Engine {
 		}
 		this.selectedCom = com
 		this.updateCmp(com)
+	}
+
+	//  重置
+	resetAll(): void {
+		this.engineDataList = []
+		this.selectedCom = null
+		this.runListeners()
+		this.listeners = []
 	}
 
 	// TODO: 欠缺记录画布操作历史记录

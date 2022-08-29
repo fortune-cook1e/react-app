@@ -3,8 +3,7 @@ import { EngineButtonProps, EngineEmployeeProps } from './attr'
 
 export enum EngineComponentType {
 	Button = 0,
-	Table = 1,
-	Employee = 2
+	Employee = 1
 }
 
 export type EngineCmpValuesType = EngineButtonProps | EngineEmployeeProps

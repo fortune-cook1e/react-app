@@ -5,8 +5,8 @@ export const getComponentByType = (type: EngineComponentType): string => {
 	switch (type) {
 		case EngineComponentType.Button:
 			return 'Button'
-		case EngineComponentType.Table:
-			return 'Table'
+		case EngineComponentType.Employee:
+			return 'Employee'
 		default:
 			return ''
 	}

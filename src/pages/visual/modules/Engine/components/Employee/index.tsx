@@ -28,7 +28,8 @@ const Employee = (props: EngineCmpProps): JSX.Element => {
 	}, [page, pageSize, keyword])
 
 	const { data, loading } = useRequest(() => fetchStaffList(params), {
-		refreshDeps: [params]
+		refreshDeps: [params],
+		debounceWait: 300
 	})
 
 	const columns: ColumnsType<IStaff> = [
@@ -72,31 +73,6 @@ const Employee = (props: EngineCmpProps): JSX.Element => {
 			title: '离职时间',
 			dataIndex: 'resignationTime',
 			ellipsis: true
-		},
-		// {
-		// 	key: 'leave',
-		// 	title: '状态',
-		// 	dataIndex: 'leave'
-		// },
-		{
-			key: 'id',
-			title: '操作',
-			dataIndex: 'id',
-			render: (id: string) => {
-				return (
-					<span>gaga</span>
-					// <Space>
-					// 	<Button size='small' onClick={() => onUpdate(id)}>
-					// 		更新
-					// 	</Button>
-					// 	<Popconfirm title='确定删除？' onConfirm={() => delStaff(id)}>
-					// 		<Button size='small' loading={deletingStaffId === id}>
-					// 			删除
-					// 		</Button>
-					// 	</Popconfirm>
-					// </Space>
-				)
-			}
 		}
 	]
 

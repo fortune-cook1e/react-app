@@ -18,13 +18,6 @@ export const MATERIAL_LIST: MaterialComponentData[] = [
 		}
 	},
 	{
-		id: 'table',
-		cmpType: EngineComponentType.Table,
-		name: '表格',
-		style: {},
-		values: {}
-	},
-	{
 		id: 'employee',
 		cmpType: EngineComponentType.Employee,
 		name: '员工管理',

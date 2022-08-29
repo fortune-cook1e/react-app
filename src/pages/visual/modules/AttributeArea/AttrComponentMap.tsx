@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useEngineContext } from '../../context'
 import { EngineComponentType, EngineCmpProps } from '../../types'
 import Button from './components/Button'

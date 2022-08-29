@@ -2,12 +2,11 @@ import React, { useMemo } from 'react'
 import { useEngineContext } from '../../context'
 import { EngineComponentType, EngineComponentData, EngineCmpProps } from '../../types'
 import Button from '../Engine/components/Button'
-import Table from '../Engine/components/Table'
 import Employee from './components/Employee'
+import RemoveWrapper from './RemoveWrapper'
 
 const ENGINE_COMPONENT_MAP: Record<EngineComponentType, (props: EngineCmpProps) => JSX.Element> = {
 	[EngineComponentType.Button]: Button,
-	[EngineComponentType.Table]: Table,
 	[EngineComponentType.Employee]: Employee
 }
 
@@ -25,11 +24,16 @@ const EngineComponentMap = ({ canvasCmpData }: Props): JSX.Element => {
 		return Cmp ? <Cmp {...canvasCmpData} /> : null
 	}, [canvasCmpData])
 
-	const onSelectCmp = () => {
-		globalEngine.setSelectedCmp(uniqueId)
+	const onSelectCmp = (event: React.MouseEvent<HTMLElement>): void => {
+		event.stopPropagation()
+		globalEngine.setSelectedCmp(canvasCmpData)
 	}
 
-	return <div onClick={onSelectCmp}>{renderCanvasCmp}</div>
+	return (
+		<div onClick={onSelectCmp}>
+			<RemoveWrapper id={uniqueId}>{renderCanvasCmp}</RemoveWrapper>
+		</div>
+	)
 }
 
 export default EngineComponentMap

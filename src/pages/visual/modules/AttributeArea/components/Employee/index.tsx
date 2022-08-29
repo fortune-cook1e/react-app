@@ -10,7 +10,7 @@ const Employee = (props: EngineCmpProps): JSX.Element => {
 	const { globalEngine } = useEngineContext()
 	const { values } = props
 
-	const { page, pageSize, keyword } = values as EngineEmployeeProps
+	const { keyword } = values as EngineEmployeeProps
 
 	const onKeywordChange = (event: any) => {
 		const val = event.target.value
@@ -21,7 +21,7 @@ const Employee = (props: EngineCmpProps): JSX.Element => {
 
 	return (
 		<Form>
-			<Item label='标题'>
+			<Item label='关键词'>
 				<Input placeholder='请输入查询关键字' value={keyword} onChange={onKeywordChange} />
 			</Item>
 		</Form>
