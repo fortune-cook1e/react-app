@@ -4,6 +4,7 @@ import { useEngineContext } from '@/pages/visual/context'
 import { EngineCmpProps } from '../../../../types'
 import { TYPE_OPTIONS } from './const'
 import { ButtonType } from 'antd/lib/button'
+import { EngineButtonProps } from '@/pages/visual/types/attr'
 
 const { Item } = Form
 
@@ -11,7 +12,7 @@ const Button = (props: EngineCmpProps): JSX.Element => {
 	const { globalEngine } = useEngineContext()
 	const { values } = props
 
-	const { text, type } = values
+	const { text, type } = values as EngineButtonProps
 
 	const onTextChange = (event: any) => {
 		const val = event.target.value

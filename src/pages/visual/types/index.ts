@@ -1,12 +1,13 @@
 import { CSSProperties } from 'react'
-import { EngineButtonProps } from './attr'
+import { EngineButtonProps, EngineEmployeeProps } from './attr'
 
 export enum EngineComponentType {
 	Button = 0,
-	Table = 1
+	Table = 1,
+	Employee = 2
 }
 
-export type EngineCmpValuesType = EngineButtonProps
+export type EngineCmpValuesType = EngineButtonProps | EngineEmployeeProps
 export interface MaterialComponentData {
 	id: string
 	name: string

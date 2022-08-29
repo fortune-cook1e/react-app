@@ -1,12 +1,15 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, useEffect, useRef } from 'react'
 import { useDrop } from 'react-dnd'
+import { toPng } from 'html-to-image'
 import { Draggable, Droppable, DragDropContext, DropResult } from 'react-beautiful-dnd'
 import { EngineComponentData, MaterialComponentData, DndDropResult } from '../../types'
 import EngineComponentMap from './EngineComponentMap'
-import { MATERIAL_LIST } from '../../constants'
+import { EVENT_MAP, MATERIAL_LIST } from '../../constants'
 import styles from './index.module.less'
 import { Engine } from '../../instance/engine'
 import { getUniqueId } from './utils'
+import { useEngineContext } from '../../context'
+import { message } from 'antd'
 
 interface Props {
 	engineInstance: Engine
@@ -17,6 +20,7 @@ interface Props {
 const ENGINE_DROP_ID = 'engine'
 
 const RenderEngine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
+	const { eventEmitter, globalEngine } = useEngineContext()
 	const [{ isOver }, dndDropRef] = useDrop(() => ({
 		accept: MATERIAL_LIST.map(c => c.id),
 		collect: monitor => {
@@ -28,6 +32,33 @@ const RenderEngine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
 			addComponent(componentData)
 		}
 	}))
+
+	const ref = useRef<HTMLDivElement>(null)
+
+	const onEngineToImg = () => {
+		const engineData = globalEngine.getEngineData()
+
+		if (!ref.current || !engineData.length) {
+			message.info('请先填充画布')
+			return
+		}
+		const _height = ref.current?.scrollHeight
+		toPng(ref.current, { cacheBust: true, height: _height })
+			.then(dataUrl => {
+				const link = document.createElement('a')
+				link.download = 'my-image-name.png'
+				link.href = dataUrl
+				link.click()
+			})
+			.catch(err => {
+				console.log(err)
+			})
+	}
+
+	// 订阅下载图片事件
+	eventEmitter.useSubscription(EVENT_MAP.saveAsPic, () => {
+		onEngineToImg()
+	})
 
 	const addComponent = (item: MaterialComponentData) => {
 		const cmp = {
@@ -59,33 +90,35 @@ const RenderEngine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
 
 	return (
 		<div className={styles.engine} style={engineStyle} ref={dndDropRef}>
-			<DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
-				<Droppable droppableId={ENGINE_DROP_ID}>
-					{dropProvided => (
-						<div
-							ref={dropProvided.innerRef}
-							className={styles.canvas__core__content}
-							{...dropProvided.droppableProps}
-						>
-							{engineRenderData.map((c: EngineComponentData, cIndex: number) => {
-								return (
-									<Draggable key={c.uniqueId} draggableId={c.uniqueId} index={cIndex}>
-										{dragProvided => (
-											<div
-												{...dragProvided.draggableProps}
-												{...dragProvided.dragHandleProps}
-												ref={dragProvided.innerRef}
-											>
-												<EngineComponentMap canvasCmpData={c} />
-											</div>
-										)}
-									</Draggable>
-								)
-							})}
-						</div>
-					)}
-				</Droppable>
-			</DragDropContext>
+			<div className={styles.engine__container} ref={ref}>
+				<DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+					<Droppable droppableId={ENGINE_DROP_ID}>
+						{dropProvided => (
+							<div
+								ref={dropProvided.innerRef}
+								className={styles.canvas__core__content}
+								{...dropProvided.droppableProps}
+							>
+								{engineRenderData.map((c: EngineComponentData, cIndex: number) => {
+									return (
+										<Draggable key={c.uniqueId} draggableId={c.uniqueId} index={cIndex}>
+											{dragProvided => (
+												<div
+													{...dragProvided.draggableProps}
+													{...dragProvided.dragHandleProps}
+													ref={dragProvided.innerRef}
+												>
+													<EngineComponentMap canvasCmpData={c} />
+												</div>
+											)}
+										</Draggable>
+									)
+								})}
+							</div>
+						)}
+					</Droppable>
+				</DragDropContext>
+			</div>
 		</div>
 	)
 }

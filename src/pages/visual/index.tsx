@@ -9,10 +9,12 @@ import Engine from './modules/Engine'
 import { EngineContext } from './context'
 import { useEngine } from './hooks/useEngine'
 import { useForceUpdate } from '@/hooks/useForceUpdate'
+import useEventEmitter from '@/hooks/useEventEmitter'
 
 const Visual = (): JSX.Element => {
 	const globalEngine = useEngine()
 	const forceUpdate = useForceUpdate()
+	const eventEmitter = useEventEmitter()
 
 	useEffect(() => {
 		// 订阅数据源的改变
@@ -26,7 +28,7 @@ const Visual = (): JSX.Element => {
 	}, [])
 
 	return (
-		<EngineContext.Provider value={{ globalEngine }}>
+		<EngineContext.Provider value={{ globalEngine, eventEmitter }}>
 			<DndProvider backend={HTML5Backend}>
 				<div className={styles.visual}>
 					<HeaderArea />

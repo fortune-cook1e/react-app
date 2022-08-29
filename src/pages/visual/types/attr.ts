@@ -4,3 +4,10 @@ import { ButtonProps } from 'antd'
 export type EngineButtonProps = {
 	text: string
 } & ButtonProps
+
+// 员工组件Props
+export type EngineEmployeeProps = {
+	page: number
+	pageSize: number
+	keyword?: string
+}

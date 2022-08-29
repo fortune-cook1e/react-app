@@ -23,5 +23,17 @@ export const MATERIAL_LIST: MaterialComponentData[] = [
 		name: '表格',
 		style: {},
 		values: {}
+	},
+	{
+		id: 'employee',
+		cmpType: EngineComponentType.Employee,
+		name: '员工管理',
+		style: {},
+		values: {
+			page: 1,
+			pageSize: 10
+		}
 	}
 ]
+
+export * from './event'

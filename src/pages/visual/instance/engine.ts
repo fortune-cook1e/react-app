@@ -85,6 +85,7 @@ export class Engine {
 			..._selectedCom,
 			values: _values
 		}
+
 		this.selectedCom = cmp
 		this.updateCmp(cmp)
 	}

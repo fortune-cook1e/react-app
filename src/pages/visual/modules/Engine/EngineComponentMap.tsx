@@ -3,10 +3,12 @@ import { useEngineContext } from '../../context'
 import { EngineComponentType, EngineComponentData, EngineCmpProps } from '../../types'
 import Button from '../Engine/components/Button'
 import Table from '../Engine/components/Table'
+import Employee from './components/Employee'
 
 const ENGINE_COMPONENT_MAP: Record<EngineComponentType, (props: EngineCmpProps) => JSX.Element> = {
 	[EngineComponentType.Button]: Button,
-	[EngineComponentType.Table]: Table
+	[EngineComponentType.Table]: Table,
+	[EngineComponentType.Employee]: Employee
 }
 
 interface Props {
@@ -20,7 +22,7 @@ const EngineComponentMap = ({ canvasCmpData }: Props): JSX.Element => {
 
 	const renderCanvasCmp = useMemo(() => {
 		const Cmp = ENGINE_COMPONENT_MAP[cmpType]
-		return <Cmp {...canvasCmpData} />
+		return Cmp ? <Cmp {...canvasCmpData} /> : null
 	}, [canvasCmpData])
 
 	const onSelectCmp = () => {
