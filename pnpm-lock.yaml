@@ -15,6 +15,7 @@ specifiers:
   '@reduxjs/toolkit': ^1.6.0
   '@types/react': ^17.0.9
   '@types/react-beautiful-dnd': ^13.1.2
+  '@types/react-color': ^3.0.6
   '@types/react-dom': ^17.0.6
   '@types/react-redux': ^7.1.24
   '@types/react-router-dom': ^5.3.3
@@ -62,6 +63,7 @@ specifiers:
   query-string: ^7.1.1
   react: ^17.0.2
   react-beautiful-dnd: ^13.1.0
+  react-color: ^2.19.3
   react-dnd: ^16.0.1
   react-dnd-html5-backend: ^16.0.1
   react-dom: ^17.0.2
@@ -91,6 +93,7 @@ dependencies:
   '@ant-design/icons': 4.7.0_sfoxds7t5ydpegc3knd667wn6m
   '@fe-cookie/client-request-crypto': 1.0.1
   '@reduxjs/toolkit': 1.8.2_bjryulbxll5jujtwpu5a2wm2cy
+  '@types/react-color': 3.0.6
   ahooks: 3.7.0_react@17.0.2
   antd: 4.21.3_sfoxds7t5ydpegc3knd667wn6m
   axios: 0.27.2
@@ -103,6 +106,7 @@ dependencies:
   query-string: 7.1.1
   react: 17.0.2
   react-beautiful-dnd: 13.1.0_sfoxds7t5ydpegc3knd667wn6m
+  react-color: 2.19.3_react@17.0.2
   react-dnd: 16.0.1_rnf7gdpsn5dq2lkn43x7lp5n4a
   react-dnd-html5-backend: 16.0.1
   react-dom: 17.0.2_react@17.0.2
@@ -2062,6 +2066,14 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: true
 
+  /@icons/material/0.2.4_react@17.0.2:
+    resolution: {integrity: sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 17.0.2
+    dev: false
+
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}
     engines: {node: '>=6.0.0'}
@@ -2421,6 +2433,13 @@ packages:
       '@types/react': 17.0.46
     dev: true
 
+  /@types/react-color/3.0.6:
+    resolution: {integrity: sha512-OzPIO5AyRmLA7PlOyISlgabpYUa3En74LP8mTMa0veCA719SvYQov4WLMsHvCgXP+L+KI9yGhYnqZafVGG0P4w==}
+    dependencies:
+      '@types/react': 17.0.46
+      '@types/reactcss': 1.2.6
+    dev: false
+
   /@types/react-dom/17.0.17:
     resolution: {integrity: sha512-VjnqEmqGnasQKV0CWLevqMTXBYG9GbwuE6x3VetERLh0cq2LTptFE73MrQi2S7GkKXCf2GgwItB/melLnxfnsg==}
     dependencies:
@@ -2462,6 +2481,12 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.1.0
+
+  /@types/reactcss/1.2.6:
+    resolution: {integrity: sha512-qaIzpCuXNWomGR1Xq8SCFTtF4v8V27Y6f+b9+bzHiv087MylI/nTCqqdChNeWS7tslgROmYB7yeiruWX7WnqNg==}
+    dependencies:
+      '@types/react': 17.0.46
+    dev: false
 
   /@types/redux-logger/3.0.9:
     resolution: {integrity: sha512-cwYhVbYNgH01aepeMwhd0ABX6fhVB2rcQ9m80u8Fl50ZODhsZ8RhQArnLTkE7/Zrfq4Sz/taNoF7DQy9pCZSKg==}
@@ -6698,6 +6723,10 @@ packages:
       p-locate: 5.0.0
     dev: true
 
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
+
   /lodash.curry/4.1.1:
     resolution: {integrity: sha512-/u14pXGviLaweY5JI0IUzgzF2J6Ne8INyzAZjImcryjgkZ+ebruBxy2/JaOOkTqScddcYtakjhSaeemV8lR0tA==}
     dev: false
@@ -6824,6 +6853,10 @@ packages:
     dependencies:
       '@babel/runtime': 7.18.3
       remove-accents: 0.4.2
+    dev: false
+
+  /material-colors/1.2.6:
+    resolution: {integrity: sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg==}
     dev: false
 
   /mathml-tag-names/2.1.3:
@@ -9045,6 +9078,21 @@ packages:
       - react-native
     dev: false
 
+  /react-color/2.19.3_react@17.0.2:
+    resolution: {integrity: sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      '@icons/material': 0.2.4_react@17.0.2
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      material-colors: 1.2.6
+      prop-types: 15.8.1
+      react: 17.0.2
+      reactcss: 1.2.3_react@17.0.2
+      tinycolor2: 1.4.2
+    dev: false
+
   /react-dnd-html5-backend/16.0.1:
     resolution: {integrity: sha512-Wu3dw5aDJmOGw8WjH1I1/yTH+vlXEL4vmjk5p+MHxP8HuHJS1lAGeIdG/hze1AvNeXWo/JgULV87LyQOr+r5jw==}
     dependencies:
@@ -9253,6 +9301,15 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
+    dev: false
+
+  /reactcss/1.2.3_react@17.0.2:
+    resolution: {integrity: sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      lodash: 4.17.21
+      react: 17.0.2
     dev: false
 
   /read-cache/1.0.0:
@@ -10488,6 +10545,10 @@ packages:
 
   /tiny-invariant/1.2.0:
     resolution: {integrity: sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==}
+    dev: false
+
+  /tinycolor2/1.4.2:
+    resolution: {integrity: sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==}
     dev: false
 
   /tmp/0.0.33:

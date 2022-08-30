@@ -6,8 +6,10 @@ import JsonViewer from './components/JsonViewer'
 import { EVENT_MAP } from '../../constants'
 import { addVisual, updateVisual } from '@/apis/v2/visual'
 import { useRequest } from 'ahooks'
+import { useNavigate } from 'react-router-dom'
 
 const HeaderArea = (): JSX.Element => {
+	const navigate = useNavigate()
 	const { eventEmitter, globalEngine, mode, editingId } = useEngineContext()
 	const [visible, setVisible] = useState<boolean>(false)
 
@@ -25,19 +27,27 @@ const HeaderArea = (): JSX.Element => {
 
 	const onSave = async () => {
 		const data = globalEngine.getEngineData()
+		const pageConfig = globalEngine.getEnginePageConfig()
 
 		const cmpListStr = JSON.stringify(data)
+		const pageConfigStr = JSON.stringify(pageConfig)
 		if (mode === 'add') {
 			await addVisualRunner({
-				cmpList: cmpListStr
+				cmpList: cmpListStr,
+				pageConfig: pageConfigStr
 			})
 		} else {
 			await updateVisualRunner({
 				cmpList: cmpListStr,
+				pageConfig: pageConfigStr,
 				id: editingId as string
 			})
 		}
 		message.success('保存成功')
+	}
+
+	const goBack = () => {
+		navigate('/visual-management')
 	}
 
 	return (
@@ -56,6 +66,9 @@ const HeaderArea = (): JSX.Element => {
 					</Button>
 					<Button type='default' onClick={() => setVisible(true)}>
 						查看元数据
+					</Button>
+					<Button type='default' onClick={goBack}>
+						返回
 					</Button>
 				</Space>
 			</div>

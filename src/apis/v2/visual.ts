@@ -37,3 +37,12 @@ export const updateVisual = (data: UpdateVisualRequest): Promise<HttpResponse<Vi
 		method: 'post',
 		data
 	})
+
+export const deleteVisual = (id: string): Promise<HttpResponse> =>
+	request({
+		url: `${nameSpace}/delete`,
+		method: 'post',
+		data: {
+			id
+		}
+	})

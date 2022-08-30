@@ -1,3 +1,5 @@
+import { DEFAULT_PAGE_CONFIG, DEFAULT_ENGINE_DATA } from './../constants/index'
+import { PageConfig } from './../types/index'
 import { CSSProperties } from 'react'
 import { EngineComponentData, EngineCmpValuesType } from '../types'
 
@@ -7,17 +9,23 @@ export class Engine {
 	engineDataList: EngineComponentData[] // 引擎展示的数据
 	listeners: ListenerFunc[] // 订阅函数
 	selectedCom: EngineComponentData | null // 当前选中的组件
+	pageConfig: PageConfig // 当前页面配置
 	// canvasChangedHistory: EngineComponentData[][] // 画布改变历史记录
 
 	constructor(engineDataList?: EngineComponentData[]) {
-		this.engineDataList = engineDataList || []
+		this.engineDataList = engineDataList || DEFAULT_ENGINE_DATA
 		this.listeners = []
 		this.selectedCom = null
+		this.pageConfig = DEFAULT_PAGE_CONFIG
 		// this.canvasChangedHistory = []
 	}
 
 	getEngineData(): EngineComponentData[] {
 		return this.engineDataList
+	}
+
+	getEnginePageConfig(): PageConfig {
+		return this.pageConfig
 	}
 
 	// 添加组件
@@ -122,6 +130,27 @@ export class Engine {
 	}
 
 	// TODO: 欠缺记录画布操作历史记录
+
+	updatePageConfig(pageconfig: PageConfig): void {
+		this.pageConfig = pageconfig
+		this.runListeners()
+	}
+
+	// 更新当前页面样式
+	updatePageConfigStyle(style: CSSProperties): void {
+		const _style = {
+			...this.pageConfig.style,
+			...style
+		}
+		this.pageConfig.style = _style
+		this.runListeners()
+	}
+
+	// 更新页面标题
+	updatePageConfigTitle(title: string): void {
+		this.pageConfig.title = title
+		this.runListeners()
+	}
 
 	// 执行订阅函数
 	runListeners(): void {

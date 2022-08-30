@@ -1,4 +1,10 @@
-import { MaterialComponentData, EngineComponentType } from '../types'
+import { getUniqueId } from '@/utils'
+import {
+	PageConfig,
+	MaterialComponentData,
+	EngineComponentType,
+	EngineComponentData
+} from '../types'
 
 // 左侧组件列表数据
 // TIP: 每次增加一个组件需要在以下地方同步处理
@@ -25,6 +31,25 @@ export const MATERIAL_LIST: MaterialComponentData[] = [
 		values: {
 			page: 1,
 			pageSize: 10
+		}
+	}
+]
+
+export const DEFAULT_PAGE_CONFIG: PageConfig = {
+	style: {},
+	title: '默认标题'
+}
+
+export const DEFAULT_ENGINE_DATA: EngineComponentData[] = [
+	{
+		id: 'page',
+		uniqueId: getUniqueId(),
+		cmpType: EngineComponentType.Page,
+		name: '页面配置',
+		style: {},
+		values: {
+			title: '首页',
+			style: {}
 		}
 	}
 ]

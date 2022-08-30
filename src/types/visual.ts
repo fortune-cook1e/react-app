@@ -11,10 +11,12 @@ export interface JsonVisualItem {
 export interface VisualItem {
 	id: string
 	cmpList: string
+	pageConfig: string
 }
 
 export interface AddVisualRequest {
 	cmpList: string
+	pageConfig: string
 }
 
 export interface UpdateVisualRequest extends AddVisualRequest {

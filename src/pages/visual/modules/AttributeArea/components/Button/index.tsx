@@ -14,7 +14,7 @@ const Button = (props: EngineCmpProps): JSX.Element => {
 
 	const { text, type } = values as EngineButtonProps
 
-	const onTextChange = (event: any) => {
+	const onTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const val = event.target.value
 		globalEngine.updateSelectedCmpValues({
 			text: val

@@ -12,7 +12,7 @@ const Employee = (props: EngineCmpProps): JSX.Element => {
 
 	const { keyword } = values as EngineEmployeeProps
 
-	const onKeywordChange = (event: any) => {
+	const onKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const val = event.target.value
 		globalEngine.updateSelectedCmpValues({
 			keyword: val
