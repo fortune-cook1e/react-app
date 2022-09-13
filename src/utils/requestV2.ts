@@ -19,8 +19,11 @@ const request = <T = any, D = any>(
 		customError: false // 自定义处理报错(不再弹窗报错)
 	}
 
-	const { method, url, data, params, options = defaultOptions } = requestionOptions
+	const { method = 'get', url, data, params, options = defaultOptions } = requestionOptions
 	const { globalLoading, customError } = options
+
+	const getMethods = ['get', 'GET']
+	const isGetMethod = getMethods.includes(method)
 
 	const { sign, params: newParams } = clientCrypto({
 		params: params || data || {},
@@ -30,8 +33,8 @@ const request = <T = any, D = any>(
 	const _options: AxiosRequestConfig = {
 		method,
 		url,
-		data,
-		params,
+		data: isGetMethod ? data : newParams,
+		params: isGetMethod ? newParams : params,
 		headers: {
 			'X-AUTHO-TOKEN': sign || ''
 		}
@@ -44,7 +47,7 @@ const request = <T = any, D = any>(
 				const responseAuthroizationToken =
 					headers['Set-Authorization'] || headers['set-authorization']
 				if (responseAuthroizationToken) {
-					const [, token] = responseAuthroizationToken.split(',')
+					// const [, token] = responseAuthroizationToken.split(',')
 					// TODO: token处理
 				}
 				const { data, status } = response
