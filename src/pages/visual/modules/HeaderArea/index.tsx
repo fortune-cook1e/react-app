@@ -4,7 +4,7 @@ import { Button, message, Space } from 'antd'
 import { useEngineContext } from '../../context'
 import JsonViewer from './components/JsonViewer'
 import { EVENT_MAP } from '../../constants'
-import { addVisual, updateVisual } from '@/apis/v2/visual'
+import { addVisual, updateVisual } from '@/apis/visual'
 import { useRequest } from 'ahooks'
 import { useNavigate } from 'react-router-dom'
 

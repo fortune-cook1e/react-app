@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './index.module.less'
-import { fetchVisualList, deleteVisual } from '@/apis/v2/visual'
+import { fetchVisualList, deleteVisual } from '@/apis/visual'
 import { useRequest } from 'ahooks'
 import { VisualItem } from '@/types/visual'
 import { ColumnsType } from 'antd/es/table'

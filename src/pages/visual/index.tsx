@@ -13,7 +13,7 @@ import { useForceUpdate } from '@/hooks/useForceUpdate'
 import useEventEmitter from '@/hooks/useEventEmitter'
 import { useRouter } from '@/hooks'
 import { useRequest, useSafeState } from 'ahooks'
-import { fetchVisualInfo } from '@/apis/v2/visual'
+import { fetchVisualInfo } from '@/apis/visual'
 
 const Visual = (): JSX.Element => {
 	const globalEngine = useEngine()

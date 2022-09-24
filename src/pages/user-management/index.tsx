@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import { useQuery } from 'react-query'
+import React from 'react'
 import { ColumnsType } from 'antd/es/table'
 import { Table } from 'antd'
 import { Gender, IUser } from '@/types'
 import { getUsers } from '@/apis'
+import { useRequest } from 'ahooks'
 
 const UserManagement = (): JSX.Element => {
-	const { isFetching, data } = useQuery('users', getUsers)
+	const { data, loading } = useRequest(getUsers)
 
 	const columns: ColumnsType<IUser> = [
 		{
@@ -32,7 +32,7 @@ const UserManagement = (): JSX.Element => {
 		}
 	]
 
-	return <Table<IUser> rowKey='id' loading={isFetching} columns={columns} dataSource={data} />
+	return <Table<IUser> rowKey='id' loading={loading} columns={columns} dataSource={data?.data} />
 }
 
 export default UserManagement

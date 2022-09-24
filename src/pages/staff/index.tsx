@@ -2,51 +2,38 @@ import React, { useState } from 'react'
 import { Table, Input, Space, Button, Popconfirm } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { Department, Gender, IStaff, Occupation, PageRequest } from '@/types'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { fetchStaffList, deleteStaff } from '@/apis/staff'
 import LayoutContainer from '@/components/common/LayoutContainer'
 import styles from './index.module.less'
 import StaffModal from './modules/StaffModal'
-import { GENDER_OPTIONS, QUERY_KEYS } from '@/constants'
+import { GENDER_OPTIONS } from '@/constants'
 import { OCCUPATION_OPTIONS, DEPARTMENT_OPTIONS } from '@/constants/staff'
-
-type SearchQuerykey = [string, { pager: PageRequest }]
+import { useRequest, useDebounce } from 'ahooks'
 
 const Page = (): JSX.Element => {
-	const queryClient = useQueryClient()
 	const [pager, setPager] = useState<PageRequest>({
 		page: 1,
 		page_size: 10
 	})
 	const [total, setTotal] = useState<number>(0)
 	const [keyword, setKeyword] = useState<string | undefined>(undefined)
+	const debouncedKeyword = useDebounce(keyword, { wait: 500 })
+
 	const [visible, setVisible] = useState<boolean>(false)
 	const [updatingStaffId, setUpdatingStaffId] = useState<string | undefined>(undefined)
 	const [deletingStaffId, setDeletingStaffId] = useState<string | undefined>(undefined)
 
 	const {
-		isFetching,
+		loading,
 		data,
-		refetch: getStaffList
-	} = useQuery<IStaff[], Error, IStaff[], SearchQuerykey>(
-		[QUERY_KEYS.staff.list, { pager }],
-		async params => {
-			const { queryKey } = params
-			const {
-				pager: { page, page_size }
-			} = queryKey[1]
-			const { list = [], pager } = await fetchStaffList({ page, page_size, keyword })
-			setTotal(pager.total)
-			return list
-		}
-	)
+		run: getStaffList
+	} = useRequest(() => fetchStaffList({ ...pager, keyword: debouncedKeyword }), {
+		refreshDeps: [pager, debouncedKeyword]
+	})
 
-	const { mutate: delStaff } = useMutation((id: string) => deleteStaff({ id }), {
-		onMutate(id: string) {
-			setDeletingStaffId(id)
-		},
+	const { run: delStaff } = useRequest((id: string) => deleteStaff({ id }), {
+		manual: true,
 		onSuccess() {
-			queryClient.invalidateQueries(QUERY_KEYS.staff.list)
 			setDeletingStaffId(undefined)
 		}
 	})
@@ -63,14 +50,10 @@ const Page = (): JSX.Element => {
 	const onClose = () => {
 		setUpdatingStaffId(undefined)
 		setVisible(false)
+		getStaffList()
 	}
 
 	const columns: ColumnsType<IStaff> = [
-		// {
-		// 	key: 'id',
-		// 	title: 'Id',
-		// 	dataIndex: 'id'
-		// },
 		{
 			key: 'name',
 			title: '名称',
@@ -169,8 +152,8 @@ const Page = (): JSX.Element => {
 			<LayoutContainer.Content>
 				<Table
 					columns={columns}
-					loading={isFetching}
-					dataSource={data}
+					loading={loading}
+					dataSource={data?.data.list}
 					rowKey='id'
 					pagination={{
 						current: pager.page,

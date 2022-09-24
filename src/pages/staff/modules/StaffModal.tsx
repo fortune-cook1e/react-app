@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Modal, Form, Input, Select, DatePicker, Spin } from 'antd'
 import { Department, Gender, IStaff, Occupation } from '@/types'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { updateStaff, createStaff, fetchStaffInfo } from '@/apis/staff'
 import { GENDER_OPTIONS, QUERY_KEYS } from '@/constants'
 import moment, { Moment } from 'moment'
 import { DEPARTMENT_OPTIONS, OCCUPATION_OPTIONS } from '@/constants/staff'
+import { useRequest } from 'ahooks'
 const { RangePicker } = DatePicker
 
 const { Item } = Form
@@ -30,17 +30,15 @@ interface StaffForm {
 const DATE_FORMAT = 'YYYY-MM-DD'
 
 const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props): JSX.Element => {
-	const queryClient = useQueryClient()
 	const [form] = Form.useForm<StaffForm>()
 
-	const { isFetching: staffInfoLoading } = useQuery<IStaff>(
-		['staff', staffId],
+	const { loading: staffInfoLoading, run: getStaffInfo } = useRequest(
 		() => fetchStaffInfo(staffId),
 		{
-			enabled: !!staffId,
-			onSuccess: data => {
+			manual: true,
+			onSuccess(data) {
 				const { company, id, entryTime, resignationTime, occupation, gender, name, department } =
-					data
+					data.data
 				form.setFieldsValue({
 					id,
 					name,
@@ -54,24 +52,33 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
 		}
 	)
 
+	useEffect(() => {
+		staffId && getStaffInfo()
+	}, [staffId])
+
 	const onResetAll = () => {
-		queryClient.invalidateQueries(QUERY_KEYS.staff.list)
 		onClose()
 		onSuccess?.()
 		form.resetFields()
 	}
 
-	const { isLoading: addLoading, mutate: addStaff } = useMutation(
-		(newStaff: Omit<IStaff, 'id'>) => createStaff(newStaff),
+	const { loading: addLoading, run: addRunner } = useRequest(
+		(staff: Omit<IStaff, 'id'>) => createStaff(staff),
 		{
-			onSuccess: () => onResetAll()
+			manual: true,
+			onSuccess() {
+				onResetAll()
+			}
 		}
 	)
 
-	const { isLoading: updateLoading, mutate: update } = useMutation(
+	const { loading: updateLoading, run: updateRunner } = useRequest(
 		(staff: IStaff) => updateStaff(staff),
 		{
-			onSuccess: () => onResetAll()
+			manual: true,
+			onSuccess() {
+				onResetAll()
+			}
 		}
 	)
 
@@ -99,10 +106,9 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
 			resignationTime: resignationTime.format(DATE_FORMAT)
 		}
 		if (isUpdateMode) {
-			update(params)
+			addRunner(params)
 		} else {
-			const { id, ...rest } = params
-			addStaff(rest)
+			updateRunner(params)
 		}
 	}
 

@@ -1,11 +1,7 @@
 import { VisualItem } from '@/types/visual'
-import { HttpResponse } from './../../types/request'
-import {
-	AddVisualRequest,
-	FetchVisualListResponse,
-	UpdateVisualRequest
-} from './../../types/visual'
-import request from '@/utils/requestV2'
+import { HttpResponse } from '../types/request'
+import { AddVisualRequest, FetchVisualListResponse, UpdateVisualRequest } from '../types/visual'
+import request from '@/utils/request'
 
 const nameSpace = '/visual'
 

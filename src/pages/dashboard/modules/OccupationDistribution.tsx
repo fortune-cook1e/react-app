@@ -10,7 +10,7 @@ interface StaffPieChartData {
 }
 
 interface Props {
-	staffData: IStaff[]
+	staffData?: IStaff[]
 }
 
 const OccupationDistribution = ({ staffData = [] }: Props): JSX.Element => {

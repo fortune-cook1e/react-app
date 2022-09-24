@@ -25,3 +25,5 @@ export interface PageRequest {
 export interface PageResponse extends PageRequest {
 	total: number
 }
+
+export type PromiseHttpRes<T = any> = Promise<HttpResponse<T>>

@@ -16,7 +16,7 @@ const scale = {
 }
 
 interface Props {
-	staffData: IStaff[]
+	staffData?: IStaff[]
 }
 
 const Resignation = ({ staffData = [] }: Props): JSX.Element => {

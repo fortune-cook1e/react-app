@@ -234,6 +234,34 @@ module.exports = {
 		],
 		'array-bracket-spacing': [2, 'never'], // 禁止在数组括号内出现空格
 		'no-magic-numbers': [0, { ignore: [1, 2], ignoreArrayIndexes: true }],
-		'require-await': 2
+		'require-await': 2,
+		'import/order': [
+			2,
+			{
+				'newlines-between': 'always',
+				groups: [
+					'builtin',
+					'external',
+					'internal',
+					'parent',
+					'sibling',
+					'index',
+					'unknown',
+					'object',
+					'type'
+				],
+				alphabetize: {
+					order: 'asc',
+					caseInsensitive: true
+				},
+				pathGroups: [
+					{
+						pattern: 'react*',
+						group: 'external',
+						position: 'before'
+					}
+				]
+			}
+		]
 	}
 }
