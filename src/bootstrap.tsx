@@ -10,11 +10,10 @@ import store from '@/store'
 import './styles/base.less'
 
 render(
-  <ConfigProvider locale={zhCN}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <ConfigProvider locale={zhCN}>
       <App />
-    </Provider>
-  </ConfigProvider>,
-
+    </ConfigProvider>
+  </Provider>,
   document.getElementById('app')
 )

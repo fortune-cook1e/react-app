@@ -1,7 +1,6 @@
 export * from './useRedux'
 export * from './useIntersectionObserver'
 export * from './useClickOutside'
-export * from './useAuth'
 export * from './useRouter'
 export * from './useMount'
 export * from './useUpdateEffect'

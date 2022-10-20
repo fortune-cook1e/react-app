@@ -1,13 +1,12 @@
 import { Dropdown, Menu, message, Space } from 'antd'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import styles from './index.module.less'
 import Logo from './Logo'
 
-import { useAuth } from '@/hooks'
-import { userSelector } from '@/store/slices/user'
+import { userSelector, doLogout } from '@/store/slices/user'
 
 import type { MenuProps } from 'antd'
 
@@ -17,8 +16,8 @@ export enum MenuKey {
 }
 
 const Tools = (): JSX.Element => {
+  const dispatch = useDispatch()
   const { user } = useSelector(userSelector)
-  const { logout } = useAuth()
   const navigate = useNavigate()
 
   const onMenuClick: MenuProps['onClick'] = async ({ key }) => {
@@ -26,7 +25,7 @@ const Tools = (): JSX.Element => {
       case 'setting':
         return
       case 'logout':
-        await logout()
+        await dispatch(doLogout())
         navigate('/login')
         message.success('注销成功')
     }

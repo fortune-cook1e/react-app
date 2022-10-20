@@ -78,7 +78,7 @@ const userSlice = createSlice({
   }
 })
 
-const userReducer = userSlice.reducer
-export const { setUser } = userSlice.actions
+const { actions, reducer } = userSlice
+export const { setUser } = actions
 export const userSelector = (state: RootState): UserState => state.user
-export default userReducer
+export default reducer

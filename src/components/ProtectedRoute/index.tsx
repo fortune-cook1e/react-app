@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { useAuth } from '@/hooks'
 import globalConfig from '@/utils/config'
-
 interface Props {
   children: React.ReactNode
 }
 
 const ProtectedRoute = ({ children }: Props): JSX.Element => {
-  const { isUserLogin } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {

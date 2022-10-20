@@ -1,11 +1,12 @@
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { Form, Input, Button, Space, message } from 'antd'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import styles from './index.module.less'
 
-import { useAuth } from '@/hooks/useAuth'
+import { doRegister, doLogin } from '@/store/slices/user'
 import { LoginRequest } from '@/types'
 
 const { Item } = Form
@@ -13,7 +14,7 @@ const { Password } = Input
 
 const Login = (): JSX.Element => {
   const navigate = useNavigate()
-  const { login: doLogin, register: doRegister } = useAuth()
+  const dispatch = useDispatch()
   const [form] = Form.useForm<LoginRequest>()
   const [loadings, setLoadings] = useState({
     login: false,
@@ -28,7 +29,7 @@ const Login = (): JSX.Element => {
       })
       const values = await form.validateFields()
       const submitFunc = type === 'login' ? doLogin : doRegister
-      await submitFunc(values)
+      await dispatch(submitFunc(values))
       message.success(`${type === 'login' ? '登录' : '注册'}成功`)
       navigate('/dashboard')
     } catch {
