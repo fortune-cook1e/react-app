@@ -1,14 +1,13 @@
 {
-	"extends": ["stylelint-config-standard-scss"],
-	"plugins": ["stylelint-order"],
+	"extends": ["stylelint-config-standard", "stylelint-prettier/recommended"],
+	"plugins": ["stylelint-order", "stylelint-prettier"],
+	"customSyntax": "postcss-less",
 	"rules": {
 		"font-family-no-missing-generic-family-keyword": null,
 		"max-line-length": 150,
 		"no-descending-specificity": null,
 		"number-max-precision": 10,
-		"scss/at-import-partial-extension": null,
-		"scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]+$",
-		"selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*(__[a-z0-9]+)*$",
+		"selector-class-pattern": null,
 		"selector-pseudo-class-no-unknown": [
 			true,
 			{
