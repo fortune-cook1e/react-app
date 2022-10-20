@@ -1,22 +1,22 @@
-import { toaster } from './ToasterClass'
 import { ToasterOptions, CreateToasterOptions } from './toaster.type'
+import { toaster } from './ToasterClass'
 
 type NoCloseOptions = Omit<ToasterOptions, 'onClose'>
 
 const defaultSetting: NoCloseOptions = {
-	message: 'hahahaha',
-	icon: 'success',
-	duration: 50000,
-	position: 'bottom'
+  message: 'hahahaha',
+  icon: 'success',
+  duration: 50000,
+  position: 'bottom'
 }
 
 export const useToaster = (): any => {
-	const toastFunction = (options: CreateToasterOptions = defaultSetting) => {
-		return toaster.notify(options)
-	}
+  const toastFunction = (options: CreateToasterOptions = defaultSetting) => {
+    return toaster.notify(options)
+  }
 
-	toastFunction.close = toaster.close
-	toastFunction.closeAll = toaster.closeAll
+  toastFunction.close = toaster.close
+  toastFunction.closeAll = toaster.closeAll
 
-	return toastFunction
+  return toastFunction
 }

@@ -1,22 +1,23 @@
-import { RootState } from '@/store'
 import { createSlice } from '@reduxjs/toolkit'
 
+import { RootState } from '@/store'
+
 export interface AppState {
-	menuCollapsed: boolean
+  menuCollapsed: boolean
 }
 
 const initialState: AppState = {
-	menuCollapsed: false
+  menuCollapsed: false
 }
 
 const appSlice = createSlice({
-	name: 'app',
-	initialState,
-	reducers: {
-		setMenuStatus: (state, action) => {
-			state.menuCollapsed = action.payload
-		}
-	}
+  name: 'app',
+  initialState,
+  reducers: {
+    setMenuStatus: (state, action) => {
+      state.menuCollapsed = action.payload
+    }
+  }
 })
 
 const appReducer = appSlice.reducer
