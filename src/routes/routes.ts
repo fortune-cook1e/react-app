@@ -1,8 +1,8 @@
 import { lazy } from 'react'
 
-import { IRoute, IChildRoute } from '@/types'
+import { IRoute } from '@/types'
 
-export const studyRoutes: IChildRoute[] = [
+export const studyRoutes: IRoute[] = [
   {
     path: '/lazy-load',
     element: lazy(() => import('@/pages/lazy-load')),
@@ -14,11 +14,17 @@ export const studyRoutes: IChildRoute[] = [
     element: lazy(() => import('@/pages/indexDb')),
     title: 'IndexDB',
     key: 'indexDb'
+  },
+  {
+    path: '/desktop',
+    element: lazy(() => import('@/pages/desktop')),
+    title: 'desktop',
+    key: 'desktop'
   }
 ]
 
 // 调koa-app APi相关路由
-export const apisRoutes: IChildRoute[] = [
+export const apisRoutes: IRoute[] = [
   {
     path: '/user-management',
     element: lazy(() => import('@/pages/user-management')),

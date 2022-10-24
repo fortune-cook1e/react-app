@@ -1,8 +1,10 @@
+import { BgColorsOutlined } from '@ant-design/icons'
 import { Dropdown, Menu, message, Space } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import Floatings from './Floatings'
 import styles from './index.module.less'
 import Logo from './Logo'
 
@@ -19,6 +21,7 @@ const Tools = (): JSX.Element => {
   const dispatch = useDispatch()
   const { user } = useSelector(userSelector)
   const navigate = useNavigate()
+  const [themeSettingVis, setThemeSettingVis] = useState<boolean>(false)
 
   const onMenuClick: MenuProps['onClick'] = async ({ key }) => {
     switch (key) {
@@ -49,9 +52,15 @@ const Tools = (): JSX.Element => {
 
   return (
     <div className={styles.tools}>
+      <Floatings visible={themeSettingVis} onClose={() => setThemeSettingVis(false)} />
+
+      <BgColorsOutlined
+        onClick={() => setThemeSettingVis(true)}
+        style={{ color: '#fff', fontSize: '20px', marginRight: '10px' }}
+      />
       <Dropdown overlay={menu}>
         <div className={styles.tools__menu}>
-          <Space>
+          <Space size={8}>
             <Logo />
             <span className={styles.username}>{user?.username}</span>
           </Space>

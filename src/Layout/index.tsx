@@ -1,9 +1,8 @@
 import { Layout } from 'antd'
 import { AnimatePresence } from 'framer-motion'
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import Floatings from './Floatings'
 import styles from './index.module.less'
 import Logo from './Logo'
 import SideMenu from './SideMenu'
@@ -21,8 +20,6 @@ const BaseLayout = (): JSX.Element => {
 
       <Layout className={styles.layout__main}>
         <SideMenu />
-
-        <Floatings />
 
         <Layout style={{ padding: '24px' }}>
           <Content
