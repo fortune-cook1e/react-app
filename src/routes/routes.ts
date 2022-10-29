@@ -20,6 +20,12 @@ export const studyRoutes: IRoute[] = [
     element: lazy(() => import('@/pages/desktop')),
     title: 'desktop',
     key: 'desktop'
+  },
+  {
+    path: '/rtc',
+    element: lazy(() => import('@/pages/web-rtc')),
+    title: 'webRTC',
+    key: 'webRtc'
   }
 ]
 

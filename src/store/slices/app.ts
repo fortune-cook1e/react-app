@@ -7,7 +7,7 @@ export interface AppState {
 }
 
 const initialState: AppState = {
-  menuCollapsed: false
+  menuCollapsed: true
 }
 
 const appSlice = createSlice({
