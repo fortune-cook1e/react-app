@@ -1,73 +1,65 @@
-import { Button, Space } from 'antd'
+import { Button, message, Space } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
 
+import WebRtcHooks from './hooks'
 import styles from './index.module.less'
 
+import canvasBgImg from '@/assets/images/canvas.jpg'
 import { getUniqueId } from '@/utils'
 
-const VIDEL_ELEMENT = 'localVideo'
+const VIDEO_ELEMENT = 'localVideo'
+const REPLAY_ELEMENT = 'replay-element'
+const CANVAS_ELEMENT = 'canvas-element'
+const COMBINATION_ELEMENT = 'combination-element'
+
+let video2CInterval: any = null
 
 const Page = (): JSX.Element => {
+  const { getLocalStream } = WebRtcHooks()
   const [imgList, setImgList] = useState<{ id: string; url: string }[]>([])
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | undefined>()
   const blobData = useRef<Blob[]>([])
 
   useEffect(() => {
-    function getSupportedMimeTypes(): string[] {
-      const media = 'video'
-      const types = ['webm', 'mp4', 'mov', 'avi', 'wmv', 'flv', 'mkv']
-      const codes = ['vp9', 'vp9.0', 'vp8', 'vp8.0', 'avcl', 'av1', 'h265', 'h264']
-      const supported: string[] = []
-      const isSupported = MediaRecorder.isTypeSupported
-
-      types.forEach((type: string) => {
-        const mimeType = `${media}/${type}`
-        codes.forEach((code: string) => {
-          ;[`${mimeType};codecs=${code}`, `${mimeType};codecs=${code.toUpperCase()}`].forEach(
-            variation => {
-              if (isSupported(variation)) {
-                supported.push(variation)
-              }
-            }
-          )
-        })
-        if (isSupported(mimeType)) {
-          supported.push(mimeType)
-        }
-      })
-      return supported
+    function initCanvasImage() {
+      const canvasEl = document.getElementById(CANVAS_ELEMENT) as HTMLCanvasElement
+      const ctx = canvasEl.getContext('2d')
+      const img = new Image()
+      img.src = canvasBgImg
+      img.onload = function () {
+        if (!ctx) return
+        ctx.drawImage(img, 0, 0, canvasEl.width, canvasEl.height)
+        const imgData = ctx.getImageData(0, 0, canvasEl.width, canvasEl.height)
+        console.log({ imgData })
+      }
     }
 
-    const supportedMineTypes = getSupportedMimeTypes()
-    console.log({ supportedMineTypes })
-  }, [])
+    initCanvasImage()
 
-  // 获取摄像头视频流
-  const getLocalStream = async (constraints: MediaStreamConstraints) => {
-    const stream = await navigator.mediaDevices.getUserMedia(constraints)
-    playLocalStream(stream)
-  }
+    return () => {
+      clearInterval(video2CInterval)
+      video2CInterval = null
+    }
+  }, [])
 
   // 播放视频流
   const playLocalStream = (stream: MediaStream) => {
-    const videoEl = document.getElementById(VIDEL_ELEMENT) as HTMLVideoElement
+    const videoEl = document.getElementById(VIDEO_ELEMENT) as HTMLVideoElement
     videoEl.srcObject = stream
   }
 
-  // 开始获取媒体设备使用权限
-  const onGetVideoStream = () => {
+  // 打开摄像头
+  const start = () => {
     getLocalStream({
       audio: false,
       video: true
+    }).then(stream => {
+      playLocalStream(stream)
     })
   }
 
-  // 获取所有媒体设备
-  const getALlCameraDevices = async () => {
-    const devices = await navigator.mediaDevices.enumerateDevices()
-  }
-
   const takePhotos = () => {
-    const videoEl = document.getElementById(VIDEL_ELEMENT) as HTMLVideoElement
+    const videoEl = document.getElementById(VIDEO_ELEMENT) as HTMLVideoElement
     const canvas = document.createElement('canvas')
     canvas.width = videoEl.videoWidth
     canvas.height = videoEl.videoHeight
@@ -83,6 +75,7 @@ const Page = (): JSX.Element => {
     ])
   }
 
+  // 开始录制
   const startRecording = async () => {
     const kbps = 1024
     const mbps = kbps * kbps
@@ -94,25 +87,45 @@ const Page = (): JSX.Element => {
       video: true
     })
 
-    console.log({ stream })
-    const mediaRecoreder = new MediaRecorder(stream, options)
+    const _mediaRecoreder = new MediaRecorder(stream, options)
 
-    mediaRecoreder.start(0)
+    setMediaRecorder(_mediaRecoreder)
 
-    mediaRecoreder.ondataavailable = e => {
+    _mediaRecoreder.start(0)
+
+    _mediaRecoreder.ondataavailable = e => {
       blobData.current.push(e.data)
     }
 
-    mediaRecoreder.onstop = () => {
+    _mediaRecoreder.onstop = () => {
       console.log('stop recording..')
     }
 
-    mediaRecoreder.onerror = e => {
+    _mediaRecoreder.onerror = e => {
       console.log('recording eroror..', { e })
     }
   }
 
-  const downloadBlob = () => {
+  // 结束录制
+  const endRecording = () => {
+    if (!mediaRecorder) {
+      return message.error('未录制')
+    }
+    mediaRecorder.stop()
+    setMediaRecorder(undefined)
+  }
+
+  // 开始回放
+  const replay = () => {
+    const blob = new Blob(blobData.current, { type: 'video/webm' })
+    const blobUrl = URL.createObjectURL(blob)
+    const videoEl = document.getElementById(REPLAY_ELEMENT) as HTMLVideoElement
+    videoEl.src = blobUrl
+    videoEl.play()
+  }
+
+  const downloadVideo = () => {
+    if (!blobData.current.length) return
     const blob = new Blob(blobData.current, { type: 'video/webm' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -120,6 +133,7 @@ const Page = (): JSX.Element => {
     a.download = url
     a.click()
     URL.revokeObjectURL(url)
+    blobData.current = []
   }
 
   // 共享屏幕
@@ -131,23 +145,43 @@ const Page = (): JSX.Element => {
     playLocalStream(localStream)
   }
 
+  // 将视频数据绘制到canvas上
+  const draw2Canvas = () => {
+    const canvasEl = document.getElementById(CANVAS_ELEMENT) as HTMLCanvasElement
+    const videoEL = document.getElementById(VIDEO_ELEMENT) as HTMLVideoElement
+    const canvasCtx = canvasEl.getContext('2d')
+    if (!canvasCtx) return
+    canvasCtx.drawImage(videoEL, 0, 0, canvasEl.width, canvasEl.height)
+  }
+
   return (
     <div>
       <h1>this is webRTC</h1>
 
       <div>
-        <Space>
-          <Button onClick={onGetVideoStream}>Get Stream</Button>
-          <Button onClick={takePhotos}>take photos</Button>
-          <Button onClick={getALlCameraDevices}>Get all Devices</Button>
-          <Button onClick={shareScreen}>shareScreen</Button>
-          <Button onClick={startRecording}>recording..</Button>
-          <Button onClick={downloadBlob}>下载</Button>
+        <Space wrap>
+          <Button onClick={start}>开启摄像头</Button>
+          <Button onClick={shareScreen}>开启屏幕共享</Button>
+          <Button onClick={takePhotos}>拍照</Button>
+          <Button onClick={startRecording}>开始录制</Button>
+          <Button onClick={endRecording}>结束录制</Button>
+          <Button onClick={replay}>回放</Button>
+          <Button onClick={downloadVideo}>下载</Button>
+          <Button onClick={draw2Canvas}>将视频绘制到canvas中</Button>
         </Space>
       </div>
 
       <div>
-        <video id={VIDEL_ELEMENT} autoPlay playsInline muted />
+        <Space wrap>
+          <canvas id={CANVAS_ELEMENT} className={styles.playing} />
+          <video id={VIDEO_ELEMENT} autoPlay playsInline muted className={styles.playing} />
+          <video id={COMBINATION_ELEMENT} autoPlay playsInline muted className={styles.playing} />
+        </Space>
+      </div>
+
+      <div>
+        <h3>回放</h3>
+        <video id={REPLAY_ELEMENT} autoPlay playsInline muted />
       </div>
 
       <div>
