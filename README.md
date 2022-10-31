@@ -13,3 +13,4 @@ For studying how to use react to build a application.
 - Vite for development
 - Visual construction
 - Web-Rtc
+- Face recognition
