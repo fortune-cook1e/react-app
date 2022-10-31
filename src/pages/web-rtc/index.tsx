@@ -8,30 +8,36 @@ import styles from './index.module.less'
 import canvasBgImg from '@/assets/images/canvas.jpg'
 import { getUniqueId } from '@/utils'
 
-const VIDEO_ELEMENT = 'localVideo'
-const REPLAY_ELEMENT = 'replay-element'
-const CANVAS_ELEMENT = 'canvas-element'
 const COMBINATION_ELEMENT = 'combination-element'
 
 let video2CInterval: any = null
 
 const Page = (): JSX.Element => {
-  const { getLocalStream } = WebRtcHooks()
+  const { getLocalStream, initFaceApi } = WebRtcHooks()
   const [imgList, setImgList] = useState<{ id: string; url: string }[]>([])
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | undefined>()
+  const [loading, setLoading] = useState<boolean>(false)
   const blobData = useRef<Blob[]>([])
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const imgRef = useRef<HTMLImageElement>(null)
+  const replayRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    initFaceApi()
+  }, [])
 
   useEffect(() => {
     function initCanvasImage() {
-      const canvasEl = document.getElementById(CANVAS_ELEMENT) as HTMLCanvasElement
-      const ctx = canvasEl.getContext('2d')
-      const img = new Image()
-      img.src = canvasBgImg
-      img.onload = function () {
-        if (!ctx) return
-        ctx.drawImage(img, 0, 0, canvasEl.width, canvasEl.height)
-        const imgData = ctx.getImageData(0, 0, canvasEl.width, canvasEl.height)
-        console.log({ imgData })
+      if (canvasRef.current) {
+        const ctx = canvasRef.current.getContext('2d')
+        const img = new Image()
+        img.src = canvasBgImg
+        img.onload = function () {
+          if (!ctx || !canvasRef.current) return
+          ctx.drawImage(img, 0, 0, canvasRef.current.width, canvasRef.current.height)
+          // const imgData = ctx.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height)
+        }
       }
     }
 
@@ -45,8 +51,9 @@ const Page = (): JSX.Element => {
 
   // 播放视频流
   const playLocalStream = (stream: MediaStream) => {
-    const videoEl = document.getElementById(VIDEO_ELEMENT) as HTMLVideoElement
-    videoEl.srcObject = stream
+    if (videoRef.current) {
+      videoRef.current.srcObject = stream
+    }
   }
 
   // 打开摄像头
@@ -60,20 +67,21 @@ const Page = (): JSX.Element => {
   }
 
   const takePhotos = () => {
-    const videoEl = document.getElementById(VIDEO_ELEMENT) as HTMLVideoElement
-    const canvas = document.createElement('canvas')
-    canvas.width = videoEl.videoWidth
-    canvas.height = videoEl.videoHeight
-    const ctx = canvas.getContext('2d')
-    ctx?.drawImage(videoEl, 0, 0, canvas.width, canvas.height)
-    const imgUrl = canvas.toDataURL('image/png')
-    setImgList(l => [
-      ...l,
-      {
-        id: getUniqueId(),
-        url: imgUrl
-      }
-    ])
+    if (videoRef.current) {
+      const canvas = document.createElement('canvas')
+      canvas.width = videoRef.current.videoWidth
+      canvas.height = videoRef.current.videoHeight
+      const ctx = canvas.getContext('2d')
+      ctx?.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height)
+      const imgUrl = canvas.toDataURL('image/png')
+      setImgList(l => [
+        ...l,
+        {
+          id: getUniqueId(),
+          url: imgUrl
+        }
+      ])
+    }
   }
 
   // 开始录制
@@ -120,9 +128,10 @@ const Page = (): JSX.Element => {
   const replay = () => {
     const blob = new Blob(blobData.current, { type: 'video/webm' })
     const blobUrl = URL.createObjectURL(blob)
-    const videoEl = document.getElementById(REPLAY_ELEMENT) as HTMLVideoElement
-    videoEl.src = blobUrl
-    videoEl.play()
+    if (replayRef.current) {
+      replayRef.current.src = blobUrl
+      replayRef.current.play()
+    }
   }
 
   const downloadVideo = () => {
@@ -148,24 +157,43 @@ const Page = (): JSX.Element => {
 
   // 将视频数据绘制到canvas上
   const draw2Canvas = () => {
-    const canvasEl = document.getElementById(CANVAS_ELEMENT) as HTMLCanvasElement
-    const videoEL = document.getElementById(VIDEO_ELEMENT) as HTMLVideoElement
-    const canvasCtx = canvasEl.getContext('2d')
-    if (!canvasCtx) return
-    canvasCtx.drawImage(videoEL, 0, 0, canvasEl.width, canvasEl.height)
+    if (canvasRef.current && videoRef.current) {
+      const canvasCtx = canvasRef.current.getContext('2d')
+      if (!canvasCtx) return
+      canvasCtx.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height)
+    }
   }
 
+  // 识别人脸
   const captureFace = async () => {
-    const canvasEl = document.getElementById(CANVAS_ELEMENT) as HTMLCanvasElement
-    // console.log(import.meta.env.PROD)
-    // FIXME: 暂时只在vite开发环境下支持
-    const result = await Promise.all([
-      faceApi.nets.tinyFaceDetector.loadFromUri('/models'),
-      faceApi.nets.faceLandmark68Net.loadFromUri('/models'),
-      faceApi.nets.faceRecognitionNet.loadFromUri('/models'),
-      faceApi.nets.faceExpressionNet.loadFromUri('/models')
-    ])
-    console.log({ result })
+    try {
+      setLoading(true)
+      // FIXME: 这里执行时间会有点久 会出现页面丢帧 后面用service-worker 来做
+      if (imgRef.current && canvasRef.current) {
+        const detections = await faceApi
+          .detectSingleFace(imgRef.current, new faceApi.TinyFaceDetectorOptions())
+          .withFaceLandmarks()
+          .withFaceExpressions()
+        faceApi.matchDimensions(canvasRef.current, {
+          width: 480,
+          height: 300
+        })
+
+        const resized: any = faceApi.resizeResults(detections, {
+          width: 480,
+          height: 300
+        })
+
+        // to draw the detection onto the detected face i.e the box
+        faceApi.draw.drawDetections(canvasRef.current, resized)
+        // to draw the the points onto the detected face
+        faceApi.draw.drawFaceLandmarks(canvasRef.current, resized)
+        // to analyze and output the current expression by the detected face
+        faceApi.draw.drawFaceExpressions(canvasRef.current, resized)
+      }
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -182,21 +210,24 @@ const Page = (): JSX.Element => {
           <Button onClick={replay}>回放</Button>
           <Button onClick={downloadVideo}>下载</Button>
           <Button onClick={draw2Canvas}>将视频绘制到canvas中</Button>
-          <Button onClick={captureFace}>捕获人脸</Button>
+          <Button onClick={captureFace} loading={loading}>
+            捕获人脸
+          </Button>
         </Space>
       </div>
 
       <div>
         <Space wrap>
-          <canvas id={CANVAS_ELEMENT} className={styles.playing} />
-          <video id={VIDEO_ELEMENT} autoPlay playsInline muted className={styles.playing} />
+          <img src={canvasBgImg} ref={imgRef} className={styles.playing} />
+          <canvas ref={canvasRef} className={styles.playing} />
+          <video ref={videoRef} autoPlay playsInline muted className={styles.playing} />
           <video id={COMBINATION_ELEMENT} autoPlay playsInline muted className={styles.playing} />
         </Space>
       </div>
 
       <div>
         <h3>回放</h3>
-        <video id={REPLAY_ELEMENT} autoPlay playsInline muted />
+        <video ref={replayRef} autoPlay playsInline muted />
       </div>
 
       <div>

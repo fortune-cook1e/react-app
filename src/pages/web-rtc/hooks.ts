@@ -1,7 +1,10 @@
+import * as faceApi from 'face-api.js'
+
 export interface WebRtcHooksResponse {
   getSupportedMimeTypes: () => string[]
   getALlCameraDevices: () => Promise<MediaDeviceInfo[]>
   getLocalStream: (constraints: MediaStreamConstraints) => Promise<MediaStream>
+  initFaceApi: () => Promise<void>
 }
 
 const WebRtcHooks = (): WebRtcHooksResponse => {
@@ -41,10 +44,23 @@ const WebRtcHooks = (): WebRtcHooksResponse => {
     return stream
   }
 
+  const initFaceApi = async () => {
+    // FIXME: 暂时只在vite开发环境下支持
+    await Promise.all([
+      faceApi.nets.tinyFaceDetector.loadFromUri('/models'),
+      faceApi.nets.faceLandmark68Net.loadFromUri('/models'),
+      faceApi.nets.faceRecognitionNet.loadFromUri('/models'),
+      faceApi.nets.faceExpressionNet.loadFromUri('/models')
+      // faceApi.nets.ssdMobilenetv1.loadFromUri('/models')
+    ])
+    console.log('faceApi init done.,,')
+  }
+
   return {
     getSupportedMimeTypes,
     getALlCameraDevices,
-    getLocalStream
+    getLocalStream,
+    initFaceApi
   }
 }
 
