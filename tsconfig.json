@@ -1,21 +1,21 @@
 {
-	"compilerOptions": {
-		"module": "CommonJS",
-		"moduleResolution": "Node",
-		"allowJs": true,
-		"strict": true,
-		"target": "ESNext",
-		"outDir": "./dist",
-		"sourceMap": true,
-		"esModuleInterop": true,
-		"isolatedModules": true,
-		"jsx": "react-jsx",
-		"lib": ["dom", "esnext"],
-		"baseUrl": "./",
-		"paths": {
-			"@/*": ["src/*"]
-		}
-	},
-	"typeRoots": ["node_modules/@types", "src/global.d.ts", "vite.config.ts", "vite/client"],
-	"exclude": ["node_modules", "dist", "build"]
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "allowJs": true,
+    "strict": true,
+    "target": "ESNext",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": ["dom", "esnext"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "typeRoots": ["node_modules/@types", "src/global.d.ts", "vite.config.ts", "vite/client"],
+  "exclude": ["node_modules", "dist", "build"]
 }

@@ -1,4 +1,5 @@
 import { Button, message, Space } from 'antd'
+import * as faceApi from 'face-api.js'
 import React, { useEffect, useRef, useState } from 'react'
 
 import WebRtcHooks from './hooks'
@@ -154,6 +155,19 @@ const Page = (): JSX.Element => {
     canvasCtx.drawImage(videoEL, 0, 0, canvasEl.width, canvasEl.height)
   }
 
+  const captureFace = async () => {
+    const canvasEl = document.getElementById(CANVAS_ELEMENT) as HTMLCanvasElement
+    // console.log(import.meta.env.PROD)
+    // FIXME: 暂时只在vite开发环境下支持
+    const result = await Promise.all([
+      faceApi.nets.tinyFaceDetector.loadFromUri('/models'),
+      faceApi.nets.faceLandmark68Net.loadFromUri('/models'),
+      faceApi.nets.faceRecognitionNet.loadFromUri('/models'),
+      faceApi.nets.faceExpressionNet.loadFromUri('/models')
+    ])
+    console.log({ result })
+  }
+
   return (
     <div>
       <h1>this is webRTC</h1>
@@ -168,6 +182,7 @@ const Page = (): JSX.Element => {
           <Button onClick={replay}>回放</Button>
           <Button onClick={downloadVideo}>下载</Button>
           <Button onClick={draw2Canvas}>将视频绘制到canvas中</Button>
+          <Button onClick={captureFace}>捕获人脸</Button>
         </Space>
       </div>
 

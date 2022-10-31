@@ -1,5 +1,6 @@
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -16,7 +17,7 @@ const cssRegex = /\.css$/
 const cssModuleRegex = /\.module\.css$/
 const lessRegex = /\.less$/
 const lessModuleRegex = /\.module\.less$/
-const assetRegex = /\.(png|svg|jpg|jpeg|gif)$/i
+const assetRegex = /\.(png|svg|jpg|jpeg|gif|json)$/i
 
 const cssModuleOptions = (type, useModules) => {
   const options = { importLoaders: type || 1 }
@@ -52,6 +53,7 @@ const config = {
     filename: isDev ? 'js/[name].js' : 'js/[name].[contenthash].js',
     chunkFilename: isDev ? 'js/[name].js' : 'js/[name].[contenthash].js'
   },
+
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
@@ -61,7 +63,8 @@ const config = {
     // see:https://github.com/react-dnd/react-dnd/issues/3423
     fallback: {
       'react/jsx-runtime': 'react/jsx-runtime.js',
-      'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js'
+      'react/jsx-dev-runtime': 'react/jsx-dev-runtime.js',
+      fs: false
     }
   },
   module: {
@@ -158,6 +161,7 @@ const config = {
       filename: 'styles/[name].[contenthash].css',
       chunkFilename: 'styles/[id].[contenthash].css'
     }),
+    // new Dotenv(),
     isDev && new ReactRefreshWebpackPlugin({ overlay: false })
     // 	new ErrorPlugin(),
     // new ModuleFederationPlugin({
