@@ -4,7 +4,7 @@ For studying how to use react to build a application.
 
 ## Preview
 
-[Preview](https://fortune-cook1e.github.io/react-app)
+[Preview](https://fortune-cook1e.github.io/react-app/#/lazy-load)
 
 ## Features
 

@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import * as faceApi from 'face-api.js'
 
 export interface WebRtcHooksResponse {
@@ -34,6 +35,7 @@ const WebRtcHooks = (): WebRtcHooksResponse => {
     return supported
   }
 
+  // 获取所有媒体设备
   async function getALlCameraDevices() {
     return await await navigator.mediaDevices.enumerateDevices()
   }
@@ -44,6 +46,7 @@ const WebRtcHooks = (): WebRtcHooksResponse => {
     return stream
   }
 
+  // 初始化faceApi
   const initFaceApi = async () => {
     // FIXME: 暂时只在vite开发环境下支持
     await Promise.all([
@@ -53,7 +56,7 @@ const WebRtcHooks = (): WebRtcHooksResponse => {
       faceApi.nets.faceExpressionNet.loadFromUri('/models')
       // faceApi.nets.ssdMobilenetv1.loadFromUri('/models')
     ])
-    console.log('faceApi init done.,,')
+    message.success('face-api init done')
   }
 
   return {

@@ -12,7 +12,9 @@ const COMBINATION_ELEMENT = 'combination-element'
 
 let video2CInterval: any = null
 
-const Page = (): JSX.Element => {
+// web-worker:https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers
+
+const WebRtc = (): JSX.Element => {
   const { getLocalStream, initFaceApi } = WebRtcHooks()
   const [imgList, setImgList] = useState<{ id: string; url: string }[]>([])
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | undefined>()
@@ -61,9 +63,13 @@ const Page = (): JSX.Element => {
     getLocalStream({
       audio: false,
       video: true
-    }).then(stream => {
-      playLocalStream(stream)
     })
+      .then(stream => {
+        playLocalStream(stream)
+      })
+      .catch(e => {
+        message.error(e.message)
+      })
   }
 
   const takePhotos = () => {
@@ -241,4 +247,4 @@ const Page = (): JSX.Element => {
   )
 }
 
-export default Page
+export default WebRtc
