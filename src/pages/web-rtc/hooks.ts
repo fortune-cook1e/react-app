@@ -1,5 +1,6 @@
 import { message } from 'antd'
 import * as faceApi from 'face-api.js'
+import { useEffect } from 'react'
 
 export interface WebRtcHooksResponse {
   getSupportedMimeTypes: () => string[]
@@ -58,6 +59,10 @@ const WebRtcHooks = (): WebRtcHooksResponse => {
     ])
     message.success('face-api init done')
   }
+
+  useEffect(() => {
+    initFaceApi()
+  }, [])
 
   return {
     getSupportedMimeTypes,

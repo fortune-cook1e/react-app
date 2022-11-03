@@ -15,7 +15,7 @@ let video2CInterval: any = null
 // web-worker:https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers
 
 const WebRtc = (): JSX.Element => {
-  const { getLocalStream, initFaceApi } = WebRtcHooks()
+  const { getLocalStream } = WebRtcHooks()
   const [imgList, setImgList] = useState<{ id: string; url: string }[]>([])
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
@@ -26,7 +26,13 @@ const WebRtc = (): JSX.Element => {
   const replayRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    initFaceApi()
+    // worker.onmessage = function(){
+    // }
+    const worker = new Worker(new URL('./worker.ts', import.meta.url))
+    worker.onmessage = function () {
+      console.log('gagaga')
+    }
+    worker.postMessage([0, 1000000000])
   }, [])
 
   useEffect(() => {
