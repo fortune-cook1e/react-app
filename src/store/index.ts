@@ -1,23 +1,16 @@
-import { configureStore, getDefaultMiddleware, ThunkAction, Action } from '@reduxjs/toolkit'
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
-import { createLogger } from 'redux-logger'
+import logger from 'redux-logger'
 
 import rootReducer from './slices/index'
 
-const loggerMiddleware = createLogger()
-
-const middlewares = [...getDefaultMiddleware(), loggerMiddleware]
-
-const store = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
 
-  // TODO: 这里middlewares后续要改成函数形式
-  middleware: middlewares
+  middleware: getDefaultMiddleware => getDefaultMiddleware().prepend().concat(logger)
 })
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = (): any => useDispatch<AppDispatch>()
 export type AppThunk = ThunkAction<void, RootState, null, Action<string>>
-
-export default store

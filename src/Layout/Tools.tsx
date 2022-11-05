@@ -8,7 +8,8 @@ import Floatings from './Floatings'
 import styles from './index.module.less'
 import Logo from './Logo'
 
-import { userSelector, doLogout } from '@/store/slices/user'
+import { RootState, store } from '@/store'
+import { userSelector, setUser } from '@/store/slices/user'
 
 import type { MenuProps } from 'antd'
 
@@ -19,16 +20,17 @@ export enum MenuKey {
 
 const Tools = (): JSX.Element => {
   const dispatch = useDispatch()
-  const { user } = useSelector(userSelector)
+  const { user } = useSelector((state: RootState) => state.user)
   const navigate = useNavigate()
   const [themeSettingVis, setThemeSettingVis] = useState<boolean>(false)
 
-  const onMenuClick: MenuProps['onClick'] = async ({ key }) => {
+  const onMenuClick: MenuProps['onClick'] = ({ key }) => {
+    setUser(null)
     switch (key) {
       case 'setting':
         return
       case 'logout':
-        await dispatch(doLogout())
+        // await dispatch(doLogout())
         navigate('/login')
         message.success('注销成功')
     }

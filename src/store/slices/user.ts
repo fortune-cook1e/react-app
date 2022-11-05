@@ -21,17 +21,17 @@ const initialState: UserState = {
   user: initUser()
 }
 
-export const doLogin = createAsyncThunk('users/login', async (params: LoginRequest) => {
+export const doLogin = createAsyncThunk('user/login', async (params: LoginRequest) => {
   const data = await login(params)
   return data
 })
 
-export const doLogout = createAsyncThunk('users/logout', async () => {
+export const doLogout = createAsyncThunk('user/logout', async () => {
   await logout()
   return
 })
 
-export const doRegister = createAsyncThunk('users/register', async (params: LoginRequest) => {
+export const doRegister = createAsyncThunk('user/register', async (params: LoginRequest) => {
   const data = await register(params)
   return data
 })
@@ -42,39 +42,8 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload
+      setStorage('local', LOCAL_STORAGE_USER_KEY, JSON.stringify(action.payload))
     }
-  },
-  extraReducers: builder => {
-    builder
-      .addCase(doLogin.pending, () => {
-        console.log('login pending...')
-      })
-      .addCase(doLogin.fulfilled, (state, action) => {
-        state.user = action.payload
-        setStorage('local', LOCAL_STORAGE_USER_KEY, JSON.stringify(action.payload))
-      })
-      .addCase(doLogin.rejected, () => {
-        throw new Error('login rejected')
-      })
-      .addCase(doLogout.pending, () => {
-        console.log('logout pending...')
-      })
-      .addCase(doLogout.fulfilled, state => {
-        state.user = null
-      })
-      .addCase(doLogout.rejected, () => {
-        throw new Error('logout rejected')
-      })
-      .addCase(doRegister.pending, () => {
-        console.log('register pending...')
-      })
-      .addCase(doRegister.fulfilled, (state, action) => {
-        state.user = action.payload
-        setStorage('local', LOCAL_STORAGE_USER_KEY, JSON.stringify(action.payload))
-      })
-      .addCase(doRegister.rejected, () => {
-        throw new Error('register rejected')
-      })
   }
 })
 

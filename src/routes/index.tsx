@@ -1,9 +1,11 @@
 import React, { Suspense, ComponentType } from 'react'
-import { useRoutes } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 
-import { routes } from './routes'
+import { studyRoutes, apisRoutes, noLayoutRoutes } from './routes'
 
 import ProtectedRoute from '@/components/ProtectedRoute'
+import Layout from '@/Layout'
+import Dashboard from '@/pages/dashboard'
 import NotFound from '@/pages/not-found'
 import { IRoute } from '@/types'
 
@@ -41,17 +43,24 @@ const setProtectedRoute = (routes: IRoute[]): IRoute[] => {
   return routes
 }
 
-const protectedRoutes = setProtectedRoute(routes)
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />
+      },
+      ...setProtectedRoute(studyRoutes),
+      ...setProtectedRoute(apisRoutes)
+    ]
+  },
+  ...setProtectedRoute(noLayoutRoutes),
+  {
+    path: '*',
+    element: <NotFound />
+  }
+])
 
-const RouteElement = (): JSX.Element | null => {
-  const element = useRoutes([
-    ...protectedRoutes,
-    {
-      path: '*',
-      element: <NotFound />
-    }
-  ])
-  return element
-}
-
-export default RouteElement
+export default router

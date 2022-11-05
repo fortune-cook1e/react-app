@@ -4,7 +4,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 
 import globalConfig from './config'
 
-import store from '@/store'
+import { store } from '@/store'
 import { setUser } from '@/store/slices/user'
 import { HttpResponse, RequestOptions } from '@/types'
 

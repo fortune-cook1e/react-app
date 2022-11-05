@@ -9,6 +9,7 @@ declare module 'postcss-import'
 declare module 'postcss-preset-env'
 declare module '*.less'
 declare module '*.jpg'
+declare module '*.svg'
 
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string

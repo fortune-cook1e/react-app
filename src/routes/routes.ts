@@ -3,6 +3,12 @@ import { lazy } from 'react'
 import { IRoute } from '@/types'
 
 export const studyRoutes: IRoute[] = [
+  // {
+  //   path: '/dashboard',
+  //   element: lazy(() => import('@/pages/dashboard')),
+  //   title: 'Dashboard',
+  //   key: 'dashboard'
+  // },
   {
     path: '/lazy-load',
     element: lazy(() => import('@/pages/lazy-load')),
@@ -51,30 +57,7 @@ export const apisRoutes: IRoute[] = [
   }
 ]
 
-export const routes: IRoute[] = [
-  {
-    path: '/',
-    element: lazy(() => import('@/Layout')),
-    title: 'home',
-    key: 'home',
-    icon: '',
-    children: [
-      {
-        index: true,
-        element: lazy(() => import('@/pages/dashboard')),
-        title: 'dashboard',
-        key: 'dashboard2'
-      },
-      {
-        path: '/dashboard',
-        element: lazy(() => import('@/pages/dashboard')),
-        title: '首页',
-        key: 'dashboard'
-      },
-      ...studyRoutes,
-      ...apisRoutes
-    ]
-  },
+export const noLayoutRoutes: IRoute[] = [
   {
     path: '/editor',
     element: lazy(() => import('@/pages/editor')),
