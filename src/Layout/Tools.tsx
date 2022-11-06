@@ -1,15 +1,15 @@
 import { BgColorsOutlined } from '@ant-design/icons'
 import { Dropdown, Menu, message, Space } from 'antd'
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
 
 import Floatings from './Floatings'
 import styles from './index.module.less'
 import Logo from './Logo'
 
-import { RootState, store } from '@/store'
-import { userSelector, setUser } from '@/store/slices/user'
+import { logout } from '@/apis'
+import { userState } from '@/recoil/atoms'
 
 import type { MenuProps } from 'antd'
 
@@ -19,18 +19,17 @@ export enum MenuKey {
 }
 
 const Tools = (): JSX.Element => {
-  const dispatch = useDispatch()
-  const { user } = useSelector((state: RootState) => state.user)
   const navigate = useNavigate()
+  const [user, setUser] = useRecoilState(userState)
   const [themeSettingVis, setThemeSettingVis] = useState<boolean>(false)
 
-  const onMenuClick: MenuProps['onClick'] = ({ key }) => {
-    setUser(null)
+  const onMenuClick: MenuProps['onClick'] = async ({ key }) => {
     switch (key) {
       case 'setting':
         return
       case 'logout':
-        // await dispatch(doLogout())
+        await logout()
+        setUser(null)
         navigate('/login')
         message.success('注销成功')
     }

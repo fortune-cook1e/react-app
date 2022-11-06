@@ -2,18 +2,17 @@ import { ConfigProvider } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import React from 'react'
 import { render } from 'react-dom'
-import { Provider } from 'react-redux'
+import { RecoilRoot } from 'recoil'
 
 import App from './App'
 
-import { store } from '@/store'
 import './styles/base.less'
 
 render(
-  <Provider store={store}>
+  <RecoilRoot>
     <ConfigProvider locale={zhCN}>
       <App />
     </ConfigProvider>
-  </Provider>,
+  </RecoilRoot>,
   document.getElementById('app')
 )

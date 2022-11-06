@@ -1,14 +1,12 @@
 import { MenuUnfoldOutlined, MenuFoldOutlined, DesktopOutlined } from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import styles from './index.module.less'
 
-import { useAppDispatch, useRouter } from '@/hooks'
+import { useRouter } from '@/hooks'
 import { menu } from '@/routes/menu'
-import { appSelector, setMenuStatus } from '@/store/slices/app'
 import { MenuItem, ChildMenuItem } from '@/types'
 import { getItemInChildrenMap } from '@/utils'
 
@@ -21,8 +19,6 @@ interface MenuKeys {
 }
 
 const SideMenu = (): JSX.Element => {
-  const { menuCollapsed } = useSelector(appSelector)
-  const dispatch = useAppDispatch()
   const { location } = useRouter()
 
   const [menuKeys] = useState<MenuKeys>(() => {
@@ -39,9 +35,10 @@ const SideMenu = (): JSX.Element => {
     }
   })
 
+  const [open, setOpen] = useState<boolean>(false)
+
   const changeMenuStatus = () => {
-    const status = !menuCollapsed
-    dispatch(setMenuStatus(status))
+    setOpen(!open)
   }
 
   const renderMenuWithChildren = (menu: ChildMenuItem) => {
@@ -89,7 +86,7 @@ const SideMenu = (): JSX.Element => {
         className={styles.layout__menu}
         trigger={null}
         collapsible
-        collapsed={menuCollapsed}
+        collapsed={open}
       >
         <Menu
           mode='inline'
@@ -103,7 +100,7 @@ const SideMenu = (): JSX.Element => {
       </Sider>
 
       <div className={styles.menu__button} onClick={changeMenuStatus}>
-        {menuCollapsed ? (
+        {open ? (
           <MenuUnfoldOutlined onClick={changeMenuStatus} />
         ) : (
           <MenuFoldOutlined onClick={changeMenuStatus} />
