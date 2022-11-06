@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }: Props): JSX.Element => {
     // 	queryClient.invalidateQueries()
     // }
     if (!user) {
-      navigate('/login')
+      // navigate('/login')
     }
   }, [])
   return <>{children}</>
