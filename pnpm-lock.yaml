@@ -7,7 +7,7 @@ specifiers:
   '@babel/preset-env': ^7.14.4
   '@babel/preset-react': ^7.13.13
   '@babel/preset-typescript': ^7.13.0
-  '@babel/runtime': ^7.14.0
+  '@babel/runtime': ^7.19.4
   '@commitlint/cli': ^12.1.4
   '@commitlint/config-conventional': ^12.1.4
   '@fe-cookie/client-request-crypto': ^1.0.1
@@ -32,6 +32,7 @@ specifiers:
   clean-webpack-plugin: ^4.0.0-alpha.0
   commitizen: ^4.2.4
   conventional-changelog-cli: ^2.1.1
+  core-js: ^3.26.1
   cross-env: ^7.0.3
   css-loader: ^5.2.6
   css-minimizer-webpack-plugin: ^3.0.1
@@ -98,6 +99,7 @@ dependencies:
   antd: registry.npmmirror.com/antd/4.23.6_sfoxds7t5ydpegc3knd667wn6m
   axios: registry.npmmirror.com/axios/0.27.2
   classnames: registry.npmmirror.com/classnames/2.3.2
+  core-js: 3.26.1
   face-api.js: registry.npmmirror.com/face-api.js/0.22.2
   framer-motion: registry.npmmirror.com/framer-motion/4.1.17_sfoxds7t5ydpegc3knd667wn6m
   html-to-image: registry.npmmirror.com/html-to-image/1.10.8
@@ -263,6 +265,11 @@ packages:
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
     dev: true
+
+  /core-js/3.26.1:
+    resolution: {integrity: sha512-21491RRQVzUn0GGM9Z1Jrpr6PNPxPi+Za8OM9q4tksTSnlbXXGKK1nXNg/QvwFYettXvSX6zWKCtHHfjN4puyA==}
+    requiresBuild: true
+    dev: false
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}

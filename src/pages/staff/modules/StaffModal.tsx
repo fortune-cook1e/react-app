@@ -4,7 +4,7 @@ import moment, { Moment } from 'moment'
 import React, { useEffect } from 'react'
 
 import { updateStaff, createStaff, fetchStaffInfo } from '@/apis/staff'
-import { GENDER_OPTIONS, QUERY_KEYS } from '@/constants'
+import { GENDER_OPTIONS } from '@/constants'
 import { DEPARTMENT_OPTIONS, OCCUPATION_OPTIONS } from '@/constants/staff'
 import { Department, Gender, IStaff, Occupation } from '@/types'
 
