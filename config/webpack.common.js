@@ -3,14 +3,16 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const deps = require('../package.json').dependencies
 
 const paths = require('./paths')
 const antdTheme = require('./theme')
-// const ErrorPlugin = require('./plugins/error')
 
 const isDev = process.env.NODE_ENV === 'development'
+const analyse = process.env.ANALYSE === '1'
 
 const jstsRegex = /\.(js|jsx|ts|tsx)$/
 const cssRegex = /\.css$/
@@ -18,6 +20,8 @@ const cssModuleRegex = /\.module\.css$/
 const lessRegex = /\.less$/
 const lessModuleRegex = /\.module\.less$/
 const assetRegex = /\.(png|svg|jpg|jpeg|gif|json)$/i
+
+const smp = new SpeedMeasurePlugin()
 
 const cssModuleOptions = (type, useModules) => {
   const options = { importLoaders: type || 1 }
@@ -41,7 +45,7 @@ const lessOptions = () => {
   }
 }
 
-const config = {
+const config = smp.wrap({
   // FIXBUG: 解决webpack-dev-server 热更新未开启bug
   target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
   entry: {
@@ -69,24 +73,32 @@ const config = {
   },
   module: {
     rules: [
+      // {
+      //   test: jstsRegex,
+      //   include: paths.src,
+      //   use: [
+      //     {
+      //       loader: 'babel-loader',
+      //       options: {
+      //         cacheDirectory: true,
+      //         plugins: [isDev && require.resolve('react-refresh/babel')].filter(Boolean)
+      //       }
+      //     }
+      //   ]
+      // },
       {
         test: jstsRegex,
-        exclude: '/node_modules/',
         include: paths.src,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              plugins: [isDev && require.resolve('react-refresh/babel')].filter(Boolean)
-            }
+        use: {
+          loader: 'swc-loader',
+          options: {
+            sync: true
           }
-        ]
+        }
       },
       {
         test: cssRegex,
         include: paths.src,
-        exclude: [cssModuleRegex, '/node_modules/'],
         use: [
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
@@ -100,7 +112,6 @@ const config = {
       {
         test: cssModuleRegex,
         include: paths.src,
-        exclude: '/node_modules/',
         use: [
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
@@ -157,12 +168,10 @@ const config = {
       filename: 'index.html', // output file
       inject: 'body' // script插入body底部
     }),
-    new MiniCssExtractPlugin({
-      filename: 'styles/[name].[contenthash].css',
-      chunkFilename: 'styles/[id].[contenthash].css'
-    }),
+
     // new Dotenv(),
-    isDev && new ReactRefreshWebpackPlugin({ overlay: false })
+    isDev && new ReactRefreshWebpackPlugin({ overlay: false }),
+    analyse && new BundleAnalyzerPlugin()
     // 	new ErrorPlugin(),
     // new ModuleFederationPlugin({
     // 	name: 'reactApp',
@@ -188,6 +197,13 @@ const config = {
     // 	}
     // })
   ].filter(Boolean)
-}
+})
+
+config.plugins.push(
+  new MiniCssExtractPlugin({
+    filename: 'styles/[name].[contenthash].css',
+    chunkFilename: 'styles/[id].[contenthash].css'
+  })
+)
 
 module.exports = config
