@@ -73,29 +73,29 @@ const config = smp.wrap({
   },
   module: {
     rules: [
-      // {
-      //   test: jstsRegex,
-      //   include: paths.src,
-      //   use: [
-      //     {
-      //       loader: 'babel-loader',
-      //       options: {
-      //         cacheDirectory: true,
-      //         plugins: [isDev && require.resolve('react-refresh/babel')].filter(Boolean)
-      //       }
-      //     }
-      //   ]
-      // },
       {
         test: jstsRegex,
         include: paths.src,
-        use: {
-          loader: 'swc-loader',
-          options: {
-            sync: true
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              plugins: [isDev && require.resolve('react-refresh/babel')].filter(Boolean)
+            }
           }
-        }
+        ]
       },
+      // {
+      //   test: jstsRegex,
+      //   include: paths.src,
+      //   use: {
+      //     loader: 'swc-loader',
+      //     options: {
+      //       sync: true
+      //     }
+      //   }
+      // },
       {
         test: cssRegex,
         include: paths.src,
