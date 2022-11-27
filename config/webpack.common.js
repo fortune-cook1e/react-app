@@ -49,7 +49,7 @@ const config = smp.wrap({
   // FIXBUG: 解决webpack-dev-server 热更新未开启bug
   target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
   entry: {
-    app: paths.src + '/index.tsx'
+    app: paths.src + '/Main.tsx'
   },
   output: {
     path: paths.build,
