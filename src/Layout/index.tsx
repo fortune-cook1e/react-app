@@ -1,6 +1,5 @@
 import { Layout } from 'antd'
 import { AnimatePresence } from 'framer-motion'
-import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import styles from './index.module.less'

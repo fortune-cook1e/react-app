@@ -3,16 +3,16 @@ import { message } from 'antd'
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 
 import globalConfig from './config'
-import { PubSub } from './pub'
+import PubSub from './pub'
 
 import { TOKEN_FAILURE_EVENT } from '@/constants/pub'
-import { HttpResponse, RequestOptions } from '@/types'
+import { HttpResponse, RequestOptions, ResponseCode } from '@/types'
 
 const instance = axios.create({
   baseURL: '/api'
 })
 
-const { publish } = PubSub()
+const { publish } = PubSub
 
 // TIP: 此版本的request 会返回 code 和data 2个字段
 const request = <T = any, D = any>(
@@ -51,14 +51,14 @@ const request = <T = any, D = any>(
         const { data, status } = response
         const { code, msg = '服务器异常' } = data
         // TODO: 待处理 status非200情况
-        if (code !== 0) {
+        if (code !== ResponseCode.Ok) {
           // TIP: 10000code代表token失效 需要重新登录
-          if (code === 10000) {
+          if (code === ResponseCode.LoginInValid) {
             message.info('登录失效，请重新登录，1s后进行跳转')
             setTimeout(() => {
               // TODO: Recoil 暂时不知道如何调用atom 所以采用 subscribe
               // store.dispatch(setUser(null))
-              publish(TOKEN_FAILURE_EVENT)
+              publish(TOKEN_FAILURE_EVENT, 'token faile..')
               window.location.hash = '#/login'
             }, 1000)
 

@@ -1,38 +1,34 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 
-import ReactErrorBoundary from './components/ErrorBoundary'
 import { TOKEN_FAILURE_EVENT } from './constants/pub'
 import { userState } from './recoil/atoms'
 import { clearIndexedDb, initIndexedDb } from './utils/config'
-import { PubSub } from './utils/pub'
+import pubSub from './utils/pub'
 
 import router from '@/routes'
 
 const App = (): JSX.Element => {
   const [, setUser] = useRecoilState(userState)
-  const { subscribe, unsubscribe } = PubSub()
+
+  const clearUser = () => {
+    setUser(null)
+  }
+
   useEffect(() => {
     // TOKEN失效后将用户信息清空
-    subscribe(TOKEN_FAILURE_EVENT, () => {
-      setUser(null)
-    })
+    pubSub.subscribe(TOKEN_FAILURE_EVENT, clearUser)
 
     initIndexedDb()
 
     return () => {
       clearIndexedDb()
-      unsubscribe(TOKEN_FAILURE_EVENT, () => {})
+      pubSub.unsubscribe(TOKEN_FAILURE_EVENT, clearUser)
     }
   }, [])
 
-  return (
-    <ReactErrorBoundary>
-      {/* 这里由于 git-page 不支持 BrowserRouter 所以改用HashRouter */}
-      <RouterProvider router={router} />
-    </ReactErrorBoundary>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App
