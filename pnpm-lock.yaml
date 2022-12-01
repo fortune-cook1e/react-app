@@ -26,6 +26,7 @@ specifiers:
   '@types/react-test-renderer': ^18.0.0
   '@types/react-transition-group': ^4.4.1
   '@types/redux-logger': ^3.0.8
+  '@types/testing-library__jest-dom': ^5.14.5
   '@types/uuid': ^8.3.4
   '@typescript-eslint/eslint-plugin': ^4.26.0
   '@typescript-eslint/parser': ^4.26.0
@@ -51,6 +52,7 @@ specifiers:
   eslint-config-prettier: ^8.3.0
   eslint-plugin-import: ^2.26.0
   eslint-plugin-jest: ^27.1.6
+  eslint-plugin-jest-dom: ^4.0.3
   eslint-plugin-prettier: ^3.4.0
   eslint-plugin-react: ^7.24.0
   eslint-plugin-react-hooks: ^4.2.0
@@ -157,6 +159,7 @@ devDependencies:
   '@types/react-test-renderer': 18.0.0
   '@types/react-transition-group': registry.npmmirror.com/@types/react-transition-group/4.4.5
   '@types/redux-logger': registry.npmmirror.com/@types/redux-logger/3.0.9
+  '@types/testing-library__jest-dom': 5.14.5
   '@types/uuid': registry.npmmirror.com/@types/uuid/8.3.4
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/4.33.0_k4l66av2tbo6kxzw52jzgbfzii
   '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/4.33.0_3rubbgt5ekhqrcgx4uwls3neim
@@ -177,6 +180,7 @@ devDependencies:
   eslint-config-prettier: registry.npmmirror.com/eslint-config-prettier/8.5.0_eslint@7.32.0
   eslint-plugin-import: registry.npmmirror.com/eslint-plugin-import/2.26.0_ffi3uiz42rv3jyhs6cr7p7qqry
   eslint-plugin-jest: 27.1.6_stqubpz3vkfqj6hpy7pdfbi33y
+  eslint-plugin-jest-dom: 4.0.3_eslint@7.32.0
   eslint-plugin-prettier: registry.npmmirror.com/eslint-plugin-prettier/3.4.1_7gsvg5lgwpfdww3i7smtqxamuy
   eslint-plugin-react: registry.npmmirror.com/eslint-plugin-react/7.31.10_eslint@7.32.0
   eslint-plugin-react-hooks: registry.npmmirror.com/eslint-plugin-react-hooks/4.6.0_eslint@7.32.0
@@ -2065,6 +2069,18 @@ packages:
       source-map: 0.6.1
     dev: true
 
+  /eslint-plugin-jest-dom/4.0.3_eslint@7.32.0:
+    resolution: {integrity: sha512-9j+n8uj0+V0tmsoS7bYC7fLhQmIvjRqRYEcbDSi+TKPsTThLLXCyj5swMSSf/hTleeMktACnn+HFqXBr5gbcbA==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0, npm: '>=6', yarn: '>=1'}
+    peerDependencies:
+      eslint: ^6.8.0 || ^7.0.0 || ^8.0.0
+    dependencies:
+      '@babel/runtime': 7.20.1
+      '@testing-library/dom': 8.19.0
+      eslint: registry.npmmirror.com/eslint/7.32.0
+      requireindex: 1.2.0
+    dev: true
+
   /eslint-plugin-jest/27.1.6_stqubpz3vkfqj6hpy7pdfbi33y:
     resolution: {integrity: sha512-XA7RFLSrlQF9IGtAmhddkUkBuICCTuryfOTfCSWcZHiHb69OilIH05oozH2XA6CEOtztnOd0vgXyvxZodkxGjg==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -3723,6 +3739,11 @@ packages:
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /requireindex/1.2.0:
+    resolution: {integrity: sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==}
+    engines: {node: '>=0.10.5'}
     dev: true
 
   /requires-port/1.0.0:

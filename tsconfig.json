@@ -16,6 +16,13 @@
       "@/*": ["src/*"]
     }
   },
-  "typeRoots": ["node_modules/@types", "src/global.d.ts", "vite.config.ts", "vite/client"],
+  "typeRoots": [
+    "node_modules/@types",
+    "src/global.d.ts",
+    "vite.config.ts",
+    "vite/client",
+    "jest-setup.ts",
+    "jest.config.ts"
+  ],
   "exclude": ["node_modules", "dist", "build"]
 }

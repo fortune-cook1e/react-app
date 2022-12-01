@@ -3,7 +3,7 @@ import { message } from 'antd'
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 
 import globalConfig from './config'
-import PubSub from './pub'
+import pubSub from './pub'
 
 import { TOKEN_FAILURE_EVENT } from '@/constants/pub'
 import { HttpResponse, RequestOptions, ResponseCode } from '@/types'
@@ -11,8 +11,6 @@ import { HttpResponse, RequestOptions, ResponseCode } from '@/types'
 const instance = axios.create({
   baseURL: '/api'
 })
-
-const { publish } = PubSub
 
 // TIP: 此版本的request 会返回 code 和data 2个字段
 const request = <T = any, D = any>(
@@ -58,7 +56,7 @@ const request = <T = any, D = any>(
             setTimeout(() => {
               // TODO: Recoil 暂时不知道如何调用atom 所以采用 subscribe
               // store.dispatch(setUser(null))
-              publish(TOKEN_FAILURE_EVENT, 'token faile..')
+              pubSub.publish(TOKEN_FAILURE_EVENT, 'token faile..')
               window.location.hash = '#/login'
             }, 1000)
 

@@ -11,7 +11,8 @@
     "eslint:recommended",
     "prettier",
     "plugin:react/recommended",
-    "plugin:react/jsx-runtime"
+    "plugin:react/jsx-runtime",
+    "plugin:jest-dom/recommended"
   ],
   "settings": {
     "react": {
@@ -19,7 +20,7 @@
       "version": "detect"
     }
   },
-  "plugins": ["react", "react-hooks", "import", "jest"],
+  "plugins": ["react", "react-hooks", "import", "jest-dom", "jest"],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module"
@@ -51,6 +52,11 @@
     "react/jsx-one-expression-per-line": 0,
     "react/jsx-pascal-case": 1,
     "react/jsx-props-no-multi-spaces": 2,
+
+    "jest-dom/prefer-checked": "error",
+    "jest-dom/prefer-enabled-disabled": "error",
+    "jest-dom/prefer-required": "error",
+    "jest-dom/prefer-to-have-attribute": "error",
 
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "error",
