@@ -1,20 +1,57 @@
 import { useRequest } from 'ahooks'
+import { Form, Input, Button } from 'antd'
+import { useState } from 'react'
 
-// import { fetchStaffList } from '@/apis/staff'
+const { Item } = Form
+
+import { fetchStaffList } from '@/apis/staff'
 
 const UnitTest = (): JSX.Element => {
-  // const { data } = useRequest(fetchStaffList, {
-  //   onSuccess() {
-  //     console.log('scuc')
-  //   }
-  // })
+  const [name, setName] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+  const { data, run, loading } = useRequest(fetchStaffList, {
+    manual: true,
+    onSuccess() {
+      console.log('scuc')
+    }
+  })
 
   return (
     <div>
-      {/* {data?.data?.list.map(d => {
-        return <div key={d.id}>{d.name}</div>
-      })} */}
-      <p>haha</p>
+      <Form>
+        <Item label='用户名'>
+          <Input placeholder='username' value={name} onChange={e => setName(e.target.value)} />
+        </Item>
+        <Item label='密码'>
+          <Input
+            type='password'
+            placeholder='password'
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+        </Item>
+
+        <Button
+          onClick={() =>
+            run({
+              page: 1,
+              page_size: 10
+            })
+          }
+          loading={loading}
+        >
+          {loading ? 'loading' : 'click'}
+        </Button>
+      </Form>
+
+      {data?.data.list.map(i => {
+        return (
+          <div key={i.id} role='list-item'>
+            {i.name}
+          </div>
+        )
+      })}
     </div>
   )
 }

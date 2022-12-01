@@ -1,3 +1,4 @@
+// FIXBUG: 暂时屏蔽外部库https://juejin.cn/post/6999572866815492110
 import { clientCrypto } from '@fe-cookie/client-request-crypto'
 import { message } from 'antd'
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
@@ -27,19 +28,19 @@ const request = <T = any, D = any>(
   const getMethods = ['get', 'GET']
   const isGetMethod = getMethods.includes(method)
 
-  const { sign, params: newParams } = clientCrypto({
-    params: params || data || {},
-    salt: globalConfig.salt
-  })
+  // const { sign, params: newParams } = clientCrypto({
+  //   params: params || data || {},
+  //   salt: globalConfig.salt
+  // })
 
   const _options: AxiosRequestConfig = {
     method,
     url,
-    data: isGetMethod ? data : newParams,
-    params: isGetMethod ? newParams : params,
-    headers: {
-      'X-AUTHO-TOKEN': sign || ''
-    }
+    data,
+    params
+    // headers: {
+    //   'X-AUTHO-TOKEN': sign || ''
+    // }
   }
 
   return new Promise((resolve, reject) => {

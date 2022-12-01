@@ -238,14 +238,7 @@
     "yield-star-spacing": [2, "both"], // 强制在 yield* 表达式中 * 周围使用空格
     "yoda": [2, "never"], // 比较绝不能是 Yoda 条件
     "prefer-const": 2,
-    "object-curly-spacing": [
-      2,
-      "always",
-      {
-        // 强制在花括号中使用一致的空格
-        "objectsInObjects": false
-      }
-    ],
+    "object-curly-spacing": [2, "always"],
     "array-bracket-spacing": [2, "never"], // 禁止在数组括号内出现空格
     "no-magic-numbers": [0, { "ignore": [1, 2], "ignoreArrayIndexes": true }],
     "require-await": 2,
