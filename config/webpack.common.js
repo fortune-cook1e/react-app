@@ -19,7 +19,7 @@ const cssRegex = /\.css$/
 const cssModuleRegex = /\.module\.css$/
 const lessRegex = /\.less$/
 const lessModuleRegex = /\.module\.less$/
-const assetRegex = /\.(png|svg|jpg|jpeg|gif|json)$/i
+const assetRegex = /\.(png|svg|jpg|jpeg|gif|json|glb)$/i
 
 const smp = new SpeedMeasurePlugin()
 

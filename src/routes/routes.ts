@@ -38,6 +38,12 @@ export const studyRoutes: IRoute[] = [
     element: lazy(() => import('@/pages/unit-test')),
     title: '单元测试',
     key: 'unitTest'
+  },
+  {
+    path: '/three',
+    element: lazy(() => import('@/pages/three-dimension')),
+    title: 'ThreeJs',
+    key: 'three'
   }
 ]
 
