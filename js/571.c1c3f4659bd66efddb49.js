@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkreact_app=self.webpackChunkreact_app||[]).push([[571],{91571:function(e,a,c){c.r(a);c(22374);var s=c(52454);a.default=()=>(0,s.jsx)("div",{children:"this is Picture"})}}]);
