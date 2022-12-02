@@ -1,0 +1,1 @@
+onmessage=a=>{console.log("gagagagaga");const[g,e]=a.data;let o=0;for(let a=g;a<e;a++)o+=a;postMessage(o)};
