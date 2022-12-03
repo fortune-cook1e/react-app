@@ -1,8 +1,6 @@
-import { FC } from 'react'
-
 import OriginThree from './components/OriginThree'
 
-const ThreeDimension: FC = () => {
+const ThreeDimension = (): JSX.Element => {
   return (
     <div>
       <h1>three Dimension</h1>

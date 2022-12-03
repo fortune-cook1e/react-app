@@ -35,9 +35,8 @@ const setProtectedRoute = (routes: IRoute[]): IRoute[] => {
   if (!routes.length) return []
   // 遍历增加权限HOC
   routes.forEach((route: IRoute) => {
-    const { meta, element } = route
-    const Component = element
-    route.element = setProtectedComponent({ component: Component, needProtect: meta?.auth })
+    const { meta, lazyElement } = route
+    route.element = setProtectedComponent({ component: lazyElement, needProtect: meta?.auth })
     !!route?.children && setProtectedRoute(route.children)
   })
   return routes
