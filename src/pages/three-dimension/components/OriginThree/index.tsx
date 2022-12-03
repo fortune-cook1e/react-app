@@ -11,12 +11,12 @@ const OriginThree: FC = () => {
       <h2>this origin three</h2>
 
       <Row>
-        <Col span={24}>
+        {/* <Col span={24}>
           <CubeDemo />
         </Col>
         <Col span={24}>
           <LineDemo />
-        </Col>
+        </Col> */}
         <Col span={24}>
           <ModelDemo />
         </Col>

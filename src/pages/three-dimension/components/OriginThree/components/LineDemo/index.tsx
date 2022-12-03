@@ -10,7 +10,7 @@ const LineDemo: FC = () => {
     if (ref.current) {
       const scene = new Three.Scene()
       const camera = new Three.PerspectiveCamera(75, 1, 0.1, 500)
-      camera.position.set(0, 0, 100)
+      camera.position.set(0, 0, 0)
       camera.lookAt(0, 0, 0)
 
       const renderer = new Three.WebGLRenderer()

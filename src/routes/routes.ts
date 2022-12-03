@@ -38,12 +38,6 @@ export const studyRoutes: IRoute[] = [
     element: lazy(() => import('@/pages/unit-test')),
     title: '单元测试',
     key: 'unitTest'
-  },
-  {
-    path: '/three',
-    element: lazy(() => import('@/pages/three-dimension')),
-    title: 'ThreeJs',
-    key: 'three'
   }
 ]
 
@@ -87,6 +81,13 @@ export const noLayoutRoutes: IRoute[] = [
     element: lazy(() => import('@/pages/login')),
     title: '登录',
     key: 'login',
+    icon: ''
+  },
+  {
+    path: '/three',
+    element: lazy(() => import('@/pages/three-dimension')),
+    title: 'ThreeJs',
+    key: 'three',
     icon: ''
   }
 ]

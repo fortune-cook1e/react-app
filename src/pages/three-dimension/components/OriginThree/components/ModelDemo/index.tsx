@@ -1,6 +1,5 @@
-import { useRef } from 'react'
-import { useEffect } from 'react'
-import { FC } from 'react'
+import { useSize } from 'ahooks'
+import { FC, useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment'
@@ -9,40 +8,54 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 const ModelDemo: FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null)
   const ref = useRef<HTMLDivElement>(null)
+  const size = useSize(ref)
 
   useEffect(() => {
     let mixer: any
-    if (ref.current) {
+    let animate: any
+
+    if (ref.current && size) {
       const clock = new THREE.Clock()
       const stats = Stats()
 
-      ref.current.appendChild(stats.dom)
-
+      // 渲染器设置
+      // 1. 像素比例 2. 渲染窗口大小
       const renderer = new THREE.WebGLRenderer({ antialias: true })
       renderer.setPixelRatio(window.devicePixelRatio)
-      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setSize(size?.width || 500, size?.height || 500)
       renderer.outputEncoding = THREE.sRGBEncoding
+
+      // 设置摄像机
+      const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 100)
+      camera.position.set(5, 2, 8)
+
+      // 重新绘制
+      const childNodes = ref.current.childNodes
+      if (childNodes.length) {
+        ref.current.innerHTML = ''
+      }
+      ref.current.appendChild(stats.dom)
       ref.current.appendChild(renderer.domElement)
 
       const pmremGenerator = new THREE.PMREMGenerator(renderer)
-
       const scene = new THREE.Scene()
       scene.background = new THREE.Color(0xbfe3dd)
       scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture
 
-      const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 100)
-      camera.position.set(5, 2, 8)
-
+      // 允许摄像头转动
       const controls = new OrbitControls(camera, renderer.domElement)
       controls.target.set(0, 0.5, 0)
       controls.update()
       controls.enablePan = false
       controls.enableDamping = true
 
+      //
       const dracoLoader = new DRACOLoader()
-      // dracoLoader.setDecoderPath('js/libs/draco/gltf/')
+      dracoLoader.setDecoderPath('/sdks/')
 
+      // 用于加载glb文件
       const loader = new GLTFLoader()
       loader.setDRACOLoader(dracoLoader)
 
@@ -57,7 +70,7 @@ const ModelDemo: FC = () => {
           mixer = new THREE.AnimationMixer(model)
           mixer.clipAction(gltf.animations[0]).play()
 
-          // animate()
+          animate()
         },
         undefined,
         function (e) {
@@ -68,28 +81,27 @@ const ModelDemo: FC = () => {
       window.onresize = function () {
         camera.aspect = window.innerWidth / window.innerHeight
         camera.updateProjectionMatrix()
-
-        renderer.setSize(window.innerWidth, window.innerHeight)
+        renderer.setSize(size?.width || 500, size?.height || 500)
       }
 
-      // function animate() {
-      //   requestAnimationFrame(animate)
+      animate = function () {
+        requestAnimationFrame(animate)
 
-      //   const delta = clock.getDelta()
+        const delta = clock.getDelta()
 
-      //   mixer.update(delta)
+        mixer.update(delta)
 
-      //   controls.update()
+        controls.update()
 
-      //   stats.update()
+        stats.update()
 
-      //   renderer.render(scene, camera)
-      // }
+        renderer.render(scene, camera)
+      }
     }
-  }, [])
+  }, [size])
 
   return (
-    <div>
+    <div ref={containerRef}>
       <h3> Model Demo</h3>
       <div ref={ref} />
     </div>

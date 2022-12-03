@@ -51,10 +51,15 @@ const WebRtcHooks = (): WebRtcHooksResponse => {
   const initFaceApi = async () => {
     // FIXME: 暂时只在vite开发环境下支持
     await Promise.all([
-      faceApi.nets.tinyFaceDetector.loadFromUri('/models'),
-      faceApi.nets.faceLandmark68Net.loadFromUri('/models'),
-      faceApi.nets.faceRecognitionNet.loadFromUri('/models'),
-      faceApi.nets.faceExpressionNet.loadFromUri('/models')
+      // faceApi.nets.tinyFaceDetector.loadFromUri('/src/sdks/web-trc/models'),
+      // faceApi.nets.faceLandmark68Net.loadFromUri('/src/sdks/web-trc/models'),
+      // faceApi.nets.faceRecognitionNet.loadFromUri('/src/sdks/web-trc/models'),
+      // faceApi.nets.faceExpressionNet.loadFromUri('/src/sdks/web-trc/models')
+
+      faceApi.nets.tinyFaceDetector.loadFromUri('./models'),
+      faceApi.nets.faceLandmark68Net.loadFromUri('./models'),
+      faceApi.nets.faceRecognitionNet.loadFromUri('./models'),
+      faceApi.nets.faceExpressionNet.loadFromUri('./models')
       // faceApi.nets.ssdMobilenetv1.loadFromUri('/models')
     ])
     message.success('face-api init done')
