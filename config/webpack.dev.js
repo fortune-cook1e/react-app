@@ -4,8 +4,6 @@ const { merge } = require('webpack-merge')
 const paths = require('./paths')
 const commonConfig = require('./webpack.common')
 
-const jstsRegex = /\.(js|jsx|ts|tsx)$/
-
 const PORT = 8081
 
 const API_PREFIX = '/api'
@@ -16,12 +14,16 @@ module.exports = merge(commonConfig, {
   devtool: 'cheap-source-map',
   devServer: {
     historyApiFallback: true,
-    static: paths.build,
+    static: paths.public,
     compress: true,
     open: true,
     hot: true,
     port: PORT,
+    devMiddleware: {
+      writeToDisk: true
+    },
     client: {
+      progress: true,
       overlay: {
         errors: false,
         warnings: false

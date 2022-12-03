@@ -55,7 +55,8 @@ const config = smp.wrap({
     path: paths.build,
     publicPath: isDev ? '/' : './',
     filename: isDev ? 'js/[name].js' : 'js/[name].[contenthash].js',
-    chunkFilename: isDev ? 'js/[name].js' : 'js/[name].[contenthash].js'
+    chunkFilename: isDev ? 'js/[name].js' : 'js/[name].[contenthash].js',
+    assetModuleFilename: 'images/[hash][ext][query]'
   },
 
   resolve: {
