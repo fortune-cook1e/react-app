@@ -33,6 +33,10 @@ module.exports = merge(common, {
         {
           from: resolveDir('../public/models'),
           to: paths.build + '/models'
+        },
+        {
+          from: resolveDir('../public/sdks'),
+          to: paths.build + '/sdks'
         }
       ]
     })
