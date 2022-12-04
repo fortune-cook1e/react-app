@@ -23,6 +23,11 @@ export const menu: MenuItem[] = [
         title: '可视化',
         key: 'visual',
         path: '/visual'
+      },
+      {
+        path: '/three',
+        title: 'ThreeJs',
+        key: 'three'
       }
     ]
   },

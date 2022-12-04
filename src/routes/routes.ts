@@ -28,7 +28,7 @@ export const studyRoutes: IRoute[] = [
     key: 'desktop'
   },
   {
-    path: '/rtc',
+    path: '/web-rtc',
     lazyElement: lazy(() => import('@/pages/web-rtc')),
     title: 'webRTC',
     key: 'webRtc'
@@ -75,6 +75,13 @@ export const noLayoutRoutes: IRoute[] = [
     lazyElement: lazy(() => import('@/pages/visual')),
     title: '可视化',
     key: 'visual'
+  },
+  {
+    path: '/three',
+    lazyElement: lazy(() => import('@/pages/three-dimension')),
+    title: 'ThreeJs',
+    key: 'three',
+    icon: ''
   },
   {
     path: '/login',
