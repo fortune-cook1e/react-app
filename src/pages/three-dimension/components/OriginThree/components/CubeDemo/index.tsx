@@ -1,12 +1,16 @@
+import { useSize } from 'ahooks'
 import { useEffect } from 'react'
 import { FC, useRef } from 'react'
 import * as Three from 'three'
 
 const CubeDemo: FC = () => {
   const renderRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const size = useSize(containerRef)
 
   useEffect(() => {
-    if (renderRef.current) {
+    if (renderRef.current && size) {
+      console.log('size..', size)
       const scene = new Three.Scene()
       const camera = new Three.PerspectiveCamera(75, 1, 0.1, 1000)
       const renderer = new Three.WebGLRenderer()
@@ -28,10 +32,10 @@ const CubeDemo: FC = () => {
 
       renderer.render(scene, camera)
     }
-  }, [])
+  }, [size])
 
   return (
-    <div>
+    <div ref={containerRef}>
       <h3>this origin three CubeDemo</h3>
       <div ref={renderRef} />
     </div>

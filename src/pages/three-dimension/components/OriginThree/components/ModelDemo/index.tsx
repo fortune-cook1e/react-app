@@ -28,7 +28,7 @@ const ModelDemo: FC = () => {
       renderer.outputEncoding = THREE.sRGBEncoding
 
       // 设置摄像机
-      const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 100)
+      const camera = new THREE.PerspectiveCamera(40, size.width / size.height, 1, 100)
       camera.position.set(5, 2, 8)
 
       // 重新绘制
@@ -79,7 +79,7 @@ const ModelDemo: FC = () => {
       )
 
       window.onresize = function () {
-        camera.aspect = window.innerWidth / window.innerHeight
+        camera.aspect = size.width / size.height
         camera.updateProjectionMatrix()
         renderer.setSize(size?.width || 500, size?.height || 500)
       }

@@ -2,6 +2,7 @@ import { Row, Col } from 'antd'
 import { FC } from 'react'
 
 import CubeDemo from './components/CubeDemo'
+import LightCubeDemo from './components/LightCubeDemo'
 import LineDemo from './components/LineDemo'
 import ModelDemo from './components/ModelDemo'
 
@@ -13,12 +14,15 @@ const OriginThree: FC = () => {
       <Row>
         {/* <Col span={24}>
           <CubeDemo />
-        </Col>
-        <Col span={24}>
+        </Col> */}
+        {/* <Col span={24}>
           <LineDemo />
         </Col> */}
-        <Col span={24}>
+        {/* <Col span={24}>
           <ModelDemo />
+        </Col> */}
+        <Col span={24}>
+          <LightCubeDemo />
         </Col>
       </Row>
     </div>
