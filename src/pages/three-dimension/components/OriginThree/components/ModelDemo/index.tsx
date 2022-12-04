@@ -53,7 +53,7 @@ const ModelDemo: FC = () => {
 
       //
       const dracoLoader = new DRACOLoader()
-      dracoLoader.setDecoderPath('/sdks/')
+      dracoLoader.setDecoderPath('./sdks/')
 
       // 用于加载glb文件
       const loader = new GLTFLoader()
