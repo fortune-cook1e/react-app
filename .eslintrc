@@ -54,7 +54,7 @@
     "react/jsx-props-no-multi-spaces": 2,
     // FIXBUG: 用于解决使用 @react-three/fiber 带来的eslint提示问题
     "react/no-unknown-property": [
-      2,
+      0,
       { "ignore": ["args", "intensity", "position", "angle", "penumbra"] }
     ],
 
