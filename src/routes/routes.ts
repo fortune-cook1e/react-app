@@ -84,6 +84,12 @@ export const noLayoutRoutes: IRoute[] = [
     icon: ''
   },
   {
+    path: '/g6',
+    lazyElement: lazy(() => import('@/pages/g6')),
+    title: 'g6',
+    key: 'g6'
+  },
+  {
     path: '/login',
     lazyElement: lazy(() => import('@/pages/login')),
     title: '登录',

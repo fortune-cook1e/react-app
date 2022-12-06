@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@antv/g6": "^4.7.16",
     "@babel/runtime": "^7.20.1",
     "@fe-cookie/client-request-crypto": "^1.0.1",
     "@react-three/drei": "^9.46.2",

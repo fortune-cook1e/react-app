@@ -28,6 +28,11 @@ export const menu: MenuItem[] = [
         path: '/three',
         title: 'ThreeJs',
         key: 'three'
+      },
+      {
+        path: '/g6',
+        title: 'g6',
+        key: 'g6'
       }
     ]
   },
