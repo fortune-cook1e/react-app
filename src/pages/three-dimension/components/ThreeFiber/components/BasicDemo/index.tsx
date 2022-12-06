@@ -1,4 +1,12 @@
-import { OrbitControls, PerspectiveCamera, TrackballControls } from '@react-three/drei'
+import {
+  OrbitControls,
+  PerspectiveCamera,
+  TrackballControls,
+  Environment,
+  useDepthBuffer,
+  SpotLight,
+  Plane
+} from '@react-three/drei'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { Button } from 'antd'
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -15,16 +23,48 @@ const IMGS = {
 function MeshCmp() {
   const meshRef = useRef<Mesh>(null)
   const colorMap = useLoader(TextureLoader, IMGS.earth)
+  const depthBuffer = useDepthBuffer({ size: 256 })
 
-  useFrame((state, delta, xrFrame) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += 0.05
-    }
-  })
+  // useFrame((state, delta, xrFrame) => {
+  //   if (meshRef.current) {
+  //     meshRef.current.rotation.x += 0.05
+  //   }
+  // })
+
   return (
     <mesh ref={meshRef}>
-      <sphereGeometry args={[1, 16, 16]} />
-      <meshStandardMaterial map={colorMap} />
+      <SpotLight
+        penumbra={0.5}
+        depthBuffer={depthBuffer}
+        position={[3, 2, 0]}
+        intensity={0.5}
+        angle={0.5}
+        color='#0EEC82'
+        castShadow
+      />
+      <OrbitControls
+        makeDefault
+        autoRotate
+        autoRotateSpeed={0.5}
+        minDistance={2}
+        maxDistance={10}
+      />
+      <PerspectiveCamera
+        near={0.01} //
+        far={50}
+        position={[1, 3, 1]}
+        makeDefault
+        fov={60}
+      />
+      <Environment preset='sunset' />
+      <mesh position-y={0.5} castShadow>
+        <boxGeometry />
+        <meshPhongMaterial />
+      </mesh>
+
+      <Plane receiveShadow rotation-x={-Math.PI / 2} args={[100, 100]}>
+        <meshPhongMaterial />
+      </Plane>
     </mesh>
   )
 }
@@ -38,10 +78,7 @@ const BasicDemo = (): JSX.Element => {
     <section>
       <p>this is basic demo</p>
       <Button onClick={() => setVisible(!visible)}>toggle</Button>
-      <Canvas>
-        <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 0, 10]} />
-        <OrbitControls />
-        <pointLight position={[10, 10, 10]} />
+      <Canvas style={{ width: '100%', height: '600px' }}>
         <MeshCmp />
       </Canvas>
     </section>

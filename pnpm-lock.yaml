@@ -83,6 +83,7 @@ specifiers:
   postcss-preset-env: ^7.7.1
   prettier: ^2.3.0
   query-string: ^7.1.1
+  random-words: ^1.2.0
   react: ^18.2.0
   react-beautiful-dnd: ^13.1.0
   react-color: ^2.19.3
@@ -133,6 +134,7 @@ dependencies:
   localforage: registry.npmmirror.com/localforage/1.10.0
   moment: registry.npmmirror.com/moment/2.29.4
   query-string: registry.npmmirror.com/query-string/7.1.1
+  random-words: 1.2.0
   react: 18.2.0
   react-beautiful-dnd: registry.npmmirror.com/react-beautiful-dnd/13.1.1_biqbaboplfbrettd7655fr4n2y
   react-color: registry.npmmirror.com/react-color/2.19.3_react@18.2.0
@@ -4074,6 +4076,10 @@ packages:
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
+
+  /random-words/1.2.0:
+    resolution: {integrity: sha512-YP2bXrT19pxtBh22DK9CLcWsmBjUBAGzw3JWJycTNbXm1+0aS6PrKuAJ9aLT0GGaPlPp9LExfJIMVkzhrDZE6g==}
+    dev: false
 
   /randombytes/2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}

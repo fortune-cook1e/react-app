@@ -2,10 +2,10 @@ import { Select } from 'antd'
 import { lazy, useMemo, useState, Suspense } from 'react'
 
 const { Option } = Select
-const LIST = ['BasicDemo']
+const LIST = ['BasicDemo', 'PerfectDemo']
 
 const ThreeFiber = (): JSX.Element => {
-  const [cmp, setCmp] = useState<string>(LIST[0])
+  const [cmp, setCmp] = useState<string>(LIST[1])
 
   const CurrentCmp: any = useMemo(() => {
     return lazy(() => import(`./components/${cmp}/index.tsx`))
