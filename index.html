@@ -8,6 +8,10 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      // FIXBUG: 用于解决 yoga-layout-prebuilt 在vite 环境下启用失败bug
+      window._a = undefined
+    </script>
     <script type="module" src="/src/Main.tsx"></script>
   </body>
 </html>

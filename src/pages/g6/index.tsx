@@ -1,7 +1,12 @@
 import G6, { Graph } from '@antv/g6'
+import { Group, Rect, Text, Circle, Image, createNodeFromReact } from '@antv/g6-react-node'
 import { FC, useEffect, useRef, useState } from 'react'
 
+import PersonCard from './components/PersonCard'
 import { data } from './data'
+import { appenAutoShapeListener } from './hooks/useEvent'
+
+G6.registerNode('person-card', createNodeFromReact(PersonCard))
 
 const G6Demo = (): JSX.Element => {
   const g6Ref = useRef<HTMLDivElement>(null)
@@ -25,14 +30,21 @@ const G6Demo = (): JSX.Element => {
           ranksepFunc: () => 1
         },
         defaultNode: {
-          size: [30, 20],
-          type: 'rect',
-          style: {
-            lineWidth: 2,
-            stroke: '#5B8FF9',
-            fill: '#C6E5FF'
+          clipCfg: {
+            show: true,
+            type: 'person-card',
+            r: 44
           }
         },
+        // defaultNode: {
+        //   size: [30, 20],
+        //   type: 'rect',
+        //   style: {
+        //     lineWidth: 2,
+        //     stroke: '#5B8FF9',
+        //     fill: '#C6E5FF'
+        //   }
+        // },
         defaultEdge: {
           size: 1,
           color: '#e2e2e2',
@@ -44,9 +56,15 @@ const G6Demo = (): JSX.Element => {
           }
         }
       })
+      // appenAutoShapeListener(_graph)
       setGraph(_graph)
+      console.log(data)
       _graph && _graph.data(data)
       _graph && _graph.render()
+    }
+
+    return () => {
+      graph && graph.destroy()
     }
   }, [])
 

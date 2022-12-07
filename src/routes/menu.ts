@@ -33,6 +33,11 @@ export const menu: MenuItem[] = [
         path: '/g6',
         title: 'g6',
         key: 'g6'
+      },
+      {
+        path: '/echarts',
+        title: 'echarts',
+        key: 'echarts'
       }
     ]
   },

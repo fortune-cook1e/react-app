@@ -1,72 +1,27 @@
 import randomWords from 'random-words'
 
-export const data = {
-  nodes: [
-    {
-      id: '0',
-      label: '0'
-    },
-    {
-      id: '1',
-      label: '1'
-    },
-    {
-      id: '2',
-      label: '2'
-    },
-    {
-      id: '3',
-      label: '3'
-    },
-    {
-      id: '4',
-      label: '4'
-    },
-    {
-      id: '5',
-      label: '5'
-    },
-    {
-      id: '6',
-      label: '6'
-    },
-    {
-      id: '7',
-      label: '7'
-    },
-    {
-      id: '8',
-      label: '8'
-    },
-    {
-      id: '9',
-      label: '9'
-    },
-    {
-      id: '10',
-      label: '10'
-    },
-    {
-      id: '11',
-      label: '11'
-    },
-    {
-      id: '12',
-      label: '12'
-    },
-    {
-      id: '13',
-      label: '13'
-    },
-    {
-      id: '14',
-      label: '14'
-    },
-    {
-      id: '15',
-      label: '15'
-    }
-  ],
+export interface Personality {
+  name?: string
+  avatar?: string
+  channel?: string
+}
+
+export interface DataNode {
+  id: string
+  label: string
+  meta: Personality
+}
+
+export interface Data {
+  nodes: DataNode[]
+  edges: {
+    target: string
+    source: string
+  }[]
+}
+
+export const data: any = {
+  nodes: [],
   edges: [
     {
       source: '0',
@@ -167,13 +122,17 @@ export const data = {
   ]
 }
 
-const personality = {
+const personality: Personality = {
   name: randomWords(5)[0],
   avatar: 'https://yunke-oss.oss-cn-hangzhou.aliyuncs.com/yued/ai-mp/assets/default_head.png',
   channel: '邀请注册'
 }
 
-data.nodes = data.nodes.map(n => ({
-  ...n,
-  ...personality
+data.nodes = new Array(15).fill(0).map((item, index) => ({
+  id: index.toString(),
+  label: randomWords(5)[0],
+  meta: personality,
+  // type: 'image',
+  img: personality.avatar,
+  type: 'person-card'
 }))

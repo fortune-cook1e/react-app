@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@ant-design/icons': ^4.7.0
   '@antv/g6': ^4.7.16
+  '@antv/g6-react-node': ^1.4.5
   '@babel/core': ^7.14.3
   '@babel/plugin-transform-runtime': ^7.14.3
   '@babel/preset-env': ^7.14.4
@@ -56,6 +57,7 @@ specifiers:
   dat.gui: ^0.7.9
   dotenv: ^16.0.1
   dotenv-webpack: ^8.0.1
+  echarts: ^5.4.0
   eslint: ^7.28.0
   eslint-config-prettier: ^8.3.0
   eslint-plugin-import: ^2.26.0
@@ -120,6 +122,7 @@ specifiers:
 dependencies:
   '@ant-design/icons': registry.npmmirror.com/@ant-design/icons/4.7.0_biqbaboplfbrettd7655fr4n2y
   '@antv/g6': 4.7.16
+  '@antv/g6-react-node': 1.4.5
   '@babel/runtime': 7.20.1
   '@fe-cookie/client-request-crypto': registry.npmmirror.com/@fe-cookie/client-request-crypto/1.0.1
   '@react-three/drei': 9.46.2_xa6xk36nauwxkzngvitxgjpnr4
@@ -130,6 +133,7 @@ dependencies:
   classnames: registry.npmmirror.com/classnames/2.3.2
   core-js: 3.26.1
   dat.gui: 0.7.9
+  echarts: 5.4.0
   face-api.js: registry.npmmirror.com/face-api.js/0.22.2
   framer-motion: registry.npmmirror.com/framer-motion/4.1.17_biqbaboplfbrettd7655fr4n2y
   html-to-image: registry.npmmirror.com/html-to-image/1.10.8
@@ -256,6 +260,10 @@ packages:
       tinycolor2: 1.4.2
     dev: false
 
+  /@antv/algorithm/0.0.6:
+    resolution: {integrity: sha512-g/abjTXHwzebghN8QPuk3z5nM/C9Wf1Toq6iHK6lwZXdUMGHxxhuO5RAkkYcR2Vib550zdQy6PLldmAWhgOjQA==}
+    dev: false
+
   /@antv/algorithm/0.1.25:
     resolution: {integrity: sha512-TGwPyFoAu4+iEJd0y1l0gHdBXCbUj8a4gR7P3GzZRfEfRnWfk+gswApzOSTd7c6HP402JOEF64PAJQKxQgSPSQ==}
     dependencies:
@@ -346,6 +354,21 @@ packages:
       lodash: 4.17.21
     dev: false
 
+  /@antv/g6-core/0.0.7:
+    resolution: {integrity: sha512-6ixXCqxsrKgovdf14KglKT6dQFb4LbzZgQaMj9s5NsfJWgwN9aYWyU2qbsyWgHkp/AOyW+vef+w2Vlk42qXFwg==}
+    dependencies:
+      '@antv/algorithm': 0.0.6
+      '@antv/dom-util': 2.0.4
+      '@antv/event-emitter': 0.1.3
+      '@antv/g-base': 0.5.11
+      '@antv/g-math': 0.1.7
+      '@antv/matrix-util': 3.1.0-beta.3
+      '@antv/path-util': 2.0.15
+      '@antv/scale': 0.3.18
+      '@antv/util': 2.0.17
+      ml-matrix: 6.10.4
+    dev: false
+
   /@antv/g6-core/0.7.16:
     resolution: {integrity: sha512-H4SciZdiT/RZDxvS/M075rodTq9W2nGmyhCZjE9dJc7YIz5jtGSAXJ5lZoDeTlrRg5y4atr7DWLxnAHoAFblfA==}
     dependencies:
@@ -409,6 +432,16 @@ packages:
       '@antv/scale': 0.3.18
       '@antv/util': 2.0.17
       insert-css: 2.0.0
+    dev: false
+
+  /@antv/g6-react-node/1.4.5:
+    resolution: {integrity: sha512-sYIUmYcZdqKhlGhjJAeNEJpnoJ+3zGajZjtatXBiIttsTHxFQVK3730k8048flYEaG1AweZhIydwmkqMlFf4iQ==}
+    dependencies:
+      '@antv/g-base': 0.5.11
+      '@antv/g6-core': 0.0.7
+      '@types/yoga-layout': 1.9.4
+      react: 16.14.0
+      yoga-layout-prebuilt: 1.10.0
     dev: false
 
   /@antv/g6/4.7.16:
@@ -1767,6 +1800,14 @@ packages:
       '@types/yargs-parser': 21.0.0
     dev: true
 
+  /@types/yoga-layout/1.9.2:
+    resolution: {integrity: sha512-S9q47ByT2pPvD65IvrWp7qppVMpk9WGMbVq9wbWZOHg6tnXSD4vyhao6nOSBwwfDdV2p3Kx9evA9vI+XWTfDvw==}
+    dev: false
+
+  /@types/yoga-layout/1.9.4:
+    resolution: {integrity: sha512-RRHc1+8Hc5mf/2lZKnom6kCnqcNS07s8keahniWTOva0KELF6RgDJmaEcvGEKUUJgN4UgessmEsWuidaOycIOw==}
+    dev: false
+
   /@typescript-eslint/scope-manager/5.44.0:
     resolution: {integrity: sha512-2pKml57KusI0LAhgLKae9kwWeITZ7IsZs77YxyNyIVOwQ1kToyXRaJLl+uDEXzMN5hnobKUOo2gKntK9H1YL8g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -2479,6 +2520,13 @@ packages:
 
   /draco3d/1.5.5:
     resolution: {integrity: sha512-JVuNV0EJzD3LBYhGyIXJLeBID/EVtmFO1ZNhAYflTgiMiAJlbhXQmRRda/azjc8MRVMHh0gqGhiqHUo5dIXM8Q==}
+    dev: false
+
+  /echarts/5.4.0:
+    resolution: {integrity: sha512-uPsO9VRUIKAdFOoH3B0aNg7NRVdN7aM39/OjovjO9MwmWsAkfGyeXJhK+dbRi51iDrQWliXV60/XwLA7kg3z0w==}
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.4.0
     dev: false
 
   /electron-to-chromium/1.4.284:
@@ -4219,7 +4267,6 @@ packages:
   /object-assign/4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
-    dev: false
 
   /object-inspect/1.12.2:
     resolution: {integrity: sha512-z+cPxW0QGUp0mcqcsgQyLVRDoXFQbXOwBaqyF7VIgI4TWNQsDHrBpUQslRmIfAoYWdYzs6UlKJtB2XJpTaNSpQ==}
@@ -4589,6 +4636,15 @@ packages:
       debounce: 1.2.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react/16.14.0:
+    resolution: {integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      prop-types: 15.8.1
     dev: false
 
   /react/18.2.0:
@@ -5115,6 +5171,10 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
+  /tslib/2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+    dev: false
+
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
@@ -5376,6 +5436,19 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /yoga-layout-prebuilt/1.10.0:
+    resolution: {integrity: sha512-YnOmtSbv4MTf7RGJMK0FvZ+KD8OEe/J5BNnR0GHhD8J/XcG/Qvxgszm0Un6FTHWW4uHlTgP0IztiXQnGyIR45g==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@types/yoga-layout': 1.9.2
+    dev: false
+
+  /zrender/5.4.0:
+    resolution: {integrity: sha512-rOS09Z2HSVGFs2dn/TuYk5BlCaZcVe8UDLLjj1ySYF828LATKKdxuakSZMvrDz54yiKPDYVfjdKqcX8Jky3BIA==}
+    dependencies:
+      tslib: 2.3.0
+    dev: false
 
   /zstddec/0.0.2:
     resolution: {integrity: sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==}
@@ -9019,7 +9092,7 @@ packages:
     version: 4.1.2
     dependencies:
       pascal-case: registry.npmmirror.com/pascal-case/3.1.2
-      tslib: registry.npmmirror.com/tslib/2.4.0
+      tslib: 2.4.0
     dev: true
 
   registry.npmmirror.com/camelcase-keys/6.2.2:
@@ -10307,7 +10380,7 @@ packages:
     version: 3.0.4
     dependencies:
       no-case: registry.npmmirror.com/no-case/3.0.4
-      tslib: registry.npmmirror.com/tslib/2.4.0
+      tslib: 2.4.0
     dev: true
 
   registry.npmmirror.com/dot-prop/5.3.0:
@@ -11526,7 +11599,7 @@ packages:
     dependencies:
       array-union: registry.npmmirror.com/array-union/1.0.2
       glob: registry.npmmirror.com/glob/7.2.3
-      object-assign: registry.npmmirror.com/object-assign/4.1.1
+      object-assign: 4.1.1
       pify: registry.npmmirror.com/pify/2.3.0
       pinkie-promise: registry.npmmirror.com/pinkie-promise/2.0.1
     dev: true
@@ -12946,7 +13019,7 @@ packages:
     version: 3.0.4
     dependencies:
       lower-case: registry.npmmirror.com/lower-case/2.0.2
-      tslib: registry.npmmirror.com/tslib/2.4.0
+      tslib: 2.4.0
     dev: true
 
   registry.npmmirror.com/node-fetch/2.1.2:
@@ -13249,7 +13322,7 @@ packages:
     version: 3.0.4
     dependencies:
       dot-case: registry.npmmirror.com/dot-case/3.0.4
-      tslib: registry.npmmirror.com/tslib/2.4.0
+      tslib: 2.4.0
     dev: true
 
   registry.npmmirror.com/parent-module/1.0.1:
@@ -13310,7 +13383,7 @@ packages:
     version: 3.1.2
     dependencies:
       no-case: registry.npmmirror.com/no-case/3.0.4
-      tslib: registry.npmmirror.com/tslib/2.4.0
+      tslib: 2.4.0
     dev: true
 
   registry.npmmirror.com/path-exists/4.0.0:
@@ -15699,7 +15772,7 @@ packages:
     name: rxjs
     version: 7.5.7
     dependencies:
-      tslib: registry.npmmirror.com/tslib/2.4.0
+      tslib: 2.4.0
     dev: true
 
   registry.npmmirror.com/safe-buffer/5.1.2:
