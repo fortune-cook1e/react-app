@@ -17,6 +17,8 @@ type EChartsOption = echarts.ComposeOption<
   TitleComponentOption | TooltipComponentOption | LegendComponentOption | GraphSeriesOption
 >
 
+const AVATAR = 'https://yunke-oss.oss-cn-hangzhou.aliyuncs.com/yued/ai-mp/assets/default_head.png'
+
 echarts.use([TitleComponent, TooltipComponent, LegendComponent, GraphChart, CanvasRenderer])
 
 const RelationshipGraph = (): JSX.Element => {
@@ -28,7 +30,9 @@ const RelationshipGraph = (): JSX.Element => {
 
       console.log({ MOCK_DATA })
 
-      MOCK_DATA.nodes.forEach(function (node: any) {})
+      MOCK_DATA.nodes.forEach(function (node: any) {
+        node.symbol = `image://${AVATAR}`
+      })
 
       const option: EChartsOption = {
         // title: {
@@ -37,7 +41,9 @@ const RelationshipGraph = (): JSX.Element => {
         //   top: 'bottom',
         //   left: 'right'
         // },
-        tooltip: {},
+        tooltip: {
+          show: false
+        },
         // legend: [
         //   {
         //     // selectedMode: 'single',
@@ -61,7 +67,7 @@ const RelationshipGraph = (): JSX.Element => {
             },
 
             label: {
-              show: true, // 节点圆盘上的文字
+              show: false, // 节点圆盘上的文字
               fontStyle: 'italic', // 文字风格，normal，italic，oblique 三种可选
               fontSize: 12,
               color: '#000000'

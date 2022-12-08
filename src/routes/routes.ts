@@ -96,6 +96,12 @@ export const noLayoutRoutes: IRoute[] = [
     key: 'echarts'
   },
   {
+    path: '/charts',
+    lazyElement: lazy(() => import('@/pages/charts')),
+    title: '图表',
+    key: 'charts'
+  },
+  {
     path: '/login',
     lazyElement: lazy(() => import('@/pages/login')),
     title: '登录',

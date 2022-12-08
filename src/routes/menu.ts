@@ -38,6 +38,11 @@ export const menu: MenuItem[] = [
         path: '/echarts',
         title: 'echarts',
         key: 'echarts'
+      },
+      {
+        path: '/charts',
+        title: '图表',
+        key: 'charts'
       }
     ]
   },
