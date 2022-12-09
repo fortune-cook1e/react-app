@@ -2,7 +2,7 @@ import { Select } from 'antd'
 import { FC, useMemo, useState, lazy, Suspense } from 'react'
 const { Option } = Select
 
-const LIST = ['Echarts', 'D3']
+const LIST = ['Echarts', 'ReactD3Graph', 'D3ForceGraph']
 
 const Charts = (): JSX.Element => {
   const [cmp, setCmp] = useState<string>(LIST[1])
