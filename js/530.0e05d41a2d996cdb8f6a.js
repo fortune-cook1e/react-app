@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_app=self.webpackChunkreact_app||[]).push([[530],{74530:function(e,s,r){r.r(s);var c=r(50959),a=r(11527);s.default=()=>{const e=(0,c.useRef)(null);return(0,a.jsxs)("div",{children:[(0,a.jsx)("h3",{children:" this is d3 force graph"}),(0,a.jsx)("div",{ref:e})]})}}}]);
