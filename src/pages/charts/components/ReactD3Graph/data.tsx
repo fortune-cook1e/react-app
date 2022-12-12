@@ -27,11 +27,10 @@ export interface Data {
 
 export const PERSON_DATA: any = {
   nodes: [],
-  links: [],
-  focusedNodeId: 'nodeIdToTriggerZoomAnimation'
+  links: []
 }
 
-PERSON_DATA.nodes = new Array(3).fill(0).map((item, index) => ({
+PERSON_DATA.nodes = new Array(100).fill(0).map((item, index) => ({
   id: index.toString(),
   name: randomWords(5)[0],
   channel: randomWords(5)[0],
@@ -41,8 +40,12 @@ PERSON_DATA.nodes = new Array(3).fill(0).map((item, index) => ({
     channel: '邀请注册',
     isRoot: index === 0
   },
+  size: 1900,
+  x: Math.random() * 1000,
+  y: Math.random() * 1000,
+  viewGenerator: (node: DataNode) => <CustomNode node={node} />
 
-  viewGenerator: () => <SimpleNode />
+  // viewGenerator: () => <SimpleNode />
 
   // size: {
   //   width: 1560,
