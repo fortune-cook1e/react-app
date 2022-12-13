@@ -29,8 +29,6 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "@antv/g6": "^4.7.16",
-    "@antv/g6-react-node": "^1.4.5",
     "@babel/runtime": "^7.20.1",
     "@fe-cookie/client-request-crypto": "^1.0.1",
     "@react-three/drei": "^9.46.2",
@@ -43,7 +41,6 @@
     "d3": "^5.5.0",
     "d3-force": "^3.0.0",
     "dat.gui": "^0.7.9",
-    "echarts": "^5.4.0",
     "face-api.js": "^0.22.2",
     "framer-motion": "^4.1.17",
     "html-to-image": "^1.10.6",

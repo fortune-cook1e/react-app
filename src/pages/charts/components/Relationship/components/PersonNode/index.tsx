@@ -1,17 +1,20 @@
-import { Tooltip } from 'antd'
 import classnames from 'classnames'
 import { FC } from 'react'
 
-import { DataNode } from './data'
+import { NodeData } from '../../types'
+
 import styles from './index.module.less'
 
 interface Props {
-  node: DataNode
+  node: NodeData
+  isRoot?: boolean
 }
 
-const CustomNode: FC<Props> = ({ node }) => {
-  const { meta } = node
-  const { avatar, channel, name, isRoot = false } = meta
+const PersonNode = ({ node, isRoot }: Props): JSX.Element => {
+  const {
+    properties: { avatar = '', name = '', count = 0, role = '' },
+    id = ''
+  } = node
 
   return (
     <div className={styles.custom}>
@@ -20,7 +23,15 @@ const CustomNode: FC<Props> = ({ node }) => {
           [styles.relation_root]: isRoot
         })}
       >
-        {isRoot ? '当前客户' : channel}
+        {isRoot ? '当前客户' : role}
+      </div>
+
+      <div
+        className={classnames(styles.count, {
+          [styles.count_root]: isRoot
+        })}
+      >
+        {count}+
       </div>
 
       <div
@@ -41,4 +52,4 @@ const CustomNode: FC<Props> = ({ node }) => {
   )
 }
 
-export default CustomNode
+export default PersonNode

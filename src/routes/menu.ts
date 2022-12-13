@@ -30,16 +30,6 @@ export const menu: MenuItem[] = [
         key: 'three'
       },
       {
-        path: '/g6',
-        title: 'g6',
-        key: 'g6'
-      },
-      {
-        path: '/echarts',
-        title: 'echarts',
-        key: 'echarts'
-      },
-      {
         path: '/charts',
         title: '图表',
         key: 'charts'
