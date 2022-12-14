@@ -5,7 +5,7 @@ import { FC, useEffect, useState } from 'react'
 import { GraphConfiguration, Graph, NodeWithExtraParameters } from 'react-d3-graph'
 
 import PersonNode from './components/PersonNode'
-import { NodeData, RelationLinkData, GraphData } from './types'
+import { NodeData, RelationLinkData, GraphData, RelationEnum } from './types'
 import { mockResponseDataFunc } from './utils'
 
 const Relationship: FC = () => {
@@ -13,7 +13,8 @@ const Relationship: FC = () => {
   const [updateKey, setUpdateKey] = useState(0)
   const [graphData, setGraphData] = useState<GraphData>({
     nodes: [],
-    links: []
+    links: [],
+    focusedNodeId: ''
   })
 
   const config: Partial<GraphConfiguration<NodeData, RelationLinkData>> | undefined = {
@@ -26,11 +27,11 @@ const Relationship: FC = () => {
     // focusZoom: 3,
     maxZoom: 12,
     minZoom: 0.05,
-    nodeHighlightBehavior: false, // 节点hover时的行为是否开启
+    nodeHighlightBehavior: true, // 节点hover时的行为是否开启
     highlightOpacity: 0.2,
     linkHighlightBehavior: true,
     highlightDegree: 5,
-    // initialZoom: 0.8,
+    initialZoom: 0.6,
     d3: {
       alphaTarget: 0.5,
       gravity: -4000
@@ -38,22 +39,24 @@ const Relationship: FC = () => {
     node: {
       renderLabel: false,
       size: 1900
-      // viewGenerator: node => <PersonNode person={node} />
     },
     link: {
-      renderLabel: false,
+      renderLabel: true,
+      labelProperty: function (node) {
+        return node.text
+      },
       color: '#5C8EFA',
-      fontColor: 'black',
-      fontSize: 8,
+      fontColor: '#5081FD',
+      fontSize: 20,
       fontWeight: 'normal',
       highlightColor: 'rgba(92, 142, 250, 1)',
-      highlightFontSize: 8,
+      highlightFontSize: 20,
       highlightFontWeight: 'normal',
       mouseCursor: 'pointer',
       opacity: 1,
       semanticStrokeWidth: true,
       strokeWidth: 2,
-      type: 'CURVE_SMOOTH'
+      type: 'STRAIGHT'
     }
   }
 
@@ -68,8 +71,10 @@ const Relationship: FC = () => {
         links: result.relationships.map(r => ({
           ...r,
           source: r.startNode,
-          target: r.endNode
-        }))
+          target: r.endNode,
+          strokeDasharray: r.type === RelationEnum.Role ? 8 : 0
+        })),
+        focusedNodeId: result.nodes[0].id
       })
     }
   })

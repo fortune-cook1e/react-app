@@ -15,62 +15,28 @@ interface TreeNode extends NodeData {
 }
 
 const MAX_LEVEL = 2
-const MAX_CHILDREN_LENGTH = 4
+const MAX_CHILDREN_LENGTH = 2
 
-/**
- * @description  生成树结构数据
- * @date 2022-12-13 16:33:02
- */
-export const generateTreeData = (
-  isRoot?: boolean,
-  level?: number,
+// 生成树数据
+export const generateTree = (
+  _level: number = MAX_LEVEL,
   prevId?: string,
-  tns?: TreeNode
+  _parent?: TreeNode
 ): TreeNode => {
-  // const _tns = tns || generateTreeNode()
-  // const _level = level || 0
+  const parent = _parent || generateTreeNode(prevId)
+  const children: TreeNode[] = []
+  if (_level === 0) return parent
 
-  // const children: TreeNode[] = []
-  // for (let i = 0; i < MAX_CHILDREN_LENGTH; i++) {
-  //   const item = generateTreeNode(prevId)
-  //   _tns.children?.push(item)
-  //   children.push(item)
-  // }
-
-  // if (_level < 0) return _tns
-  // children.forEach((key, index) => {
-  //   if (index === MAX_CHILDREN_LENGTH) return
-  //   // _tns[index].children = []
-  //   return generateTreeData(level, key, tns[index].children)
-  // })
-  const originLevel = level ?? MAX_LEVEL
-  const _level = originLevel - 1
-
-  const rootNode: TreeNode = generateTreeNode()
-
-  // 达到指定层数则不再增加数据
-  if (_level < 0) {
-    return rootNode
+  for (let i = 0; i < MAX_CHILDREN_LENGTH; i++) {
+    const node = generateTreeNode(parent.id)
+    children.push(node)
   }
-
-  if (isRoot) {
-    const rootNode: TreeNode = generateTreeNode()
-    for (let index = 0; index < MAX_CHILDREN_LENGTH; index++) {
-      const childNode = generateTreeNode(rootNode.id)
-      // 将父节点的id 存入子节点的 prevId中
-      rootNode?.children?.push(childNode)
-      generateTreeData(false, _level, rootNode.id, childNode)
-    }
-    return rootNode
-  } else {
-    for (let index = 0; index < MAX_CHILDREN_LENGTH; index++) {
-      const childNode = generateTreeNode(prevId)
-      generateTreeData(false, _level, childNode.id, childNode)
-      tns?.children?.push(childNode)
-    }
-  }
-
-  return rootNode
+  parent.children = children
+  const level = _level - 1
+  children.forEach((node, index) => {
+    return generateTree(level, node.id, node)
+  })
+  return parent
 }
 
 /**
@@ -140,10 +106,9 @@ export const treeToResponseData = (treeData: TreeNode): ResponseData => {
 
 export const mockResponseDataFunc = (): Promise<ResponseData> => {
   return new Promise((resolve, reject) => {
-    const treeData = generateTreeData(true)
+    const treeData = generateTree()
 
     const responseData = treeToResponseData(treeData)
-
     setTimeout(() => {
       resolve(responseData)
     }, 4)

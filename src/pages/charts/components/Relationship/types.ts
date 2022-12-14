@@ -31,4 +31,5 @@ export interface RelationLinkData extends RelationOriginData {
 export interface GraphData {
   nodes: NodeData[]
   links: RelationLinkData[]
+  focusedNodeId: string
 }
