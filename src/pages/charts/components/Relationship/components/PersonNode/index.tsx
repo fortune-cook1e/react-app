@@ -1,5 +1,6 @@
+import { useHover } from 'ahooks'
 import classnames from 'classnames'
-import { FC } from 'react'
+import { useRef } from 'react'
 
 import { NodeData } from '../../types'
 
@@ -15,6 +16,9 @@ const PersonNode = ({ node, isRoot }: Props): JSX.Element => {
     properties: { avatar = '', name = '', count = 0, role = '' },
     id = ''
   } = node
+
+  const useImgRef = useRef<HTMLDivElement>(null)
+  const isHovering = useHover(useImgRef)
 
   return (
     <div className={styles.custom}>
@@ -35,8 +39,10 @@ const PersonNode = ({ node, isRoot }: Props): JSX.Element => {
       </div>
 
       <div
+        ref={useImgRef}
         className={classnames(styles.avatar, {
-          [styles.avatar_root]: isRoot
+          [styles.avatar_root]: isRoot,
+          [styles.avatar_hovering]: isHovering
         })}
       >
         <img src={avatar} alt='avatar' />

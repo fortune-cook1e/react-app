@@ -15,7 +15,7 @@ interface TreeNode extends NodeData {
 }
 
 const MAX_LEVEL = 2
-const MAX_CHILDREN_LENGTH = 2
+const MAX_CHILDREN_LENGTH = 3
 
 // 生成树数据
 export const generateTree = (
@@ -109,6 +109,8 @@ export const mockResponseDataFunc = (): Promise<ResponseData> => {
     const treeData = generateTree()
 
     const responseData = treeToResponseData(treeData)
+
+    console.log({ treeData, responseData })
     setTimeout(() => {
       resolve(responseData)
     }, 4)

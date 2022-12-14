@@ -1,3 +1,7 @@
+/* prettier-ignore */
+@root-color:rgb(255 190 24 / 100%);
+@node-color: #5c8efa;
+
 .custom {
   display: flex;
   position: relative;
@@ -8,13 +12,14 @@
   .count {
     position: absolute;
     top: 15px;
+    z-index: 4;
     padding: 2px 4px;
     border-radius: 4px;
-    background: #5c8efa;
+    background: @node-color;
     text-align: center;
     color: #fff;
     &_root {
-      background-color: rgb(255 190 24 / 100%);
+      background-color: @root-color;
     }
   }
   .relation {
@@ -22,24 +27,32 @@
   }
 
   .count {
-    right: 35px;
+    right: 10px;
   }
 
   .avatar {
     display: flex;
+    position: relative;
+    z-index: 3;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     width: 92px;
     height: 92px;
     &_root {
-      background-color: rgb(255 190 24 / 100%);
+      background-color: @root-color;
     }
     > img {
       display: block;
       border-radius: 50%;
       width: 88px;
       height: 88px;
+    }
+    &_hovering {
+      transform: scale(1.2);
+      > img {
+        transform: scale(1.2);
+      }
     }
   }
 
@@ -52,6 +65,11 @@
     box-shadow: 0 2px 8px 0 #fff1da;
     line-height: 26px;
     text-align: center;
+    font-size: 16px;
+    color: @node-color;
+    &_root {
+      color: @root-color;
+    }
   }
 }
 

@@ -2,10 +2,10 @@ import { Select } from 'antd'
 import { FC, useMemo, useState, lazy, Suspense } from 'react'
 const { Option } = Select
 
-const LIST = ['Relationship']
+const LIST = ['Relationship', 'OriginD3']
 
 const Charts = (): JSX.Element => {
-  const [cmp, setCmp] = useState<string>(LIST[0])
+  const [cmp, setCmp] = useState<string>(LIST[1])
 
   const CurrentCmp: any = useMemo(() => {
     if (!cmp) return null

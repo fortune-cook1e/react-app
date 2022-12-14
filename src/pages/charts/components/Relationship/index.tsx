@@ -2,12 +2,13 @@ import { useRequest, useUpdate } from 'ahooks'
 import { Button, Spin } from 'antd'
 import randomWords from 'random-words'
 import { FC, useEffect, useState } from 'react'
-import { GraphConfiguration, Graph, NodeWithExtraParameters } from 'react-d3-graph'
+// import { GraphConfiguration, Graph, NodeWithExtraParameters } from 'react-d3-graph'
 
 import PersonNode from './components/PersonNode'
 import { NodeData, RelationLinkData, GraphData, RelationEnum } from './types'
 import { mockResponseDataFunc } from './utils'
 
+// react-d3-graph 需要d3 版本 ^5.5
 const Relationship: FC = () => {
   const update = useUpdate()
   const [updateKey, setUpdateKey] = useState(0)
@@ -17,18 +18,19 @@ const Relationship: FC = () => {
     focusedNodeId: ''
   })
 
-  const config: Partial<GraphConfiguration<NodeData, RelationLinkData>> | undefined = {
+  // Partial<GraphConfiguration<NodeData, RelationLinkData>> | undefined
+  const config: any = {
     width: 1400,
     height: 800,
     automaticRearrangeAfterDropNode: true, // 拖拽节点时 其他节点跟着移动
     staticGraph: false, // 是否为静态节点，如果是静态节点 node中需要有x y坐标
-    collapsible: false, // 点击是否可以折叠节点
+    collapsible: true, // 点击是否可以折叠节点
     directed: true, // 是否为有向图
     // focusZoom: 3,
     maxZoom: 12,
     minZoom: 0.05,
     nodeHighlightBehavior: true, // 节点hover时的行为是否开启
-    highlightOpacity: 0.2,
+    highlightOpacity: 0.1,
     linkHighlightBehavior: true,
     highlightDegree: 5,
     initialZoom: 0.6,
@@ -38,7 +40,10 @@ const Relationship: FC = () => {
     },
     node: {
       renderLabel: false,
-      size: 1900
+      size: {
+        width: 1360,
+        height: 1220
+      }
     },
     link: {
       renderLabel: true,
@@ -88,7 +93,7 @@ const Relationship: FC = () => {
         </Button>
       </div>
       <Spin spinning={loading}>
-        <Graph id='graph-id' data={graphData} config={config} />
+        {/* <Graph id='graph-id' data={graphData} config={config} /> */}
       </Spin>
     </div>
   )
