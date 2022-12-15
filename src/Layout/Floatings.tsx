@@ -30,25 +30,6 @@ const Floatings: FC<Props> = ({ visible, onClose }) => {
       style={{
         zIndex: 999
       }}
-      // handler={
-      //   <div className={styles.floating} onClick={() => setVisible(!visible)}>
-      //     {visible ? (
-      //       <CloseOutlined
-      //         style={{
-      //           color: '#fff',
-      //           fontSize: 20
-      //         }}
-      //       />
-      //     ) : (
-      //       <SettingOutlined
-      //         style={{
-      //           color: '#fff',
-      //           fontSize: 20
-      //         }}
-      //       />
-      //     )}
-      //   </div>
-      // }
     >
       <div className={styles.floating__item}>
         <h3>主题色</h3>
