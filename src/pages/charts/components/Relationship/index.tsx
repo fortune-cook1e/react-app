@@ -1,16 +1,16 @@
-import { useRequest, useUpdate } from 'ahooks'
+import { GraphConfiguration, Graph, NodeWithExtraParameters } from '@yunke/react-d3-graph'
+import { useRequest } from 'ahooks'
 import { Button, Spin } from 'antd'
 import randomWords from 'random-words'
-import { FC, useEffect, useState } from 'react'
-// import { GraphConfiguration, Graph, NodeWithExtraParameters } from 'react-d3-graph'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
 
 import PersonNode from './components/PersonNode'
-import { NodeData, RelationLinkData, GraphData, RelationEnum } from './types'
+import baseGraphConfig from './graphConfig'
+import { RelationshipNodeData, RelationLinkData, GraphData, RelationEnum } from './types'
 import { mockResponseDataFunc } from './utils'
 
 // react-d3-graph 需要d3 版本 ^5.5
 const Relationship: FC = () => {
-  const update = useUpdate()
   const [updateKey, setUpdateKey] = useState(0)
   const [graphData, setGraphData] = useState<GraphData>({
     nodes: [],
@@ -18,59 +18,32 @@ const Relationship: FC = () => {
     focusedNodeId: ''
   })
 
-  // Partial<GraphConfiguration<NodeData, RelationLinkData>> | undefined
-  const config: any = {
-    width: 1400,
-    height: 800,
-    automaticRearrangeAfterDropNode: true, // 拖拽节点时 其他节点跟着移动
-    staticGraph: false, // 是否为静态节点，如果是静态节点 node中需要有x y坐标
-    collapsible: true, // 点击是否可以折叠节点
-    directed: true, // 是否为有向图
-    // focusZoom: 3,
-    maxZoom: 12,
-    minZoom: 0.05,
-    nodeHighlightBehavior: true, // 节点hover时的行为是否开启
-    highlightOpacity: 0.1,
-    linkHighlightBehavior: true,
-    highlightDegree: 5,
-    initialZoom: 0.6,
-    d3: {
-      alphaTarget: 0.5,
-      gravity: -4000
-    },
-    node: {
-      renderLabel: false,
-      size: {
-        width: 1360,
-        height: 1220
-      }
-    },
-    link: {
-      renderLabel: true,
-      labelProperty: function (node) {
-        return node.text
-      },
-      color: '#5C8EFA',
-      fontColor: '#5081FD',
-      fontSize: 20,
-      fontWeight: 'normal',
-      highlightColor: 'rgba(92, 142, 250, 1)',
-      highlightFontSize: 20,
-      highlightFontWeight: 'normal',
-      mouseCursor: 'pointer',
-      opacity: 1,
-      semanticStrokeWidth: true,
-      strokeWidth: 2,
-      type: 'STRAIGHT'
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setUpdateKey(k => ++k)
+  //   }, 40)
+  // }, [])
+
+  const config = useMemo(() => {
+    if (!containerRef.current) return
+    const { width, height } = containerRef.current.getBoundingClientRect()
+    return {
+      ...baseGraphConfig,
+      width,
+      height
     }
-  }
+  }, [graphData])
 
   const { loading } = useRequest(() => mockResponseDataFunc(), {
     onSuccess(result) {
       if (!result) return
       setGraphData({
         nodes: result.nodes.map((n, index) => ({
-          viewGenerator: (node: any) => <PersonNode node={node as NodeData} isRoot={index === 0} />,
+          viewGenerator: (node: any) => (
+            <PersonNode node={node as RelationshipNodeData} isRoot={index === 0} />
+          ),
           ...n
         })),
         links: result.relationships.map(r => ({
@@ -81,6 +54,15 @@ const Relationship: FC = () => {
         })),
         focusedNodeId: result.nodes[0].id
       })
+
+      // Todo: 这一句很重要，需要让配置重新生效
+      setTimeout(() => {
+        setUpdateKey(k => ++k)
+        setGraphData(g => ({
+          ...g,
+          focusedNodeId: g.focusedNodeId
+        }))
+      }, 400)
     }
   })
 
@@ -92,9 +74,11 @@ const Relationship: FC = () => {
           refresh
         </Button>
       </div>
-      <Spin spinning={loading}>
-        {/* <Graph id='graph-id' data={graphData} config={config} /> */}
-      </Spin>
+      <div style={{ width: '100%', height: '100%' }} ref={containerRef}>
+        <Spin spinning={loading}>
+          <Graph id='graph-id' data={graphData} config={config} />
+        </Spin>
+      </div>
     </div>
   )
 }

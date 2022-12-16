@@ -5,7 +5,7 @@ const { Option } = Select
 const LIST = ['Relationship', 'OriginD3']
 
 const Charts = (): JSX.Element => {
-  const [cmp, setCmp] = useState<string>(LIST[1])
+  const [cmp, setCmp] = useState<string>(LIST[0])
 
   const CurrentCmp: any = useMemo(() => {
     if (!cmp) return null

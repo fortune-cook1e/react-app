@@ -1,6 +1,6 @@
 // import { NodeLevelNodeConfiguration, LinkLevelLinkConfiguration } from 'react-d3-graph'
 
-export interface NodeData extends Partial<any> {
+export interface RelationshipNodeData extends Partial<any> {
   id: string
   properties: {
     avatar: string
@@ -29,7 +29,7 @@ export interface RelationLinkData extends RelationOriginData {
 }
 
 export interface GraphData {
-  nodes: NodeData[]
+  nodes: RelationshipNodeData[]
   links: RelationLinkData[]
   focusedNodeId?: string
 }

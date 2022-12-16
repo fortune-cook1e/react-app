@@ -1,21 +1,21 @@
 import randomWords from 'random-words'
 
-import { NodeData, RelationEnum, RelationOriginData } from './types'
+import { RelationshipNodeData, RelationEnum, RelationOriginData } from './types'
 
 import { randomString } from '@/utils'
 
 interface ResponseData {
-  nodes: NodeData[]
+  nodes: RelationshipNodeData[]
   relationships: RelationOriginData[]
 }
 
-interface TreeNode extends NodeData {
+interface TreeNode extends RelationshipNodeData {
   prevId: string
   children?: TreeNode[]
 }
 
 const MAX_LEVEL = 2
-const MAX_CHILDREN_LENGTH = 3
+const MAX_CHILDREN_LENGTH = 2
 
 // 生成树数据
 export const generateTree = (
@@ -43,11 +43,14 @@ export const generateTree = (
  * @description 根据树结构数据生成 nodes 数据
  * @date 2022-12-13 17:04:50
  */
-export const generateNodesByTree = (treeData: TreeNode, tns?: NodeData[]): NodeData[] => {
-  const _tns: NodeData[] = tns || []
+export const generateNodesByTree = (
+  treeData: TreeNode,
+  tns?: RelationshipNodeData[]
+): RelationshipNodeData[] => {
+  const _tns: RelationshipNodeData[] = tns || []
   const { id, properties } = treeData
 
-  const node: NodeData = {
+  const node: RelationshipNodeData = {
     id,
     properties
   }
@@ -93,7 +96,7 @@ export const generateRelationshipsByTree = (
  * @return {*}
  */
 export const treeToResponseData = (treeData: TreeNode): ResponseData => {
-  const _nodes: NodeData[] = generateNodesByTree(treeData)
+  const _nodes: RelationshipNodeData[] = generateNodesByTree(treeData)
   const _relationships: RelationOriginData[] = generateRelationshipsByTree(treeData)
 
   return {
@@ -110,10 +113,9 @@ export const mockResponseDataFunc = (): Promise<ResponseData> => {
 
     const responseData = treeToResponseData(treeData)
 
-    console.log({ treeData, responseData })
     setTimeout(() => {
       resolve(responseData)
-    }, 4)
+    }, 1000)
   })
 }
 
@@ -131,7 +133,7 @@ export const generateTreeNode = (prevId = ''): TreeNode => {
   }
 }
 
-export const generateNodeData = (): NodeData => {
+export const generateNodeData = (): RelationshipNodeData => {
   return {
     id: randomString(),
     properties: {
