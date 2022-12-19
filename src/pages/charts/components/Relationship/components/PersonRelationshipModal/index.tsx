@@ -3,6 +3,8 @@ import { Modal, Table } from 'antd'
 import { ColumnsType } from 'antd/lib/table'
 import { FC, useEffect, useState } from 'react'
 
+import styles from './index.module.less'
+
 import { randomString } from '@/utils'
 
 interface Props {
@@ -81,7 +83,10 @@ const PersonRelationshipModal: FC<Props> = ({ cstId, visible, onCancel }) => {
   const columns: ColumnsType<RelationData> = [
     {
       title: '姓名',
-      dataIndex: 'name'
+      dataIndex: 'name',
+      render(val) {
+        return <span className={styles.name}>{val}</span>
+      }
     },
     {
       title: '角色',
@@ -94,10 +99,17 @@ const PersonRelationshipModal: FC<Props> = ({ cstId, visible, onCancel }) => {
   ]
 
   return (
-    <Modal open={visible} onCancel={onCancel} footer={null} mask={false} closable={false}>
-      <section>
-        <h3>
-          更多关系<span>(128)</span>
+    <Modal
+      open={visible}
+      width={658}
+      onCancel={onCancel}
+      footer={null}
+      mask={false}
+      closable={false}
+    >
+      <section className={styles.modal}>
+        <h3 className={styles.title}>
+          更多关系<span className={styles.total}>(128)</span>
         </h3>
 
         <Table
@@ -110,6 +122,7 @@ const PersonRelationshipModal: FC<Props> = ({ cstId, visible, onCancel }) => {
             current: pager.page,
             pageSize: pager.page_size,
             total: total,
+            simple: true,
             onChange: (page: number, pageSize: number) => {
               setPager({
                 page,
