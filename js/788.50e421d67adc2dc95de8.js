@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_app=self.webpackChunkreact_app||[]).push([[788],{89788:function(e,a,c){c.r(a);var r=c(11527);a.default=()=>(0,r.jsx)("div",{children:(0,r.jsx)("h3",{children:"Origin D3"})})}}]);
