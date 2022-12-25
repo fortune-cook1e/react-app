@@ -12,6 +12,7 @@ declare module '*.jpg'
 declare module '*.svg'
 
 declare module '@yunke/react-d3-graph'
+declare module 'react-d3-force-graph'
 
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string
