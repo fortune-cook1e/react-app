@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_app=self.webpackChunkreact_app||[]).push([[273],{57273:function(e,t,a){a.r(t);var n=a(11527);t.default=()=>(0,n.jsx)("div",{children:"this is Singleton Pattern"})}}]);
