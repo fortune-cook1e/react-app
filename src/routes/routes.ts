@@ -38,6 +38,12 @@ export const studyRoutes: IRoute[] = [
     lazyElement: lazy(() => import('@/pages/unit-test')),
     title: '单元测试',
     key: 'unitTest'
+  },
+  {
+    path: '/patters',
+    lazyElement: lazy(() => import('@/pages/patterns')),
+    title: 'patterns',
+    key: 'patterns'
   }
 ]
 
