@@ -196,7 +196,7 @@
     ],
     "no-useless-call": 2, // 禁止不必要的 .call() 和 .apply()
     "no-useless-computed-key": 2, // 禁止在对象中使用不必要的计算属性
-    "no-useless-constructor": 2, // 禁用不必要的构造函数
+    // "no-useless-constructor": 0, // 禁用不必要的构造函数
     "no-await-in-loop": 2, // 禁止在循环中出现 await
     "no-whitespace-before-property": 2, // 禁止属性前有空白
     "one-var": [
