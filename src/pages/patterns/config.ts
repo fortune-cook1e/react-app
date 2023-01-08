@@ -10,5 +10,9 @@ export const PATTERN_LIST = [
   {
     label: 'ContainerPresentational',
     value: 'ContainerPresentational'
+  },
+  {
+    label: 'Observer',
+    value: 'Observer'
   }
 ]
