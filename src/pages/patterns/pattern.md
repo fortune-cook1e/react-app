@@ -66,3 +66,27 @@ Descriptions:
 Advantages:
 1. when you have a large number of components, it's good and easy to manage communications between each component
 
+
+### HOC(nice to have)
+
+Descriptions:
+1. Pass reusable logic down as props to components throughout your application
+2. A Higher Order Component (HOC) is a component that receives another component.
+3. Apollo Client  
+
+Advantages:
+1. use the same logic in multiple components that can include applying a certain styling to components, requiring authorization, or adding a global state.
+
+
+Best Practice for HOC:
+1. The same, uncustomized behavior needs to be used by many components throughout the application.
+2. The component can work standalone, without the added custom logic.
+
+Best use-cases for Hooks:
+1. The behavior has to be customized for each component that uses it.
+2. The behavior is not spread throughout the application, only one or a few components use the behavior.
+3. The behavior adds many properties to the component
+
+
+
+

@@ -14,5 +14,9 @@ export const PATTERN_LIST = [
   {
     label: 'Observer',
     value: 'Observer'
+  },
+  {
+    label: 'HOC',
+    value: 'HOC'
   }
 ]

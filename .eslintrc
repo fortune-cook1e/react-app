@@ -37,6 +37,7 @@
 
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": 0,
+    "react/display-name": 0,
     "react/prop-types": "off",
     "react/jsx-indent": [0, 2],
     "react/jsx-indent-props": "off",
