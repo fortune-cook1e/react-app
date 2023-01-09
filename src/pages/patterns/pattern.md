@@ -49,3 +49,20 @@ Descriptions:
 5. notify(): a method to notify all observers whenever a specific event occurs
 6. A popular library that uses the observable pattern is RxJS.
 
+### Mixin Pattern
+
+Descriptions:
+1. Add functionality to objects or classes without inheritance
+
+Disadvantages:
+1. lead to prototype pollution and a level of uncertainty regarding the origin of functions
+
+
+### Mediator/Middleware Pattern(nice to have)
+
+Descriptions:
+1. Use a central mediator object to handle communication between components(Middleware)
+
+Advantages:
+1. when you have a large number of components, it's good and easy to manage communications between each component
+
