@@ -1,0 +1,43 @@
+.image-item {
+  position: relative;
+  width: 300px;
+  img {
+    margin-bottom: 20px;
+    border-radius: 15px;
+    width: 300px;
+  }
+}
+
+.flyout {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.flyout-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.flyout-list {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  padding: 0;
+  width: 150px;
+  background-color: #eee;
+  box-shadow: 3px 3px 4px #141414;
+}
+
+.flyout-item {
+  list-style: none;
+  padding: 1rem;
+  cursor: pointer;
+  transition: 0.3s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

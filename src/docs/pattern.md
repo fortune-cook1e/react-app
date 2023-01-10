@@ -119,3 +119,32 @@ Pros:
 
 Disadvantages:
 1. ES6 Arrow Functions is more efficient
+
+
+### Compound Pattern
+
+Descriptions:
+1. Create multiple components that work together to perform a single task
+
+Pros:
+1. Compound components manage their own internal state, which they share among the several child components
+
+Cons:
+1. When using the React.Children.map to provide the values, the component nesting is limited. Only direct children of the parent component will have access to the open and toggle props, meaning we can't wrap any of these components in another component.
+
+```javascript
+export default function FlyoutMenu() {
+  return (
+    <FlyOut>
+      {/* This breaks */}
+      <div>
+        <FlyOut.Toggle />
+        <FlyOut.List>
+          <FlyOut.Item>Edit</FlyOut.Item>
+          <FlyOut.Item>Delete</FlyOut.Item>
+        </FlyOut.List>
+      </div>
+    </FlyOut>
+  );
+}
+```

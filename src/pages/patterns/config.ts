@@ -22,5 +22,9 @@ export const PATTERN_LIST = [
   {
     label: 'RenderProps',
     value: 'RenderProps'
+  },
+  {
+    label: 'Compound',
+    value: 'Compound'
   }
 ]
