@@ -18,5 +18,9 @@ export const PATTERN_LIST = [
   {
     label: 'HOC',
     value: 'HOC'
+  },
+  {
+    label: 'RenderProps',
+    value: 'RenderProps'
   }
 ]

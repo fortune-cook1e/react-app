@@ -81,6 +81,7 @@ Advantages:
 Best Practice for HOC:
 1. The same, uncustomized behavior needs to be used by many components throughout the application.
 2. The component can work standalone, without the added custom logic.
+3. AuthoComponent
 
 Best use-cases for Hooks:
 1. The behavior has to be customized for each component that uses it.
@@ -88,5 +89,33 @@ Best use-cases for Hooks:
 3. The behavior adds many properties to the component
 
 
+### Rendering Pattern
+
+Descriptions:
+1. A render prop is a prop on a component, which value is a function that returns a JSX element.
+
+Advantages:
+1. Sharing logic and data among several components
+
+Disadvantages:
+1. replaced by hooks
+
+### Flyweight Pattern
+
+Descriptions:
+1. Reuse existing instances when working with identical objects
+
+Advantages:
+1. conserve memory
 
 
+### Factory Pattern
+
+Descriptions:
+1. Use a factory function in order to create objects
+
+Pros:
+1. useful when to create multiple smaller objects that share the same properties
+
+Disadvantages:
+1. ES6 Arrow Functions is more efficient
