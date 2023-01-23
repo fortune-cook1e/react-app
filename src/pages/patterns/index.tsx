@@ -1,9 +1,9 @@
 import { Select } from 'antd'
-import { FC, lazy, useMemo, useState, Suspense } from 'react'
+import { lazy, useMemo, useState, Suspense } from 'react'
 
 import { PATTERN_LIST } from './config'
 
-const Patterns: FC = () => {
+const Patterns = (): JSX.Element => {
   const [pattern, SetPattern] = useState<string>(PATTERN_LIST[0].value)
 
   const CurrentRenderPatternCmp: any = useMemo(() => {

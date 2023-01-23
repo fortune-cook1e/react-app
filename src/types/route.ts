@@ -11,7 +11,6 @@ export type IRoute = RouteObject & {
   title: string
   key: string
   children?: IRoute[]
-  icon?: string
   index?: boolean
   meta?: {
     menu: boolean
@@ -21,7 +20,7 @@ export type IRoute = RouteObject & {
 
 export interface MenuItem {
   title: string
-  icon: string
+  icon?: string
   path?: string
   key: string
   children?: ChildMenuItem[]

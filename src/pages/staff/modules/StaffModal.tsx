@@ -1,7 +1,6 @@
 import { useRequest } from 'ahooks'
 import { Modal, Form, Input, Select, DatePicker, Spin } from 'antd'
-import moment, { Moment } from 'moment'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { updateStaff, createStaff, fetchStaffInfo } from '@/apis/staff'
 import { GENDER_OPTIONS } from '@/constants'
@@ -25,7 +24,7 @@ interface StaffForm {
   gender: Gender
   occupation: string
   department: string
-  time: Moment[]
+  time: any
   company: string
 }
 
@@ -47,7 +46,7 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
           gender,
           company,
           department,
-          time: [moment(entryTime), moment(resignationTime)],
+          // time: [moment(entryTime), moment(resignationTime)],
           occupation
         })
       }

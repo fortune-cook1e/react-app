@@ -32,6 +32,11 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [postcssImport, postcssPresetEnv]
+    },
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true
+      }
     }
   },
   resolve: {

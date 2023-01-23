@@ -59,7 +59,7 @@ const Tools = (): JSX.Element => {
         onClick={() => setThemeSettingVis(true)}
         style={{ color: '#fff', fontSize: '20px', marginRight: '10px' }}
       />
-      <Dropdown overlay={menu}>
+      <Dropdown menu={menu}>
         <div className={styles.tools__menu}>
           <Space size={8}>
             <Logo />

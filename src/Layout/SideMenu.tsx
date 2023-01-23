@@ -1,6 +1,6 @@
 import { MenuUnfoldOutlined, MenuFoldOutlined, DesktopOutlined } from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './index.module.less'
@@ -10,7 +10,9 @@ import { menu } from '@/routes/menu'
 import { MenuItem, ChildMenuItem } from '@/types'
 import { getItemInChildrenMap } from '@/utils'
 
-const { SubMenu, Item } = Menu
+import type { MenuProps } from 'antd'
+type AntMenuItem = Required<MenuProps>['items'][number]
+
 const { Sider } = Layout
 
 interface MenuKeys {
@@ -19,19 +21,19 @@ interface MenuKeys {
 }
 
 const SideMenu = (): JSX.Element => {
-  const { location } = useRouter()
+  const {
+    location: { pathname }
+  } = useRouter()
 
   const [menuKeys] = useState<MenuKeys>(() => {
-    const { pathname } = location
-
     const [parentItem, childItem] = getItemInChildrenMap<MenuItem | ChildMenuItem>(
       menu,
-      item => item?.path === pathname
+      item => item?.path === pathname || item.key === pathname
     ).reverse()
 
     return {
-      selected: childItem?.key ? [childItem.key] : ['dashboard'],
-      open: []
+      selected: childItem?.path ? [childItem.path] : ['/dashboard'],
+      open: [parentItem.path || parentItem.key]
     }
   })
 
@@ -41,43 +43,21 @@ const SideMenu = (): JSX.Element => {
     setOpen(!open)
   }
 
-  const renderMenuWithChildren = (menu: ChildMenuItem) => {
-    const { title, path, children, key } = menu
-    if (!children || !children.length) {
-      return (
-        <Item key={key}>
-          <Link to={path}>{title}</Link>
-        </Item>
-      )
-    }
-    return (
-      <SubMenu key={key} title={title} icon={<DesktopOutlined />}>
-        {children.map(c => {
-          return renderMenuWithChildren(c)
-        })}
-      </SubMenu>
-    )
-  }
-
-  const renderMenuWithoutChildren = (menu: MenuItem) => {
-    return (
-      <Item key={menu.key} icon={<DesktopOutlined />}>
-        <Link to={menu.path as string}>{menu.title}</Link>
-      </Item>
-    )
-  }
-
-  const renderMenu = (menu: MenuItem[]) => {
+  const getMenuItems = (menu: MenuItem[]): AntMenuItem[] => {
+    if (!menu) return []
     return menu.map(m => {
-      const { children = [], title, key } = m
-      if (!children || !children.length) return renderMenuWithoutChildren(m)
-      return (
-        <SubMenu key={key} title={title} icon={<DesktopOutlined />}>
-          {children.map(renderMenuWithChildren)}
-        </SubMenu>
-      )
+      const { title, path = '', key, children = [] } = m
+      const hasChildren = !!children.length
+      return {
+        label: hasChildren ? title : <Link to={path}>{title}</Link>,
+        key: path || key,
+        icon: hasChildren ? <DesktopOutlined /> : null,
+        children: hasChildren ? getMenuItems(children) : null
+      }
     })
   }
+
+  const menuItems = getMenuItems(menu)
 
   return (
     <div className={styles.layout__sider}>
@@ -89,14 +69,13 @@ const SideMenu = (): JSX.Element => {
         collapsed={open}
       >
         <Menu
+          defaultSelectedKeys={menuKeys.selected}
+          defaultOpenKeys={menuKeys.open}
           mode='inline'
           theme='light'
           style={{ height: '100%' }}
-          defaultOpenKeys={menuKeys.open}
-          defaultSelectedKeys={menuKeys.selected}
-        >
-          {renderMenu(menu)}
-        </Menu>
+          items={menuItems}
+        />
       </Sider>
 
       <div className={styles.menu__button} onClick={changeMenuStatus}>

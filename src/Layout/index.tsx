@@ -22,15 +22,14 @@ const BaseLayout = (): JSX.Element => {
 
         <Layout style={{ padding: '24px' }}>
           <Content
-            className='site-layout-background'
             style={{
               minHeight: 280
             }}
           >
             {/* 子路由组件渲染地方 */}
-            <AnimatePresence>
-              <Outlet />
-            </AnimatePresence>
+            {/* <AnimatePresence> */}
+            <Outlet />
+            {/* </AnimatePresence> */}
           </Content>
         </Layout>
       </Layout>
