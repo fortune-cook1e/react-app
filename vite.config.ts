@@ -1,6 +1,7 @@
 import * as path from 'path'
 
-import react from '@vitejs/plugin-react'
+// import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react-swc'
 import postcssImport from 'postcss-import'
 import postcssPresetEnv from 'postcss-preset-env'
 import { defineConfig } from 'vite'
