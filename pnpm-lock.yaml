@@ -98,7 +98,6 @@ specifiers:
   react-refresh: ^0.11.0
   react-router-dom: ^6.4.3
   react-transition-group: ^4.4.2
-  recoil: ^0.7.6
   redux-logger: ^3.0.6
   speed-measure-webpack-plugin: ^1.5.0
   style-loader: ^2.0.0
@@ -118,7 +117,7 @@ specifiers:
   webpack-cli: ^4.7.0
   webpack-dev-server: ^4.1.0
   webpack-merge: ^5.7.3
-  zustand: ^4.1.5
+  zustand: ^4.3.2
 
 dependencies:
   '@ant-design/icons': registry.npmmirror.com/@ant-design/icons/4.7.0_biqbaboplfbrettd7655fr4n2y
@@ -151,10 +150,9 @@ dependencies:
   react-json-view: registry.npmmirror.com/react-json-view/1.21.3_2zx2umvpluuhvlq44va5bta2da
   react-router-dom: 6.4.3_biqbaboplfbrettd7655fr4n2y
   react-transition-group: registry.npmmirror.com/react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y
-  recoil: 0.7.6_biqbaboplfbrettd7655fr4n2y
   three: 0.147.0
   uuid: registry.npmmirror.com/uuid/8.3.2
-  zustand: 4.1.5_react@18.2.0
+  zustand: 4.3.2_react@18.2.0
 
 devDependencies:
   '@babel/core': registry.npmmirror.com/@babel/core/7.19.3
@@ -3439,10 +3437,6 @@ packages:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
     dev: true
 
-  /hamt_plus/1.0.2:
-    resolution: {integrity: sha512-t2JXKaehnMb9paaYA7J0BX8QQAY8lwfQ9Gjf4pg/mk4krt+cmwmU652HOoWonf+7+EQV97ARPMhhVgU1ra2GhA==}
-    dev: false
-
   /has-bigints/1.0.2:
     resolution: {integrity: sha512-tSvCKtBr9lkF0Ex0aQiP9N+OpV4zi2r/Nee5VkRDbaqv35RLYMzbwQfFSZZH0kR+Rd6302UJZ2p/bJCEoR3VoQ==}
     dev: true
@@ -5506,23 +5500,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
 
-  /recoil/0.7.6_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-hsBEw7jFdpBCY/tu2GweiyaqHKxVj6EqF2/SfrglbKvJHhpN57SANWvPW+gE90i3Awi+A5gssOd3u+vWlT+g7g==}
-    peerDependencies:
-      react: '>=16.13.1'
-      react-dom: '*'
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      hamt_plus: 1.0.2
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dev: false
-
   /redent/3.0.0:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
     engines: {node: '>=8'}
@@ -6381,8 +6358,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /zustand/4.1.5_react@18.2.0:
-    resolution: {integrity: sha512-PsdRT8Bvq22Yyh1tvpgdHNE7OAeFKqJXUxtJvj1Ixw2B9O2YZ1M34ImQ+xyZah4wZrR4lENMoDUutKPpyXCQ/Q==}
+  /zustand/4.3.2_react@18.2.0:
+    resolution: {integrity: sha512-rd4haDmlwMTVWVqwvgy00ny8rtti/klRoZjFbL/MAcDnmD5qSw/RZc+Vddstdv90M5Lv6RPgWvm1Hivyn0QgJw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       immer: '>=9.0'

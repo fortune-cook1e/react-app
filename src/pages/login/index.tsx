@@ -1,13 +1,11 @@
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { Form, Input, Button, Space, message } from 'antd'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSetRecoilState } from 'recoil'
 
 import styles from './index.module.less'
 
-import { login, register } from '@/apis'
-import { userState } from '@/recoil/atoms'
+import useUserStore from '@/store/user'
 import { LoginRequest } from '@/types'
 
 const { Item } = Form
@@ -15,7 +13,7 @@ const { Password } = Input
 
 const Login = (): JSX.Element => {
   const navigate = useNavigate()
-  const setUserState = useSetRecoilState(userState)
+  const { doUserLoginOrRegister } = useUserStore()
   const [form] = Form.useForm<LoginRequest>()
   const [loadings, setLoadings] = useState({
     login: false,
@@ -29,9 +27,10 @@ const Login = (): JSX.Element => {
         [type]: true
       })
       const values = await form.validateFields()
-      const submitFunc = type === 'login' ? login : register
-      const { data } = await submitFunc(values)
-      setUserState(data)
+      await doUserLoginOrRegister(values, type)
+      // const submitFunc = type === 'login' ? login : register
+      // const { data } = await submitFunc(values)
+      // setUserState(data)
       message.success(`${type === 'login' ? '登录' : '注册'}成功`)
       navigate('/')
     } catch {

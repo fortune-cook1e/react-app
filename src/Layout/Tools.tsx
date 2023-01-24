@@ -1,15 +1,13 @@
 import { BgColorsOutlined } from '@ant-design/icons'
-import { Dropdown, Menu, message, Space } from 'antd'
-import React, { useState } from 'react'
+import { Dropdown, message, Space } from 'antd'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
 
 import Floatings from './Floatings'
 import styles from './index.module.less'
 import Logo from './Logo'
 
-import { logout } from '@/apis'
-import { userState } from '@/recoil/atoms'
+import useUserStore from '@/store/user'
 
 import type { MenuProps } from 'antd'
 
@@ -20,7 +18,7 @@ export enum MenuKey {
 
 const Tools = (): JSX.Element => {
   const navigate = useNavigate()
-  const [user, setUser] = useRecoilState(userState)
+  const { doUserLogout, user } = useUserStore()
   const [themeSettingVis, setThemeSettingVis] = useState<boolean>(false)
 
   const onMenuClick: MenuProps['onClick'] = async ({ key }) => {
@@ -28,28 +26,22 @@ const Tools = (): JSX.Element => {
       case 'setting':
         return
       case 'logout':
-        await logout()
-        setUser(null)
+        await doUserLogout
         navigate('/login')
         message.success('注销成功')
     }
   }
 
-  const menu = (
-    <Menu
-      onClick={onMenuClick}
-      items={[
-        {
-          label: '设置',
-          key: 'setting'
-        },
-        {
-          label: '注销',
-          key: 'logout'
-        }
-      ]}
-    />
-  )
+  const items: MenuProps['items'] = [
+    {
+      key: 'setting',
+      label: '设置'
+    },
+    {
+      label: '注销',
+      key: 'logout'
+    }
+  ]
 
   return (
     <div className={styles.tools}>
@@ -59,7 +51,7 @@ const Tools = (): JSX.Element => {
         onClick={() => setThemeSettingVis(true)}
         style={{ color: '#fff', fontSize: '20px', marginRight: '10px' }}
       />
-      <Dropdown menu={menu}>
+      <Dropdown menu={{ items, onClick: onMenuClick }}>
         <div className={styles.tools__menu}>
           <Space size={8}>
             <Logo />

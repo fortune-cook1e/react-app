@@ -49,14 +49,12 @@ const request = <T = any, D = any>(
         const { headers } = response
         const { data, status } = response
         const { code, msg = '服务器异常' } = data
-        // TODO: 待处理 status非200情况
+        // Todo: 待处理 status非200情况
         if (code !== ResponseCode.Ok) {
-          // TIP: 10000code代表token失效 需要重新登录
+          // Tip: 10000code代表token失效 需要重新登录
           if (code === ResponseCode.LoginInValid) {
             message.info('登录失效，请重新登录，1s后进行跳转')
             setTimeout(() => {
-              // TODO: Recoil 暂时不知道如何调用atom 所以采用 subscribe
-              // store.dispatch(setUser(null))
               pubSub.publish(TOKEN_FAILURE_EVENT, 'token faile..')
               window.location.hash = '#/login'
             }, 1000)

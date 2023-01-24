@@ -1,20 +1,16 @@
 import { useEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
 
+import AntConfigProvider from './components/AntConfigProvider'
 import { TOKEN_FAILURE_EVENT } from './constants/pub'
-import { userState } from './recoil/atoms'
+import useUserStore from './store/user'
 import { clearIndexedDb, initIndexedDb } from './utils/config'
 import pubSub from './utils/pub'
 
 import router from '@/routes'
 
 const App = (): JSX.Element => {
-  const [, setUser] = useRecoilState(userState)
-
-  const clearUser = () => {
-    setUser(null)
-  }
+  const { clearUser } = useUserStore()
 
   useEffect(() => {
     // TOKEN失效后将用户信息清空
@@ -28,7 +24,11 @@ const App = (): JSX.Element => {
     }
   }, [])
 
-  return <RouterProvider router={router} />
+  return (
+    <AntConfigProvider>
+      <RouterProvider router={router} />
+    </AntConfigProvider>
+  )
 }
 
 export default App

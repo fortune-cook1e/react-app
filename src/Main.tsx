@@ -1,8 +1,5 @@
-import { ConfigProvider } from 'antd'
-import zhCN from 'antd/lib/locale/zh_CN'
 import dayjs from 'dayjs'
 import { createRoot } from 'react-dom/client'
-import { RecoilRoot } from 'recoil'
 
 import App from './App'
 import ReactErrorBoundary from './components/ErrorBoundary'
@@ -16,10 +13,6 @@ const root = createRoot(ROOT_ELEMENT)
 
 root.render(
   <ReactErrorBoundary>
-    <RecoilRoot>
-      <ConfigProvider locale={zhCN}>
-        <App />
-      </ConfigProvider>
-    </RecoilRoot>
+    <App />
   </ReactErrorBoundary>
 )

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
 
-import { userState } from '@/recoil/atoms'
+import useUserStore from '@/store/user'
 import globalConfig from '@/utils/config'
 interface Props {
   children: React.ReactNode
@@ -10,8 +9,7 @@ interface Props {
 
 const ProtectedRoute = ({ children }: Props): JSX.Element => {
   const navigate = useNavigate()
-
-  const user = useRecoilValue(userState)
+  const { user } = useUserStore()
 
   useEffect(() => {
     // TIP: 目前不开启路由拦截

@@ -1,8 +1,9 @@
-// import { CloseOutlined, SettingOutlined } from '@ant-design/icons'
-import { ConfigProvider, Drawer } from 'antd'
-import React, { FC } from 'react'
+import { Drawer } from 'antd'
+import { FC } from 'react'
 
 import styles from './index.module.less'
+
+import useConfigStore from '@/store/config'
 
 const COLORS = ['#1890ff', '#faad14', '#13c2c2']
 
@@ -12,12 +13,10 @@ interface Props {
 }
 
 const Floatings: FC<Props> = ({ visible, onClose }) => {
+  const { changeTheme } = useConfigStore()
+
   const handleColorClick = (c: string) => {
-    ConfigProvider.config({
-      theme: {
-        primaryColor: c
-      }
-    })
+    changeTheme(c)
   }
 
   return (
