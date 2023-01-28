@@ -1,15 +1,24 @@
 import { useRequest } from 'ahooks'
-import { Form, Input, Button } from 'antd'
+import { Select, Divider } from 'antd'
 import { useState } from 'react'
 
-const { Item } = Form
+import AxiosTest from './components/AxiosTest'
+import ButtonTest from './components/ButtonTest'
+import FormTest from './components/FormTest'
+import NestedCmp from './components/NestedCmp'
+import UserTestForm from './components/UserTestForm'
 
 import { fetchStaffList } from '@/apis/staff'
 
-const UnitTest = (): JSX.Element => {
-  const [name, setName] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+const COMPONENT_LIST = [
+  {
+    label: 'FormTest',
+    value: 'FormTest'
+  }
+]
 
+const UnitTest = (): JSX.Element => {
+  const [cmp, setCmp] = useState<string>(COMPONENT_LIST[0].value)
   const { data, run, loading } = useRequest(fetchStaffList, {
     manual: true,
     onSuccess() {
@@ -19,39 +28,22 @@ const UnitTest = (): JSX.Element => {
 
   return (
     <div>
-      <Form>
-        <Item label='用户名'>
-          <Input placeholder='username' value={name} onChange={e => setName(e.target.value)} />
-        </Item>
-        <Item label='密码'>
-          <Input
-            type='password'
-            placeholder='password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-        </Item>
+      <Select
+        value={cmp}
+        onChange={c => setCmp(c)}
+        style={{ width: '200px' }}
+        options={COMPONENT_LIST}
+      />
 
-        <Button
-          onClick={() =>
-            run({
-              page: 1,
-              page_size: 10
-            })
-          }
-          loading={loading}
-        >
-          {loading ? 'loading' : 'click'}
-        </Button>
-      </Form>
-
-      {data?.data.list.map(i => {
-        return (
-          <div key={i.id} role='list-item'>
-            {i.name}
-          </div>
-        )
-      })}
+      <ButtonTest />
+      <Divider />
+      <FormTest />
+      <Divider />
+      <NestedCmp title='user' />
+      <Divider />
+      <UserTestForm onSubmitSuccess={() => console.log('ok')} />
+      <Divider />
+      <AxiosTest />
     </div>
   )
 }

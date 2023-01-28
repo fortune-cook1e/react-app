@@ -7,8 +7,8 @@ describe('UnitTest Component', () => {
   let passEl: HTMLInputElement
   let button: HTMLButtonElement
 
-  beforeEach(() => {
-    render(<UnitTest />)
+  beforeEach(async () => {
+    await render(<UnitTest />)
     inputEl = screen.getByPlaceholderText(/username/i)
     passEl = screen.getByPlaceholderText(/password/i)
     button = screen.getByText('click')
