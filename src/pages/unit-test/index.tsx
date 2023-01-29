@@ -2,11 +2,9 @@ import { useRequest } from 'ahooks'
 import { Select, Divider } from 'antd'
 import { useState } from 'react'
 
-import AxiosTest from './components/AxiosTest'
-import ButtonTest from './components/ButtonTest'
-import FormTest from './components/FormTest'
-import NestedCmp from './components/NestedCmp'
-import UserTestForm from './components/UserTestForm'
+import EventState from './components/EventState'
+import Mock from './components/Mock'
+import Visible from './components/Visible'
 
 import { fetchStaffList } from '@/apis/staff'
 
@@ -35,15 +33,11 @@ const UnitTest = (): JSX.Element => {
         options={COMPONENT_LIST}
       />
 
-      <ButtonTest />
+      <Visible />
       <Divider />
-      <FormTest />
+      <EventState />
       <Divider />
-      <NestedCmp title='user' />
-      <Divider />
-      <UserTestForm onSubmitSuccess={() => console.log('ok')} />
-      <Divider />
-      <AxiosTest />
+      <Mock />
     </div>
   )
 }

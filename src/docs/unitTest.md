@@ -16,6 +16,6 @@
 ### Experience
 
 1. 有的时候 render 组件后，但是 screen 可能找不到，这个时候可以将 render 配合 await 使用
-2. 嵌套组件过多。参考 NestedCmp, 如果组件内有嵌套组件，为了避免其他组件对当前组件测试造成影响 可以利用 jest.mock的方法来将其他组件设置为普通 div
+2. 嵌套组件过多。可以利用 jest.mock的方法来将其他组件设置为普通 div
 3. 重复性的行为可以放在 beforeEach 中执行，例如: render 组件
 4. user-event 比 fireEvent 更高级
