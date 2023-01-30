@@ -1,12 +1,10 @@
-import { useRequest } from 'ahooks'
 import { Select, Divider } from 'antd'
 import { useState } from 'react'
 
 import EventState from './components/EventState'
 import Mock from './components/Mock'
+import UserForm from './components/UserForm'
 import Visible from './components/Visible'
-
-import { fetchStaffList } from '@/apis/staff'
 
 const COMPONENT_LIST = [
   {
@@ -17,12 +15,6 @@ const COMPONENT_LIST = [
 
 const UnitTest = (): JSX.Element => {
   const [cmp, setCmp] = useState<string>(COMPONENT_LIST[0].value)
-  const { data, run, loading } = useRequest(fetchStaffList, {
-    manual: true,
-    onSuccess() {
-      console.log('scuc')
-    }
-  })
 
   return (
     <div>
@@ -38,6 +30,8 @@ const UnitTest = (): JSX.Element => {
       <EventState />
       <Divider />
       <Mock />
+      <Divider />
+      <UserForm />
     </div>
   )
 }

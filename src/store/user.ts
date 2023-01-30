@@ -6,7 +6,7 @@ import { IUser, LoginRequest } from '@/types'
 interface UserState {
   user: IUser | null
   clearUser: () => void
-  doUserLoginOrRegister: (payload: LoginRequest) => Promise<void>
+  doUserLoginOrRegister: (payload: LoginRequest, type: 'login' | 'register') => Promise<void>
   doUserLogout: () => Promise<void>
 }
 

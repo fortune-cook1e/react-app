@@ -12,6 +12,7 @@
     "jsx": "react-jsx",
     "lib": ["dom", "esnext"],
     "baseUrl": "./",
+    "types": ["cypress", "@testing-library/cypress"],
     "paths": {
       "@/*": ["src/*"]
     }

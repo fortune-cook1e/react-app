@@ -28,9 +28,6 @@ const Login = (): JSX.Element => {
       })
       const values = await form.validateFields()
       await doUserLoginOrRegister(values, type)
-      // const submitFunc = type === 'login' ? login : register
-      // const { data } = await submitFunc(values)
-      // setUserState(data)
       message.success(`${type === 'login' ? '登录' : '注册'}成功`)
       navigate('/')
     } catch {
