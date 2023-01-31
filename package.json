@@ -45,6 +45,7 @@
     "face-api.js": "^0.22.2",
     "framer-motion": "^4.1.17",
     "html-to-image": "^1.10.6",
+    "json2mq": "^0.2.0",
     "localforage": "^1.10.0",
     "query-string": "^7.1.1",
     "random-words": "^1.2.0",
@@ -59,7 +60,9 @@
     "react-json-view": "^1.21.3",
     "react-router-dom": "^6.4.3",
     "react-transition-group": "^4.4.2",
+    "resize-observer-polyfill": "^1.5.1",
     "three": "^0.147.0",
+    "throttle-debounce": "^5.0.0",
     "uuid": "^8.3.2",
     "zustand": "^4.3.2"
   },

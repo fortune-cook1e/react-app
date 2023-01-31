@@ -76,6 +76,7 @@ specifiers:
   husky: ^8.0.1
   jest: ^29.3.1
   jest-environment-jsdom: ^29.3.1
+  json2mq: ^0.2.0
   less: ^4.1.1
   less-loader: ^9.0.0
   lint-staged: ^11.0.0
@@ -102,6 +103,7 @@ specifiers:
   react-router-dom: ^6.4.3
   react-transition-group: ^4.4.2
   redux-logger: ^3.0.6
+  resize-observer-polyfill: ^1.5.1
   speed-measure-webpack-plugin: ^1.5.0
   style-loader: ^2.0.0
   stylelint: ^14.14.0
@@ -111,6 +113,7 @@ specifiers:
   stylelint-prettier: ^2.0.0
   swc-loader: ^0.2.3
   three: ^0.147.0
+  throttle-debounce: ^5.0.0
   ts-jest: ^29.0.3
   typescript: ^4.3.2
   uuid: ^8.3.2
@@ -139,6 +142,7 @@ dependencies:
   face-api.js: registry.npmmirror.com/face-api.js/0.22.2
   framer-motion: registry.npmmirror.com/framer-motion/4.1.17_biqbaboplfbrettd7655fr4n2y
   html-to-image: registry.npmmirror.com/html-to-image/1.10.8
+  json2mq: 0.2.0
   localforage: registry.npmmirror.com/localforage/1.10.0
   query-string: registry.npmmirror.com/query-string/7.1.1
   random-words: 1.2.0
@@ -153,7 +157,9 @@ dependencies:
   react-json-view: registry.npmmirror.com/react-json-view/1.21.3_2zx2umvpluuhvlq44va5bta2da
   react-router-dom: 6.4.3_biqbaboplfbrettd7655fr4n2y
   react-transition-group: registry.npmmirror.com/react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y
+  resize-observer-polyfill: 1.5.1
   three: 0.147.0
+  throttle-debounce: 5.0.0
   uuid: registry.npmmirror.com/uuid/8.3.2
   zustand: 4.3.2_react@18.2.0
 
@@ -10197,7 +10203,7 @@ packages:
       js-cookie: registry.npmmirror.com/js-cookie/2.2.1
       lodash: registry.npmmirror.com/lodash/4.17.21
       react: 18.2.0
-      resize-observer-polyfill: registry.npmmirror.com/resize-observer-polyfill/1.5.1
+      resize-observer-polyfill: 1.5.1
       screenfull: registry.npmmirror.com/screenfull/5.2.0
     dev: false
 
@@ -16311,12 +16317,6 @@ packages:
     name: requires-port
     version: 1.0.0
     dev: true
-
-  registry.npmmirror.com/resize-observer-polyfill/1.5.1:
-    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz}
-    name: resize-observer-polyfill
-    version: 1.5.1
-    dev: false
 
   registry.npmmirror.com/resolve-cwd/3.0.0:
     resolution: {integrity: sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/resolve-cwd/-/resolve-cwd-3.0.0.tgz}

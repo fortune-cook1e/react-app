@@ -44,6 +44,12 @@ export const studyRoutes: IRoute[] = [
     lazyElement: lazy(() => import('@/pages/patterns')),
     title: 'patterns',
     key: 'patterns'
+  },
+  {
+    path: '/carousel',
+    lazyElement: lazy(() => import('@/pages/carousel')),
+    title: 'carousel',
+    key: 'carousel'
   }
 ]
 
