@@ -13,7 +13,7 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
   testMatch: ['**/__test__/**/*.test.(js|jsx|ts|tsx)'],
   moduleNameMapper: {
-    // '\\.(css|less|sass|scss|stylus)$': require.resolve('identity-obj-proxy'),
+    '\\.(css|less|sass|scss|stylus)$': 'identity-obj-proxy',
     '^@/(.*)$': '<rootDir>/src/$1'
   },
   moduleDirectories: ['node_modules']

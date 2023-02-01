@@ -1,6 +1,5 @@
 import { Form, Input, Button } from 'antd'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 const { Item } = Form
 
@@ -10,7 +9,6 @@ interface IForm {
 }
 
 const UserForm = (): JSX.Element => {
-  const navigate = useNavigate()
   const [form] = Form.useForm<IForm>()
   const [count, setCount] = useState<number>(0)
 
