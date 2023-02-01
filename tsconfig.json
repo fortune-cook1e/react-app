@@ -12,11 +12,12 @@
     "jsx": "react-jsx",
     "lib": ["dom", "esnext"],
     "baseUrl": "./",
-    "types": ["cypress", "@testing-library/cypress"],
+    "types": ["@testing-library/jest-dom"],
     "paths": {
       "@/*": ["src/*"]
     }
   },
+  "include": ["src/**/*.tsx"],
   "typeRoots": [
     "node_modules/@types",
     "src/global.d.ts",
