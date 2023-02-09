@@ -63,10 +63,8 @@
     "react-json-view": "^1.21.3",
     "react-router-dom": "^6.4.3",
     "react-transition-group": "^4.4.2",
-    "resize-observer-polyfill": "^1.5.1",
-    "styled-components": "^5.3.6",
+    "socket.io-client": "^4.6.0",
     "three": "^0.147.0",
-    "throttle-debounce": "^5.0.0",
     "uuid": "^8.3.2",
     "zustand": "^4.3.2"
   },
