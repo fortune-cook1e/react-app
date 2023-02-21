@@ -16,7 +16,8 @@ const globalConfig = {
   indexedDbStoreName: 'reactApp',
   indexedDbVersion: 1,
   // ISDEV 变量在vite文件中定义
-  isDev: getEnv() === Env.Dev
+  isDev: getEnv() === Env.Dev,
+  requestUrl: getEnv() === Env.Dev ? '/api' : 'https://koa-app-seven.vercel.app/api'
 }
 
 // 初始化indexedDb数据库

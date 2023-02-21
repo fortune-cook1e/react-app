@@ -12,9 +12,7 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 
 const PORT = 8081
 const API_PREFIX = '/api'
-const API_URL = isDevelopment
-  ? 'http://localhost:3000/api'
-  : 'https://koa-app-fortune-cook1e.vercel.app/api'
+const API_URL = isDevelopment ? 'http://localhost:3000/api' : 'https://koa-app-seven.vercel.app/api'
 
 const PATHS = {
   // Source files

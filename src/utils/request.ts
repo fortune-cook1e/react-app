@@ -10,7 +10,7 @@ import { TOKEN_FAILURE_EVENT } from '@/constants/pub'
 import { HttpResponse, RequestOptions, ResponseCode } from '@/types'
 
 const instance = axios.create({
-  baseURL: '/api'
+  baseURL: globalConfig.requestUrl
 })
 
 // TIP: 此版本的request 会返回 code 和data 2个字段
