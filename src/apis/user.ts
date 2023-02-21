@@ -28,6 +28,6 @@ export const register = (data: LoginRequest): PromiseHttpRes<IUser> => {
 
 export const getUsers = (): PromiseHttpRes<IUser[]> =>
   request({
-    url: '/mongo/user/list',
+    url: '/user/list',
     method: 'get'
   })
