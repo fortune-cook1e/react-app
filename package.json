@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.dev.js",
     "dev:node": "cross-env ts-node-dev src/server/index.tsx",
-    "start": "cross-env vite",
+    "start:dev": "cross-env NODE_ENV=development vite",
+    "start:test": "cross-env NODE_ENV=test vite",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
     "analyse": "cross-env ANALYSE=1 NODE_ENV=production webpack --config config/webpack.prod.js",
     "lint": "cross-env eslint src --ext .js,.jsx,.ts,.tsx --cache --fix",

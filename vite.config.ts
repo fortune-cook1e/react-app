@@ -8,9 +8,13 @@ import { defineConfig } from 'vite'
 
 const { resolve } = path
 
+const isDevelopment = process.env.NODE_ENV === 'development'
+
 const PORT = 8081
 const API_PREFIX = '/api'
-const API_HOST = 'http://localhost:3000'
+const API_URL = isDevelopment
+  ? 'http://localhost:3000/api'
+  : 'https://koa-app-fortune-cook1e.vercel.app/api'
 
 const PATHS = {
   // Source files
@@ -49,7 +53,8 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       [`${API_PREFIX}`]: {
-        target: API_HOST,
+        target: API_URL,
+        changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '')
       }
     }

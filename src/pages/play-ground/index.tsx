@@ -1,5 +1,9 @@
+import { useRequest } from 'ahooks'
 import { Button } from 'antd'
-import { useState } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+
+import { getUsers } from '@/apis'
 const PlayGround = () => {
   const [counter1, setCounter1] = useState(0)
   const [counter2, setCounter] = useState(0)
@@ -9,7 +13,7 @@ const PlayGround = () => {
     setCounter(prev => prev + 1)
   }
 
-  console.log('render')
+  useRequest(getUsers)
 
   return (
     <section>
