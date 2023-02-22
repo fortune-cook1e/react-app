@@ -13,7 +13,15 @@ const PlayGround = () => {
     setCounter(prev => prev + 1)
   }
 
-  useRequest(getUsers)
+  useEffect(() => {
+    axios.get('https://koa-app-seven.vercel.app/api/user/list').then(res => {
+      console.log({ res })
+    })
+  }, [counter1])
+
+  useRequest(getUsers, {
+    refreshDeps: [counter1]
+  })
 
   return (
     <section>
