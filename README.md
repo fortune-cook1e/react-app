@@ -16,3 +16,8 @@ For studying how to use react to build a application.
 - Face recognition
 - threeJs
 - D3 visualization
+
+## Warning
+
+Koa-app does not choose open source for privacy reasons.
+
