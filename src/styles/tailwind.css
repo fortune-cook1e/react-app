@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  @apply px-4 py-2 rounded font-semibold bg-gray-200 text-primary-light;
+}
+
+/* 需要注意的是 Tailwind一个间距单位是 0.25rem 在浏览器中默认为 4px。 相当于 px-1 = padding-top and padding-bottom = 4px */
+
+/* @layer base 一般用于处理基本样式 例如初始化 h1 h2等  */
+
+/* @layer utilities 用于增加自定义类 也可以增加变体 */
+
+/* @variants 一般用来扩展变体行为 例如在 hover focus状态下增加对应class */

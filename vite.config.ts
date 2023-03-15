@@ -22,7 +22,9 @@ const PATHS = {
   build: resolve(__dirname, './dist'),
 
   // Static files that get copied to build folder
-  public: resolve(__dirname, './public')
+  public: resolve(__dirname, './public'),
+
+  postCssConfig: resolve(__dirname, './postcss.config.js')
 }
 
 // https://vitejs.dev/config/
@@ -32,9 +34,7 @@ export default defineConfig({
     IS_DEV: false
   },
   css: {
-    postcss: {
-      plugins: [postcssImport, postcssPresetEnv]
-    },
+    postcss: PATHS.postCssConfig,
     preprocessorOptions: {
       less: {
         javascriptEnabled: true

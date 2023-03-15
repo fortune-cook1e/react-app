@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
+// import ClientMonitor, { CustomOptionsType } from 'skywalking-client-js'
 
 import AntConfigProvider from './components/AntConfigProvider'
 import { TOKEN_FAILURE_EVENT } from './constants/pub'
@@ -17,6 +18,13 @@ const App = (): JSX.Element => {
     pubSub.subscribe(TOKEN_FAILURE_EVENT, clearUser)
 
     initIndexedDb()
+
+    // ClientMonitor.register({
+    //   collector: 'http://localhost:3000',
+    //   service: 'test-ui',
+    //   pagePath: '/current/page/name',
+    //   serviceVersion: 'v1.0.0'
+    // })
 
     return () => {
       clearIndexedDb()

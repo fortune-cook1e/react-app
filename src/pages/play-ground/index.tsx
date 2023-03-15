@@ -1,34 +1,33 @@
-import { useRequest } from 'ahooks'
-import { Button } from 'antd'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-
-import { getUsers } from '@/apis'
-const PlayGround = () => {
-  const [counter1, setCounter1] = useState(0)
-  const [counter2, setCounter] = useState(0)
-
-  const changeState = () => {
-    setCounter1(prev => prev + 2)
-    setCounter(prev => prev + 1)
+const Item = ({ i }: { i: number }) => {
+  for (let i = 0; i < 999999; i++) {
+    return (
+      <span
+        key={i}
+        style={{
+          display: 'inline-block',
+          width: '5px',
+          height: '5px',
+          backgroundColor: `rgb(${255 * Math.random()},${255 * Math.random()},${
+            255 * Math.random()
+          })`
+        }}
+      />
+    )
   }
+}
 
-  useEffect(() => {
-    axios.get('https://koa-app-seven.vercel.app/api/user/list').then(res => {
-      console.log({ res })
-    })
-  }, [counter1])
-
-  useRequest(getUsers, {
-    refreshDeps: [counter1]
-  })
-
+const PlayGround = (): JSX.Element => {
   return (
     <section>
       <h1>this is play ground</h1>
-      <div>
-        <Button onClick={changeState}>click me </Button>
+      <div className='space-y-px-5'>
+        <span className='block'>1</span>
+        <span className='block'>2</span>
+        <span className='block'>3</span>
       </div>
+
+      <div>gagaga</div>
+      <div style={{ marginTop: '10px' }}>2321312</div>
     </section>
   )
 }

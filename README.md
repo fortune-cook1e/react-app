@@ -2,6 +2,11 @@
 
 For studying how to use react to build a application.
 
+
+## Reference
+
+1. [tailwind](https://www.tailwindcss.cn/docs/space)
+
 ## Preview
 
 [Preview](https://fortune-cook1e.github.io/react-app/#/lazy-load)
