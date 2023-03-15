@@ -36,6 +36,16 @@ module.exports = {
       },
       space: {
         'px-5': '5px'
+      },
+      // 自定义动画
+      keyframes: {
+        move: {
+          '0%, 100%': { transform: 'translateX(0px)' },
+          '50%': { transform: 'translateX(300px)' }
+        }
+      },
+      animation: {
+        move: 'move 2s ease-in-out infinite'
       }
     }
   },
