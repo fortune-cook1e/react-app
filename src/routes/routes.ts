@@ -48,25 +48,25 @@ export const studyRoutes: IRoute[] = [
   {
     path: '/carousel',
     lazyElement: lazy(() => import('@/pages/carousel')),
-    title: 'carousel',
+    title: 'Carousel',
     key: 'carousel'
   },
   {
     path: '/play-ground',
     lazyElement: lazy(() => import('@/pages/play-ground')),
-    title: 'playGround',
+    title: 'PlayGround',
     key: 'playGround'
   },
   {
-    path: '/web-socket',
-    lazyElement: lazy(() => import('@/pages/web-socket')),
-    title: 'webSocket',
-    key: 'webSocket'
+    path: '/functions',
+    lazyElement: lazy(() => import('@/pages/functions')),
+    title: 'Functions',
+    key: 'Functions'
   }
 ]
 
-// 调koa-app APi相关路由
-export const apisRoutes: IRoute[] = [
+// 大模块功能 前后端配合
+export const moduleRoutes: IRoute[] = [
   {
     path: '/user-management',
     lazyElement: lazy(() => import('@/pages/user-management')),
@@ -84,6 +84,12 @@ export const apisRoutes: IRoute[] = [
     key: 'visualManagement',
     path: '/visual-management',
     lazyElement: lazy(() => import('@/pages/visual-management'))
+  },
+  {
+    path: '/web-socket',
+    lazyElement: lazy(() => import('@/pages/web-socket')),
+    title: 'webSocket',
+    key: 'webSocket'
   }
 ]
 
@@ -104,8 +110,7 @@ export const noLayoutRoutes: IRoute[] = [
     path: '/three',
     lazyElement: lazy(() => import('@/pages/three-dimension')),
     title: 'ThreeJs',
-    key: 'three',
-    icon: ''
+    key: 'three'
   },
 
   {
@@ -118,14 +123,12 @@ export const noLayoutRoutes: IRoute[] = [
     path: '/login',
     lazyElement: lazy(() => import('@/pages/login')),
     title: '登录',
-    key: 'login',
-    icon: ''
+    key: 'login'
   },
   {
     path: '/three',
     lazyElement: lazy(() => import('@/pages/three-dimension')),
     title: 'ThreeJs',
-    key: 'three',
-    icon: ''
+    key: 'three'
   }
 ]

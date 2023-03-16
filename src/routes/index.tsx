@@ -1,7 +1,7 @@
 import { Suspense, ComponentType } from 'react'
 import { createHashRouter } from 'react-router-dom'
 
-import { studyRoutes, apisRoutes, noLayoutRoutes } from './routes'
+import { studyRoutes, moduleRoutes, noLayoutRoutes } from './routes'
 
 import ProtectedRoute from '@/components/ProtectedRoute'
 import Layout from '@/Layout'
@@ -52,7 +52,7 @@ const router = createHashRouter([
         element: <Dashboard />
       },
       ...setProtectedRoute(studyRoutes),
-      ...setProtectedRoute(apisRoutes)
+      ...setProtectedRoute(moduleRoutes)
     ]
   },
   ...setProtectedRoute(noLayoutRoutes),

@@ -1,5 +1,9 @@
 import { MenuItem } from './../types/route'
-import { apisRoutes, studyRoutes } from './routes'
+import { moduleRoutes, studyRoutes } from './routes'
+
+// 菜单分为这么几个类别：
+// 1. 功能实现(前后端结合)
+// 3. Demo实现
 
 export const menu: MenuItem[] = [
   {
@@ -19,11 +23,7 @@ export const menu: MenuItem[] = [
         key: 'editor',
         path: '/editor'
       },
-      {
-        title: '可视化',
-        key: 'visual',
-        path: '/visual'
-      },
+
       {
         path: '/three',
         title: 'ThreeJs',
@@ -37,9 +37,16 @@ export const menu: MenuItem[] = [
     ]
   },
   {
-    title: '接口调用',
+    title: '功能实现',
     icon: '',
     key: 'apis',
-    children: apisRoutes
+    children: [
+      ...moduleRoutes,
+      {
+        title: '可视化配置',
+        key: 'visual',
+        path: '/visual'
+      }
+    ]
   }
 ]
