@@ -1,6 +1,6 @@
 import { useRequest, useSafeState } from 'ahooks'
 import { Spin } from 'antd'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
@@ -71,7 +71,7 @@ const Visual = (): JSX.Element => {
               <ComponentsArea />
             </div>
             <div className={styles.emulator__middle}>
-              <Engine engineInstance={globalEngine} />
+              <Engine />
             </div>
             <div className={styles.emulator__right}>
               <AttributeArea />

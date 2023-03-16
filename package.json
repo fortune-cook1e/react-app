@@ -31,6 +31,7 @@
     ]
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.6.1",
     "@ant-design/icons": "^4.7.0",
     "@babel/runtime": "^7.20.1",
     "@fe-cookie/client-request-crypto": "^1.0.1",

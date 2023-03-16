@@ -13,6 +13,8 @@ declare module '*.svg'
 
 declare module 'react-d3-force-graph'
 
+declare module '@ant-design/cssinjs'
+
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string
   PROD: boolean

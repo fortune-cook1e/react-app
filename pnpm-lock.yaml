@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@ant-design/cssinjs': ^1.6.1
   '@ant-design/icons': ^4.7.0
   '@babel/core': ^7.14.3
   '@babel/plugin-transform-runtime': ^7.14.3
@@ -136,6 +137,7 @@ specifiers:
   zustand: ^4.3.2
 
 dependencies:
+  '@ant-design/cssinjs': 1.6.1_biqbaboplfbrettd7655fr4n2y
   '@ant-design/icons': registry.npmmirror.com/@ant-design/icons/4.7.0_biqbaboplfbrettd7655fr4n2y
   '@babel/runtime': 7.20.1
   '@fe-cookie/client-request-crypto': registry.npmmirror.com/@fe-cookie/client-request-crypto/1.0.1
@@ -292,8 +294,8 @@ packages:
       '@ctrl/tinycolor': 3.5.0
     dev: false
 
-  /@ant-design/cssinjs/1.5.6_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-1S7LUPC9BMyQ/CUYgzfePJJwEfsbVHJe3Tpd9zhujTxRM/6LYpN9N4FTaPHVqpnPazm0S2vG0WBkh2T5Erwuug==}
+  /@ant-design/cssinjs/1.6.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-35+1e5h1HzPt7d7NjXTG5yg/OQY85YcOIpb3peB3/eKri7+0mW9c+WZB3In7yMscBzvxQREOR5pxNDbqMcI42w==}
     peerDependencies:
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
@@ -2544,7 +2546,7 @@ packages:
       react-dom: '>=16.9.0'
     dependencies:
       '@ant-design/colors': 7.0.0
-      '@ant-design/cssinjs': 1.5.6_biqbaboplfbrettd7655fr4n2y
+      '@ant-design/cssinjs': 1.6.1_biqbaboplfbrettd7655fr4n2y
       '@ant-design/icons': 5.0.1_biqbaboplfbrettd7655fr4n2y
       '@ant-design/react-slick': 1.0.0_react@18.2.0
       '@babel/runtime': 7.20.13

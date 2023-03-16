@@ -1,6 +1,6 @@
 import { message } from 'antd'
 import { toPng } from 'html-to-image'
-import React, { CSSProperties, useEffect, useRef } from 'react'
+import { CSSProperties, useEffect, useRef } from 'react'
 import { useDrop } from 'react-dnd'
 
 import { EVENT_MAP, MATERIAL_LIST } from '../../constants'
@@ -13,12 +13,11 @@ import DroppableArea from './modules/DroppableArea'
 import { getUniqueId } from './utils'
 
 interface Props {
-  engineInstance: Engine
   engineData?: EngineComponentData[]
   engineStyle?: CSSProperties
 }
 
-const RenderEngine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
+const RenderEngine = ({ engineStyle }: Props): JSX.Element => {
   const { eventEmitter, globalEngine } = useEngineContext()
   const [{ isOver }, dndDropRef] = useDrop(() => ({
     accept: MATERIAL_LIST.map(c => c.id),
@@ -64,7 +63,7 @@ const RenderEngine = ({ engineInstance, engineStyle }: Props): JSX.Element => {
       ...item,
       uniqueId: getUniqueId()
     }
-    engineInstance.addCmp(cmp)
+    globalEngine.addCmp(cmp)
   }
 
   return (

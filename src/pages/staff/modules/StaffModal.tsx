@@ -15,7 +15,7 @@ interface Props {
   staffId?: string
   visible: boolean
   onClose: () => void
-  onSuccess?: () => void
+  onSuccess: () => void
 }
 
 interface StaffForm {
@@ -55,7 +55,7 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
 
   useEffect(() => {
     staffId && getStaffInfo()
-  }, [staffId])
+  }, [staffId, visible])
 
   const onResetAll = () => {
     onClose()
@@ -107,9 +107,9 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
       resignationTime: resignationTime.format(DATE_FORMAT)
     }
     if (isUpdateMode) {
-      addRunner(params)
-    } else {
       updateRunner(params)
+    } else {
+      addRunner(params)
     }
   }
 
@@ -122,7 +122,7 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
     <Modal
       width={600}
       title={staffId ? '编辑信息' : '新增员工'}
-      visible={visible}
+      open={visible}
       onCancel={onCancel}
       onOk={onOk}
       confirmLoading={addLoading || updateLoading}

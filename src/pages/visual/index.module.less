@@ -9,70 +9,47 @@
 @canvas-area-width:calc(100vw - @components-area-width - @attr-area-width);
 
 .visual {
-	min-height: 100vh;
-	.header {
-		width: 100%;
-		padding: 0 20px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		height: @header-area-height;
+  min-height: 100vh;
+  .emulator {
+    display: flex;
+    min-height: @content-area-min-height;
+    &__left {
+      width: @components-area-width;
+      height: 100%;
+      .components {
+        padding: 20px;
+        &__item {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          cursor: pointer;
+          transition: all 0.5s;
+          &:hover {
+            transform: scale(1.1);
+          }
+          &__icon {
+            margin-bottom: 5px;
+          }
+          &__title {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    &__middle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      width: @canvas-area-width;
+      background-color: gray;
+    }
 
-		background-color: #000;
-		&__logo {
-			width: 50px;
-			height: 50px;
-			line-height: 50px;
-			text-align: center;
-			border-radius: 50%;
-			background-color: palegoldenrod;
-		}
-		&__title {
-			font-size: 20px;
-			font-weight: bold;
-			color: #fff;
-		}
-	}
-	.emulator {
-		display: flex;
-		min-height: @content-area-min-height;
-		&__left {
-			width: @components-area-width;
-			height: 100%;
-			.components {
-				padding: 20px;
-				&__item {
-					display: flex;
-					flex-direction: column;
-					justify-content: center;
-					align-items: center;
-					width: 100%;
-					cursor: pointer;
-					transition: all 0.5s;
-					&:hover {
-						transform: scale(1.1);
-					}
-					&__icon {
-						margin-bottom: 5px;
-					}
-					&__title {
-						font-weight: bold;
-						margin-bottom: 0.5rem;
-					}
-				}
-			}
-		}
-		&__middle {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: @canvas-area-width;
-			background-color: gray;
-			padding: 10px;
-		}
-
-		&__right {
-			width: @attr-area-width;
-		}
-	}
+    &__right {
+      width: @attr-area-width;
+    }
+  }
 }

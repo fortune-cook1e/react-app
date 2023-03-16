@@ -1,3 +1,4 @@
+import { StyleProvider } from '@ant-design/cssinjs'
 import dayjs from 'dayjs'
 import { createRoot } from 'react-dom/client'
 
@@ -13,6 +14,8 @@ const root = createRoot(ROOT_ELEMENT)
 
 root.render(
   <ReactErrorBoundary>
-    <App />
+    <StyleProvider hashPriority='high'>
+      <App />
+    </StyleProvider>
   </ReactErrorBoundary>
 )

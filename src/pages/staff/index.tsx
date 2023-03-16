@@ -1,7 +1,7 @@
 import { useRequest, useDebounce } from 'ahooks'
 import { Table, Input, Space, Button, Popconfirm } from 'antd'
 import { ColumnsType } from 'antd/es/table'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import styles from './index.module.less'
 import StaffModal from './modules/StaffModal'
@@ -30,13 +30,23 @@ const Page = (): JSX.Element => {
     data,
     run: getStaffList
   } = useRequest(() => fetchStaffList({ ...pager, keyword: debouncedKeyword }), {
-    refreshDeps: [pager, debouncedKeyword]
+    refreshDeps: [pager, debouncedKeyword],
+    onSuccess(data) {
+      if (!data) return
+      const {
+        data: {
+          pager: { total = 0 }
+        }
+      } = data
+      setTotal(total)
+    }
   })
 
   const { run: delStaff } = useRequest((id: string) => deleteStaff({ id }), {
     manual: true,
     onSuccess() {
       setDeletingStaffId(undefined)
+      getStaffList()
     }
   })
 
@@ -52,7 +62,6 @@ const Page = (): JSX.Element => {
   const onClose = () => {
     setUpdatingStaffId(undefined)
     setVisible(false)
-    getStaffList()
   }
 
   const columns: ColumnsType<IStaff> = [
@@ -130,7 +139,12 @@ const Page = (): JSX.Element => {
 
   return (
     <LayoutContainer className={styles.staff}>
-      <StaffModal staffId={updatingStaffId} visible={visible} onClose={onClose} />
+      <StaffModal
+        staffId={updatingStaffId}
+        visible={visible}
+        onClose={onClose}
+        onSuccess={() => getStaffList()}
+      />
       <LayoutContainer.Header>
         <div className={styles.tools}>
           <Input
@@ -160,7 +174,7 @@ const Page = (): JSX.Element => {
           pagination={{
             current: pager.page,
             pageSize: pager.page_size,
-            total: total,
+            total,
             onChange: (page: number, pageSize: number) => {
               setPager({
                 page,

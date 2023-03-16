@@ -34,8 +34,15 @@ module.exports = {
           DEFAULT: '#D9D9D9'
         }
       },
-      space: {
-        'px-5': '5px'
+      height: {
+        '70-px': '70px'
+      },
+      fontSize: {
+        '12-px': '12px',
+        '14-px': '14px',
+        '16-px': '16px',
+        '18-px': '18px',
+        '20-px': '20px'
       },
       // 自定义动画
       keyframes: {

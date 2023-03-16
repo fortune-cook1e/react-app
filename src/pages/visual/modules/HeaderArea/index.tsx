@@ -1,11 +1,10 @@
 import { useRequest } from 'ahooks'
 import { Button, message, Space } from 'antd'
-import React, { useRef, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { EVENT_MAP } from '../../constants'
 import { useEngineContext } from '../../context'
-import styles from '../../index.module.less'
 
 import JsonViewer from './components/JsonViewer'
 
@@ -54,27 +53,27 @@ const HeaderArea = (): JSX.Element => {
   }
 
   return (
-    <header className={styles.header}>
+    <header className='flex justify-between items-center px-5 w-full h-70-px bg-slate-400'>
       <JsonViewer visible={visible} onClose={() => setVisible(false)} />
 
-      <div className={styles.header__logo}>V</div>
-      <h3 className={styles.header__title}>可视化搭建</h3>
-      <div className={styles.header__tools}>
-        <Space>
-          <Button type='primary' onClick={onSave} loading={addLoading || updateLoading}>
-            保存
-          </Button>
-          <Button type='default' onClick={onSaveAsPicture}>
-            下载为图片
-          </Button>
-          <Button type='default' onClick={() => setVisible(true)}>
-            查看元数据
-          </Button>
-          <Button type='default' onClick={goBack}>
-            返回
-          </Button>
-        </Space>
+      <div className='rounded-full w-12 h-12 flex justify-center items-center bg-white hover:cursor-pointer'>
+        V
       </div>
+      <h3 className='text-20px font-semibold text-white'>可视化搭建</h3>
+      <Space>
+        <Button type='primary' onClick={onSave} loading={addLoading || updateLoading}>
+          保存
+        </Button>
+        <Button type='default' onClick={onSaveAsPicture}>
+          下载为图片
+        </Button>
+        <Button type='default' onClick={() => setVisible(true)}>
+          查看元数据
+        </Button>
+        <Button type='default' onClick={goBack}>
+          返回
+        </Button>
+      </Space>
     </header>
   )
 }
