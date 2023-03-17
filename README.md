@@ -6,6 +6,7 @@ For studying how to use react to build a application.
 ## Reference
 
 1. [tailwind](https://www.tailwindcss.cn/docs/space)
+2. [Dayjs](https://dayjs.gitee.io/docs/zh-CN/parse/parse)
 
 ## Preview
 

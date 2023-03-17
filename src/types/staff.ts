@@ -6,8 +6,8 @@ export interface IStaff {
   name: string
   gender: Gender
   occupation: string
-  entryTime: string
-  resignationTime: string
+  entry_time: string
+  resignation_time: string
   company: string
   department: string
 }
@@ -44,8 +44,6 @@ export enum Department {
   AIoT = 'aiot',
   SVIP = 'svip',
   Outpost = 'outpost',
-  CDP = 'cdp',
-  MAP = 'map',
   Group = 'group',
   Unknown = 'unknown'
 }

@@ -1,5 +1,6 @@
 import { useRequest } from 'ahooks'
 import { Modal, Form, Input, Select, DatePicker, Spin } from 'antd'
+import dayjs, { Dayjs } from 'dayjs'
 import { useEffect } from 'react'
 
 import { updateStaff, createStaff, fetchStaffInfo } from '@/apis/staff'
@@ -24,7 +25,7 @@ interface StaffForm {
   gender: Gender
   occupation: string
   department: string
-  time: any
+  time: [Dayjs, Dayjs]
   company: string
 }
 
@@ -38,7 +39,7 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
     {
       manual: true,
       onSuccess(data) {
-        const { company, id, entryTime, resignationTime, occupation, gender, name, department } =
+        const { company, id, entry_time, resignation_time, occupation, gender, name, department } =
           data.data
         form.setFieldsValue({
           id,
@@ -46,7 +47,7 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
           gender,
           company,
           department,
-          // time: [moment(entryTime), moment(resignationTime)],
+          time: [dayjs(entry_time), dayjs(resignation_time)],
           occupation
         })
       }
@@ -103,8 +104,8 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
       company,
       occupation,
       department,
-      entryTime: entryTime.format(DATE_FORMAT),
-      resignationTime: resignationTime.format(DATE_FORMAT)
+      entry_time: entryTime.format(DATE_FORMAT),
+      resignation_time: resignationTime.format(DATE_FORMAT)
     }
     if (isUpdateMode) {
       updateRunner(params)
@@ -135,7 +136,7 @@ const StaffModal = ({ staffId = '', visible = false, onClose, onSuccess }: Props
           initialValues={{
             gender: Gender.Male,
             occupation: Occupation.FrontEnd,
-            department: Department.CDP
+            department: Department.Unknown
           }}
         >
           <Item label='id' name='id' hidden />
