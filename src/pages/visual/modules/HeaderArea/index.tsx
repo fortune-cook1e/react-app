@@ -35,13 +35,13 @@ const HeaderArea = (): JSX.Element => {
     const pageConfigStr = JSON.stringify(pageConfig)
     if (mode === 'add') {
       await addVisualRunner({
-        cmpList: cmpListStr,
-        pageConfig: pageConfigStr
+        cmp_list: cmpListStr,
+        page_config: pageConfigStr
       })
     } else {
       await updateVisualRunner({
-        cmpList: cmpListStr,
-        pageConfig: pageConfigStr,
+        cmp_list: cmpListStr,
+        page_config: pageConfigStr,
         id: editingId as string
       })
     }

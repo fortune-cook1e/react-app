@@ -34,9 +34,9 @@ const Visual = (): JSX.Element => {
     {
       manual: true,
       onSuccess(result) {
-        const { cmpList, pageConfig } = result
-        const jsonCmpList = JSON.parse(cmpList)
-        const jsonPageConfig = JSON.parse(pageConfig)
+        const { cmp_list, page_config } = result
+        const jsonCmpList = JSON.parse(cmp_list)
+        const jsonPageConfig = JSON.parse(page_config)
         globalEngine.updateCmps(jsonCmpList)
         globalEngine.updatePageConfig(jsonPageConfig)
       }
