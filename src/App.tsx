@@ -1,3 +1,4 @@
+import { Monitor } from 'cookie-client-monitor'
 import { useEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
 // import ClientMonitor, { CustomOptionsType } from 'skywalking-client-js'
@@ -18,6 +19,12 @@ const App = (): JSX.Element => {
     pubSub.subscribe(TOKEN_FAILURE_EVENT, clearUser)
 
     initIndexedDb()
+
+    const monitor = new Monitor({
+      collector: '/web'
+    })
+
+    monitor.register()
 
     // ClientMonitor.register({
     //   collector: 'http://localhost:3000',
