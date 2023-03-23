@@ -21,17 +21,12 @@ const App = (): JSX.Element => {
     initIndexedDb()
 
     const monitor = new Monitor({
-      collector: '/web'
+      collector: '/web',
+      spa: true,
+      fmp: true
     })
 
     monitor.register()
-
-    // ClientMonitor.register({
-    //   collector: 'http://localhost:3000',
-    //   service: 'test-ui',
-    //   pagePath: '/current/page/name',
-    //   serviceVersion: 'v1.0.0'
-    // })
 
     return () => {
       clearIndexedDb()

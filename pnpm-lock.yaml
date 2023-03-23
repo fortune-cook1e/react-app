@@ -54,6 +54,7 @@ specifiers:
   clean-webpack-plugin: ^4.0.0-alpha.0
   commitizen: ^4.2.4
   conventional-changelog-cli: ^2.1.1
+  cookie-client-monitor: ^1.0.0
   copy-webpack-plugin: ^11.0.0
   core-js: ^3.26.1
   cross-env: ^7.0.3
@@ -112,7 +113,6 @@ specifiers:
   react-router-dom: ^6.4.3
   react-transition-group: ^4.4.2
   redux-logger: ^3.0.6
-  skywalking-client-js: ^0.9.0
   socket.io-client: ^4.6.0
   speed-measure-webpack-plugin: ^1.5.0
   style-loader: ^2.0.0
@@ -148,6 +148,7 @@ dependencies:
   antd: 5.1.6_biqbaboplfbrettd7655fr4n2y
   axios: registry.npmmirror.com/axios/0.27.2
   classnames: registry.npmmirror.com/classnames/2.3.2
+  cookie-client-monitor: 1.0.0
   core-js: 3.26.1
   d3: 5.16.0
   dat.gui: 0.7.9
@@ -171,7 +172,6 @@ dependencies:
   react-json-view: registry.npmmirror.com/react-json-view/1.21.3_2zx2umvpluuhvlq44va5bta2da
   react-router-dom: 6.4.3_biqbaboplfbrettd7655fr4n2y
   react-transition-group: registry.npmmirror.com/react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y
-  skywalking-client-js: 0.9.0
   socket.io-client: 4.6.0
   three: 0.147.0
   uuid: registry.npmmirror.com/uuid/8.3.2
@@ -3091,6 +3091,10 @@ packages:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
     dev: true
 
+  /cookie-client-monitor/1.0.0:
+    resolution: {integrity: sha512-PWLl8HUlgAzRWFz+gafy+mKshWlhsuneAYSbipF+opIdAyb7r8nO0b+xMqohp1CiDvQ2/HMvN9psnkCVs8MUtw==}
+    dev: false
+
   /cookies/0.8.0:
     resolution: {integrity: sha512-8aPsApQfebXnuI+537McwYsDtjVxGm8gTIzQI3FDW6t5t/DAhERxtnbEPN/8RX+uZthoz4eCOgloXaE5cYyNow==}
     engines: {node: '>= 0.8'}
@@ -5212,10 +5216,6 @@ packages:
       - ts-node
     dev: true
 
-  /js-base64/3.7.5:
-    resolution: {integrity: sha512-3MEt5DTINKqfScXKfJFrRbxkrnk2AxPWGBL/ycjz4dK8iqiSJ06UxD8jh8xuh6p10TX4t2+7FsBYVxxQbMg+qA==}
-    dev: false
-
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -7126,12 +7126,6 @@ packages:
   /sisteransi/1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
     dev: true
-
-  /skywalking-client-js/0.9.0:
-    resolution: {integrity: sha512-U7bgzt6PH18/+m7ormxGRbMaM0uLPlDeuwlFVxT6+Emk2yOSCkVsRnbSVM1K1FHra+dTkW6EFwnjLE5fs+FZNg==}
-    dependencies:
-      js-base64: 3.7.5
-    dev: false
 
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
