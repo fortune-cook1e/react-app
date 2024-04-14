@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkreact_app=self.webpackChunkreact_app||[]).push([[8773],{18773:function(e,a,c){c.r(a);var t=c(11527);a.default=()=>(0,t.jsx)("div",{children:"this is React Concurrent"})}}]);
