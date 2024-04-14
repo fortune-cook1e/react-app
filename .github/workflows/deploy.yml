@@ -12,9 +12,9 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
-        id: pnpm-install
+        id: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
         with:
-          version: 7
+          version: 8.11.0
           run_install: false
 
       - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
