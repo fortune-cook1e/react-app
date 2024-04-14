@@ -35,6 +35,7 @@
     "@ant-design/icons": "^4.7.0",
     "@babel/runtime": "^7.20.1",
     "@fe-cookie/client-request-crypto": "^1.0.1",
+    "@fe-cookie/resume-generator-shared": "^0.0.2",
     "@koa/router": "^12.0.0",
     "@react-three/drei": "^9.46.2",
     "@react-three/fiber": "^8.9.1",
